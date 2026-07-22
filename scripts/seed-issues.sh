@@ -52,11 +52,11 @@ $goal
 
 ## 대상 파일
 
-[plan.md의 Task $num]($PLAN) 본문 참고.
+[plan.md의 Task ${num}]($PLAN) 본문 참고.
 
 ## 완료 조건
 
-- [ ] plan.md Task $num의 Step을 모두 구현
+- [ ] plan.md Task ${num}의 Step을 모두 구현
 - [ ] 테스트 통과
 - [ ] PR 머지
 
@@ -66,7 +66,7 @@ $dep_line
 
 ## 참고 문서
 
-- [docs/plan.md]($PLAN) — Task $num
+- [docs/plan.md]($PLAN) — Task ${num}
 - [docs/spec.md](https://github.com/$REPO/blob/main/docs/spec.md)
 EOF
 )
@@ -74,7 +74,7 @@ EOF
   if [ "$area" = "docs" ]; then type="chore"; else type="feat"; fi
 
   url=$(gh issue create -R "$REPO" \
-    --title "[Task $num] $title" \
+    --title "[Task ${num}] $title" \
     --body "$body" \
     --label "area/$area" \
     --label "type/$type" \
