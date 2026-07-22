@@ -6,3 +6,4 @@ check-kopilot/frontend/dist/
 *.iml
 .idea/
 .env
+.claude/settings.local.json

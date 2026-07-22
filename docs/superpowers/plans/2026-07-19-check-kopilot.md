@@ -85,7 +85,7 @@ check-kopilot/
 
 **Interfaces:**
 - Consumes: 없음 (최초 태스크)
-- Produces: 실행 가능한 Spring Boot 앱(`:8080`), MySQL 8(`localhost:3306/kopilot`), Redis 7(`localhost:6379`), 이후 모든 태스크가 사용할 `schema.sql` 테이블 5종(`stock_master`, `check_fallback`, `card`, `chat_log`, `catalog_request`)
+- Produces: 실행 가능한 Spring Boot 앱(`:8080`), MySQL 8(`localhost:3307/kopilot`), Redis 7(`localhost:6379`), 이후 모든 태스크가 사용할 `schema.sql` 테이블 5종(`stock_master`, `check_fallback`, `card`, `chat_log`, `catalog_request`)
   - ※ 기존 `check_cache`(단기 캐시)는 Redis로 이관되어 테이블에서 제거하고, 영속 폴백 전용 테이블 `check_fallback`으로 대체한다 (스펙 10절 "데모 종목 풀 사전 수집" 대응)
 
 - [ ] **Step 1: git 초기화 및 .gitignore 작성**
@@ -131,7 +131,8 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_0900_ai_ci
     ports:
-      - "3306:3306"
+      # 호스트 3307 → 컨테이너 3306. 로컬에 이미 MySQL이 3306을 쓰고 있어도 충돌하지 않는다
+      - "3307:3306"
     volumes:
       - kopilot-db:/var/lib/mysql
     healthcheck:
@@ -230,7 +231,7 @@ public class KopilotApplication {
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/kopilot?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3307/kopilot?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: kopilot
     password: kopilot
   sql:
@@ -358,6 +359,7 @@ CREATE TABLE IF NOT EXISTS catalog_request (
 
 ```bash
 cd /Users/jinhyeok/dev/koscom/check-kopilot && docker compose up -d
+docker compose ps                             # Expected: db, redis 모두 Up (db가 Created면 포트 충돌)
 docker compose exec redis redis-cli ping      # Expected: PONG
 cd backend && ./gradlew bootRun &   # gradle wrapper가 없으면 먼저: gradle wrapper --gradle-version 8.14
 sleep 25 && curl -s localhost:8080/api/health
