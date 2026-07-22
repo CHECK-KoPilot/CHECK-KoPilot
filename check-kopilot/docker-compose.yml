@@ -1,0 +1,30 @@
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: kopilot
+      MYSQL_USER: kopilot
+      MYSQL_PASSWORD: kopilot
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Seoul
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
+    ports:
+      # 호스트 3307 → 컨테이너 3306. 로컬에 이미 MySQL이 3306을 쓰고 있어도 충돌하지 않는다
+      - "3307:3306"
+    volumes:
+      - kopilot-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ukopilot", "-pkopilot"]
+      interval: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+
+volumes:
+  kopilot-db:

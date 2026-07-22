@@ -1,0 +1,54 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/kopilot?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: kopilot
+    password: kopilot
+  sql:
+    init:
+      mode: always
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY:}
+      chat:
+        options:
+          model: claude-opus-4-8
+          max-tokens: 4096
+          temperature: 0.2
+
+kopilot:
+  cache-ttl: PT10M           # CHECK API 단기 응답 캐시(Redis) TTL
+  session-ttl: PT2H          # 익명 세션 대화 컨텍스트(Redis) TTL
+  max-history-turns: 20      # Claude에 재전송할 최대 과거 턴 수 (컨텍스트 비용 상한)
+
+admin:
+  # 로그인 인증이 없으므로 Admin API는 공유 시크릿으로만 보호한다 (Task 15 참고)
+  token: ${ADMIN_TOKEN:kopilot-demo}
+
+checkapi:
+  base-url: https://checkapi.koscom.co.kr
+  cust-id: ${CHECK_CUST_ID:}     # CHECK 단말 고객번호 10자리
+  api-key: ${CHECK_API_KEY:}     # auth_key
+  # 실제 엔드포인트 (2026-07-22 실호출 확인 — docs/check-api/README.md 참조)
+  # 호출 규약: POST 전용(GET 불가), body는 JSON 또는 form.
+  # 공통 파라미터: cust_id, auth_key, jcode, sdate(YYYYMMDD), edate(YYYYMMDD)
+  # 응답: {"success":true,"results":[...]} — HTTP status는 실패해도 항상 200이므로 success 필드로 판정.
+  #       존재하지 않는 종목코드는 에러가 아니라 results:[] 로 온다.
+  #       시계열은 최신→과거 내림차순. 수치는 문자열(BigDecimal(String)로 파싱).
+  paths:
+    stock-daily: /stock/m001/hist_info    # 거래소(KOSPI) 종목 일별정보 — 종가 F15001, OHLC F15009/10/11,
+                                          #   ETP지표가치(NAV/IV) F15301 포함 → ETF 괴리율도 이 호출로 계산
+    kosdaq-daily: /stock/m003/hist_info   # 코스닥 종목 일별정보
+    index-daily: /stock/m002/hist_info    # 거래소 업종(지수) 일별정보 — 코스피는 jcode=1
+    kosdaq-index-daily: /stock/m004/hist_info   # 코스닥 지수도 jcode=1
+  # 종목 마스터 생성용 (Task 3 stock-master.csv)
+  code-paths:
+    kospi: /stock/m001/code_info
+    kospi-etf: /stock/m001/code_etf_info
+    kospi-etn: /stock/m001/code_etn_info
+    kosdaq: /stock/m003/code_info
+    index: /stock/m002/code_info
+    kosdaq-index: /stock/m004/code_info
