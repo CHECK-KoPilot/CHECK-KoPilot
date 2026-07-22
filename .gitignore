@@ -1,0 +1,8 @@
+.DS_Store
+check-kopilot/backend/build/
+check-kopilot/backend/.gradle/
+check-kopilot/frontend/node_modules/
+check-kopilot/frontend/dist/
+*.iml
+.idea/
+.env

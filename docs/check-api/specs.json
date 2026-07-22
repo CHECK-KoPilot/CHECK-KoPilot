@@ -1,0 +1,9114 @@
+[
+ {
+  "apiurl": "/future/m238/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m238/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m238/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/stock/m001/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m001/code_etf_info",
+  "title": "[코드정보(ETF)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m001/code_etn_info",
+  "title": "[코드정보(ETN)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m001/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m001/basic_info_all",
+  "title": "[기본정보(전체)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 150
+ },
+ {
+  "apiurl": "/stock/m001/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m001/basic_info_all_port",
+  "title": "[기본정보(전체_복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 150
+ },
+ {
+  "apiurl": "/stock/m001/invest_info_port",
+  "title": "[투자자 정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m001/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 82
+ },
+ {
+  "apiurl": "/stock/m001/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 82
+ },
+ {
+  "apiurl": "/stock/m001/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m001/rank",
+  "title": "[순위정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "up_code",
+   "criteria_code"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/stock/m001/upjong_info",
+  "title": "[소속업종정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/stock/m001/new_high",
+  "title": "[신고가/신저가]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "gubun"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/stock/m001/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/stock/m001/hist_info_port",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/stock/m001/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "order",
+   "dcnt"
+  ],
+  "res_count": 37
+ },
+ {
+  "apiurl": "/stock/m001/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 36
+ },
+ {
+  "apiurl": "/stock/m001/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m001/intra_date",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/stock/m001/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/stock/m001/invest_hist",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m001/rank_invest",
+  "title": "[순위정보(투자자-당일)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "criteria_code",
+   "sort_code"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m001/rank_invest_date",
+  "title": "[순위정보(투자자-기간합산)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "criteria_code",
+   "sort_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 123
+ },
+ {
+  "apiurl": "/stock/m001/rank_short_date",
+  "title": "[순위정보(공매도-기간합산)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 7
+ },
+ {
+  "apiurl": "/stock/m001/rank_mass_date",
+  "title": "[순위정보(대량매매-기간합산)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 33
+ },
+ {
+  "apiurl": "/stock/m001/mass_hist_info",
+  "title": "[대량매매 일별정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 35
+ },
+ {
+  "apiurl": "/stock/m001/loan_hist_info",
+  "title": "[대차잔고 일별정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m001/credit_hist_info",
+  "title": "[신용잔고 일별정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m001/short_hist_info",
+  "title": "[공매도 일별정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m001/member_date",
+  "title": "[회원사 매매집계]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m001/program",
+  "title": "[프로그램매매-일중]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/stock/m001/program_basic",
+  "title": "[프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 26
+ },
+ {
+  "apiurl": "/stock/m001/program_all",
+  "title": "[프로그램매매-일중(전체)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m001/program_all_basic",
+  "title": "[전체 프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m002/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m002/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m002/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/stock/m002/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/stock/m002/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m002/intra_date",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m002/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/stock/m002/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m002/invest_intra_info",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m002/invest_intra_date",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m002/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m003/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m003/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m003/basic_info_all",
+  "title": "[기본정보(전체)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 102
+ },
+ {
+  "apiurl": "/stock/m003/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m003/basic_info_all_port",
+  "title": "[기본정보(전체_복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 102
+ },
+ {
+  "apiurl": "/stock/m003/invest_info_port",
+  "title": "[투자자 정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m003/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m003/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m003/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m003/rank",
+  "title": "[순위정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "up_code",
+   "criteria_code"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/stock/m003/new_high",
+  "title": "[신고가/신저가]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "gubun"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/stock/m003/upjong_info",
+  "title": "[소속업종정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/stock/m003/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m003/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "order",
+   "dcnt"
+  ],
+  "res_count": 37
+ },
+ {
+  "apiurl": "/stock/m003/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 36
+ },
+ {
+  "apiurl": "/stock/m003/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/stock/m003/intra_date",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/stock/m003/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/stock/m003/invest_hist",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m003/rank_invest",
+  "title": "[순위정보(투자자-당일)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "criteria_code",
+   "sort_code"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m003/rank_invest_date",
+  "title": "[순위정보(투자자-기간합산)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "criteria_code",
+   "sort_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 123
+ },
+ {
+  "apiurl": "/stock/m003/rank_short_date",
+  "title": "[순위정보(공매도-기간합산)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 7
+ },
+ {
+  "apiurl": "/stock/m003/rank_mass_date",
+  "title": "[순위정보(대량매매-기간합산)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 33
+ },
+ {
+  "apiurl": "/stock/m003/mass_hist_info",
+  "title": "[대량매매 일별정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 35
+ },
+ {
+  "apiurl": "/stock/m003/loan_hist_info",
+  "title": "[대차잔고 일별정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m003/credit_hist_info",
+  "title": "[신용잔고 일별정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m003/short_hist_info",
+  "title": "[공매도 일별정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m003/member_date",
+  "title": "[회원사 매매집계]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m003/program",
+  "title": "[기본정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/stock/m003/program_basic",
+  "title": "[프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 26
+ },
+ {
+  "apiurl": "/stock/m003/program_all",
+  "title": "[프로그램매매-일중(전체)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m003/program_all_basic",
+  "title": "[전체 프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m004/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m004/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m004/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/stock/m004/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/stock/m004/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m004/intra_date",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m004/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "data_list",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/stock/m004/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m004/invest_intra_info",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m004/invest_intra_date",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m004/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m008/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/stock/m008/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m008/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m008/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 28
+ },
+ {
+  "apiurl": "/stock/m008/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m008/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/stock/m009/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/stock/m009/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m009/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m009/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 28
+ },
+ {
+  "apiurl": "/stock/m009/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m009/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/stock/m010/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/stock/m010/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m010/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m010/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 28
+ },
+ {
+  "apiurl": "/stock/m010/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/stock/m118/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/stock/m118/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m118/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m118/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m118/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/stock/m118/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m118/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/stock/m121/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m121/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m121/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 33
+ },
+ {
+  "apiurl": "/stock/m121/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/stock/m121/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m121/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 31
+ },
+ {
+  "apiurl": "/stock/m167/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m167/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m167/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 33
+ },
+ {
+  "apiurl": "/stock/m167/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/stock/m167/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m167/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 31
+ },
+ {
+  "apiurl": "/stock/m168/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m168/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/stock/m168/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 33
+ },
+ {
+  "apiurl": "/stock/m168/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/stock/m168/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/stock/m168/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 31
+ },
+ {
+  "apiurl": "/stock/m222/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m222/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m222/basic_info_all",
+  "title": "[기본정보(전체)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 152
+ },
+ {
+  "apiurl": "/stock/m222/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m222/basic_info_all_port",
+  "title": "[기본정보(전체_복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 152
+ },
+ {
+  "apiurl": "/stock/m222/invest_info_port",
+  "title": "[투자자 정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m222/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m222/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m222/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m222/rank",
+  "title": "[순위정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "up_code",
+   "criteria_code"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/stock/m222/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m222/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "order",
+   "dcnt"
+  ],
+  "res_count": 37
+ },
+ {
+  "apiurl": "/stock/m222/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 36
+ },
+ {
+  "apiurl": "/stock/m222/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m222/intra_date",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/stock/m222/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/stock/m222/rank_invest",
+  "title": "[순위정보(투자자-당일)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sort_code"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m222/rank_invest_date",
+  "title": "[순위정보(투자자-기간합산)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sort_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 123
+ },
+ {
+  "apiurl": "/stock/m222/member_date",
+  "title": "[회원사 매매집계]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m222/program",
+  "title": "[프로그램매매-일중]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/stock/m222/program_basic",
+  "title": "[프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 26
+ },
+ {
+  "apiurl": "/stock/m222/program_all",
+  "title": "[프로그램매매-일중(전체)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m222/program_all_basic",
+  "title": "[전체 프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m223/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m223/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m223/basic_info_all",
+  "title": "[기본정보(전체)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 152
+ },
+ {
+  "apiurl": "/stock/m223/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m223/basic_info_all_port",
+  "title": "[기본정보(전체_복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 152
+ },
+ {
+  "apiurl": "/stock/m223/invest_info_port",
+  "title": "[투자자 정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m223/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m223/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m223/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m223/rank",
+  "title": "[순위정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "up_code",
+   "criteria_code"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/stock/m223/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m223/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "order",
+   "dcnt"
+  ],
+  "res_count": 37
+ },
+ {
+  "apiurl": "/stock/m223/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 36
+ },
+ {
+  "apiurl": "/stock/m223/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m223/intra_date",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/stock/m223/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/stock/m223/rank_invest",
+  "title": "[순위정보(투자자-당일)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sort_code"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m223/rank_invest_date",
+  "title": "[순위정보(투자자-기간합산)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sort_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 123
+ },
+ {
+  "apiurl": "/stock/m223/member_date",
+  "title": "[회원사 매매집계]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m223/program",
+  "title": "[프로그램매매-일중]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/stock/m223/program_basic",
+  "title": "[프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 26
+ },
+ {
+  "apiurl": "/stock/m223/program_all",
+  "title": "[프로그램매매-일중(전체)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m223/program_all_basic",
+  "title": "[전체 프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m224/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m224/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m224/basic_info_all",
+  "title": "[기본정보(전체)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 152
+ },
+ {
+  "apiurl": "/stock/m224/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m224/basic_info_all_port",
+  "title": "[기본정보(전체_복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 152
+ },
+ {
+  "apiurl": "/stock/m224/invest_info_port",
+  "title": "[투자자 정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m224/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m224/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m224/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m224/rank",
+  "title": "[순위정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "up_code",
+   "criteria_code"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/stock/m224/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m224/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "order",
+   "dcnt"
+  ],
+  "res_count": 37
+ },
+ {
+  "apiurl": "/stock/m224/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 36
+ },
+ {
+  "apiurl": "/stock/m224/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m224/intra_date",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/stock/m224/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/stock/m224/rank_invest",
+  "title": "[순위정보(투자자-당일)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sort_code"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m224/rank_invest_date",
+  "title": "[순위정보(투자자-기간합산)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sort_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 123
+ },
+ {
+  "apiurl": "/stock/m224/member_date",
+  "title": "[회원사 매매집계]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m224/program",
+  "title": "[프로그램매매-일중]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/stock/m224/program_basic",
+  "title": "[프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 26
+ },
+ {
+  "apiurl": "/stock/m224/program_all",
+  "title": "[프로그램매매-일중(전체)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m224/program_all_basic",
+  "title": "[전체 프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m225/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m225/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m225/basic_info_all",
+  "title": "[기본정보(전체)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 152
+ },
+ {
+  "apiurl": "/stock/m225/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/stock/m225/basic_info_all_port",
+  "title": "[기본정보(전체_복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 152
+ },
+ {
+  "apiurl": "/stock/m225/invest_info_port",
+  "title": "[투자자 정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m225/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m225/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/stock/m225/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/stock/m225/rank",
+  "title": "[순위정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "up_code",
+   "criteria_code"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/stock/m225/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m225/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "order",
+   "dcnt"
+  ],
+  "res_count": 37
+ },
+ {
+  "apiurl": "/stock/m225/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 36
+ },
+ {
+  "apiurl": "/stock/m225/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/stock/m225/intra_date",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/stock/m225/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/stock/m225/rank_invest",
+  "title": "[순위정보(투자자-당일)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sort_code"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m225/rank_invest_date",
+  "title": "[순위정보(투자자-기간합산)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sort_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 123
+ },
+ {
+  "apiurl": "/stock/m225/member_date",
+  "title": "[회원사 매매집계]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "criteria_code",
+   "sdate",
+   "edate",
+   "-"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/stock/m225/program",
+  "title": "[프로그램매매-일중]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/stock/m225/program_basic",
+  "title": "[프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 26
+ },
+ {
+  "apiurl": "/stock/m225/program_all",
+  "title": "[프로그램매매-일중(전체)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/stock/m225/program_all_basic",
+  "title": "[전체 프로그램매매(기본정보)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/stock/m226/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m226/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m226/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/stock/m226/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m226/invest_intra_info",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m226/invest_intra_date",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m226/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m227/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m227/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m227/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/stock/m227/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m227/invest_intra_info",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m227/invest_intra_date",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m227/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m228/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m228/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m228/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/stock/m228/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m228/invest_intra_info",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m228/invest_intra_date",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m228/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m229/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m229/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/stock/m229/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/stock/m229/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 121
+ },
+ {
+  "apiurl": "/stock/m229/invest_intra_info",
+  "title": "[투자자 주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/stock/m229/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/future/m005/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m005/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m005/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m005/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m005/hoga_info_port",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m005/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m005/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m005/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m005/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m005/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m005/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m005/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m005/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m005/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m005/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m006/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/future/m006/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m006/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m006/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m006/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m006/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m006/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m006/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m006/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m006/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m006/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m006/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m006/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m006/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m006/old_code_info",
+  "title": "[과거 종목(코드정보)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "yyyymm"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m006/old_hist_info",
+  "title": "[과거종목(일별정보)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/future/m012/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/future/m012/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/future/m012/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 46
+ },
+ {
+  "apiurl": "/future/m012/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m012/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m012/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m012/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m012/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m012/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m012/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m012/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m012/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m012/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m012/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m013/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m013/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m013/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m013/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m013/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m013/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m013/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m013/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m013/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m013/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m013/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m013/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m016/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m016/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m016/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m016/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m016/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m016/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m016/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m016/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m016/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m016/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m016/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m016/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m017/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m017/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m017/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m017/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m017/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m017/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m017/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m017/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m017/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m017/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m017/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m017/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m018/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m018/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m018/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m018/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m018/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m018/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m018/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m018/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m018/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m019/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m019/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m019/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m019/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m019/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m019/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m019/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m019/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m019/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m062/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m062/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m062/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m062/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m062/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m062/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m062/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m062/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m062/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m062/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m062/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m062/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m067/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m067/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m067/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m067/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m067/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m067/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m067/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m067/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m067/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m067/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m067/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m067/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m067/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m067/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m091/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m091/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m091/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m091/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m091/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m091/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m091/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m091/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m091/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m091/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m091/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m093/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/future/m093/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m093/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m093/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m093/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m093/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m093/invest_basic_info_port",
+  "title": "[투자자 기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m093/invest_intra_info",
+  "title": "[투자자 주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 122
+ },
+ {
+  "apiurl": "/future/m093/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 82
+ },
+ {
+  "apiurl": "/future/m100/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m100/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m100/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m100/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m100/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m100/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m100/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m100/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m100/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m100/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m100/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m103/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m103/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m103/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m103/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m103/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m103/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m103/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m103/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m103/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m103/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m103/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m103/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m103/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m103/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m104/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/future/m104/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m104/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m104/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m104/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m104/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m104/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m104/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m104/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m104/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m104/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m104/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m104/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m104/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m104/old_code_info",
+  "title": "[과거 종목(코드정보)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "yyyymm"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m104/old_hist_info",
+  "title": "[과거종목(일별정보)]",
+  "type": "weinfodbbdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/future/m105/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m105/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m105/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m105/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m105/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m105/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m105/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m105/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m105/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m180/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/future/m180/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m180/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m180/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m180/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m180/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m180/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m180/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m180/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m181/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m181/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m181/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m181/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m181/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m181/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m181/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m181/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m181/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m182/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/future/m182/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m182/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m182/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m182/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m182/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m182/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m182/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m182/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m182/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m182/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m182/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m182/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m182/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m221/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m221/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m221/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m221/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m221/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m221/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m221/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m221/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m221/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m221/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m221/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m221/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m232/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m232/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m232/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m232/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m232/hoga_info_port",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m232/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m232/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m232/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m232/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m232/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m232/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m232/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m232/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m232/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m232/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m233/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m233/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m233/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m233/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m233/hoga_info_port",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m233/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m233/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m233/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m233/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m233/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m233/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m233/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m233/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m233/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m233/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m234/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/future/m234/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m234/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m234/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m234/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m234/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m234/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m234/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m234/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m234/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m234/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m234/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m234/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m234/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m234/old_code_info",
+  "title": "[과거 종목(코드정보)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "yyyymm"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m234/old_hist_info",
+  "title": "[과거종목(일별정보)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/future/m235/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/future/m235/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m235/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 48
+ },
+ {
+  "apiurl": "/future/m235/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m235/hoga_info_port",
+  "title": "[호가정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m235/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m235/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m235/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m235/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m235/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m235/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m235/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m235/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m235/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m235/old_code_info",
+  "title": "[과거 종목(코드정보)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "yyyymm"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m235/old_hist_info",
+  "title": "[과거종목(일별정보)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/future/m236/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m236/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m236/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m236/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m236/hoga_info_port",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m236/hoga_info_port_top",
+  "title": "[호가정보(복수종목_최우선)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/future/m236/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m236/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m236/tick_date",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m236/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m236/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/future/m236/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m236/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m236/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m236/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m237/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m237/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m237/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m237/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m237/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m237/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m237/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m237/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m237/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m237/invest_basic_info",
+  "title": "[투자자 기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 80
+ },
+ {
+  "apiurl": "/future/m237/invest_intra_info",
+  "title": "[주기정보(30초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 41
+ },
+ {
+  "apiurl": "/future/m237/invest_hist_info",
+  "title": "[투자자 일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 81
+ },
+ {
+  "apiurl": "/future/m238/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m238/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m238/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 38
+ },
+ {
+  "apiurl": "/future/m238/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m238/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m238/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m238/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m238/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m238/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/future/m239/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/future/m239/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m239/basic_info_port",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 43
+ },
+ {
+  "apiurl": "/future/m239/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/future/m239/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/future/m239/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 25
+ },
+ {
+  "apiurl": "/future/m239/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/future/m239/intra_date",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/future/m239/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/bond/m020/tick_info",
+  "title": "[장외호가정보(종목별)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "data_list"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/bond/m020/tick_total_info",
+  "title": "[장외호가정보(전체)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "F14729",
+   "data_list",
+   "-"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/bond/m023/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/bond/m023/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/bond/m023/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/bond/m023/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/bond/m025/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/bond/m025/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/bond/m025/intra_info",
+  "title": "[주기정보(1분)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/bond/m025/intra_date",
+  "title": "[주기정보(1분)(일자별)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list",
+   "jcode",
+   "edate"
+  ],
+  "res_count": 23
+ },
+ {
+  "apiurl": "/bond/m025/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/bond/m026/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/bond/m026/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/bond/m026/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/bond/m026/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/bond/m037/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 5
+ },
+ {
+  "apiurl": "/bond/m037/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/bond/m037/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/bond/m037/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/bond/m038/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/bond/m038/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "data_list"
+  ],
+  "res_count": 132
+ },
+ {
+  "apiurl": "/bond/m038/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist",
+   "data_list"
+  ],
+  "res_count": 132
+ },
+ {
+  "apiurl": "/bond/m038/tick_info",
+  "title": "[체결정보(장내체결+장외15분 체결)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "data_list"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/bond/m038/tick_total_info",
+  "title": "[체결정보(장내체결+장외15분 체결)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "F14729",
+   "data_list",
+   "-"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/bond/m038/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate",
+   "data_list"
+  ],
+  "res_count": 24
+ },
+ {
+  "apiurl": "/bond/m043/hist_info",
+  "title": "[일별체결(만기별)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "inst_cd",
+   "dwm_type",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/bond/m048/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/bond/m048/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 27
+ },
+ {
+  "apiurl": "/bond/m048/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/bond/m048/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/bond/m050/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/bond/m050/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "data_list"
+  ],
+  "res_count": 132
+ },
+ {
+  "apiurl": "/bond/m050/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist",
+   "data_list"
+  ],
+  "res_count": 132
+ },
+ {
+  "apiurl": "/bond/m050/tick_info",
+  "title": "[통합채권 호가(장내체결+K-bond 호가)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "data_list"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/bond/m050/tick_info_port",
+  "title": "[통합채권 호가(장내체결+K-bond 호가)(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist",
+   "data_list"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/bond/m050/tick_total_info",
+  "title": "[통합채권 호가(장내체결+K-bond 호가)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "F14729",
+   "data_list",
+   "-"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/bond/m056/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/bond/m056/basic_info",
+  "title": "[콜-기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 7
+ },
+ {
+  "apiurl": "/bond/m056/call_tick",
+  "title": "[콜-체결]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/bond/m056/hist_info",
+  "title": "[콜-일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/bond/m058/basic_info",
+  "title": "[채권발행정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 204
+ },
+ {
+  "apiurl": "/bond/m058/credit_group_info",
+  "title": "[채권 신용그룹코드-명 맵핑 정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/bond/m058/m058hcsfw",
+  "title": "[채권현금흐름]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/bond/m058/m058umkvld",
+  "title": "[시가평가(당일)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/bond/m058/m058umkvld_hist",
+  "title": "[시가평가(당일)-일별]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/bond/m058/m058hmkvld",
+  "title": "[시가평가(익일)]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/bond/m058/m058hmkvld_hist",
+  "title": "[시가평가(익일)-일별]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 21
+ },
+ {
+  "apiurl": "/bond/m058/m058hadre",
+  "title": "[발행정보-상세]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 19
+ },
+ {
+  "apiurl": "/bond/m058/m058hfrnrefe",
+  "title": "[FRN-상세]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/bond/m058/m058hfrncsfw",
+  "title": "[FRN_현금흐름]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/bond/m058/jipyo_list",
+  "title": "[지표물 리스트]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/bond/m058/m058ubidrt",
+  "title": "[국고채 발행 입찰]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 18
+ },
+ {
+  "apiurl": "/bond/m058/m058ukbuyback",
+  "title": "[국고채 발행 입찰]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 5
+ },
+ {
+  "apiurl": "/bond/m060/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/bond/m060/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/bond/m060/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 20
+ },
+ {
+  "apiurl": "/bond/m074/m074htsyd",
+  "title": "[발행기관별 민평커브]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "F12506",
+   "F16357"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/bond/m074/m074htsyd_hist",
+  "title": "[발행기관별 민평커브]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "F16357",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/bond/m097/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "data_list"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/bond/m097/basic_info",
+  "title": "[최종호가수익률]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/bond/m097/hist_info",
+  "title": "[최종호가수익률]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 5
+ },
+ {
+  "apiurl": "/bond/m161/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 5
+ },
+ {
+  "apiurl": "/bond/m161/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/bond/m161/hoga_info",
+  "title": "[호가정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 35
+ },
+ {
+  "apiurl": "/bond/m161/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "data_list"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/bond/m161/tick_info_by_jipyo",
+  "title": "[체결정보(지표코드)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "data_list"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/bond/m161/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/bond/m161/hist_info_by_jipyo",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/ext/m174/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/ext/m174/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m174/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/bond/etc/bondbasket",
+  "title": "[채권현금흐름]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 5
+ },
+ {
+  "apiurl": "/bond/etc/bondbasket_hist",
+  "title": "[채권현금흐름]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 5
+ },
+ {
+  "apiurl": "/bond/etc/cdcp_hist",
+  "title": "[CD/CP시가평가 일별]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m184/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/ext/m184/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/ext/m184/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m184/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/ext/m184/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m185/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/ext/m185/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/ext/m185/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m185/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/ext/m185/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m186/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/ext/m186/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/ext/m186/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m186/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/ext/m186/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m187/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/ext/m187/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/ext/m187/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m187/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/ext/m187/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m188/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/ext/m188/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/ext/m188/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m188/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 11
+ },
+ {
+  "apiurl": "/ext/m188/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m193/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/ext/m193/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 17
+ },
+ {
+  "apiurl": "/ext/m193/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 9
+ },
+ {
+  "apiurl": "/ext/m193/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/ext/m193/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 7
+ },
+ {
+  "apiurl": "/ext/m194/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/ext/m194/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 71
+ },
+ {
+  "apiurl": "/ext/m194/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 71
+ },
+ {
+  "apiurl": "/ext/m194/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m194/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m194/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/ext/m194/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m195/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/ext/m195/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 34
+ },
+ {
+  "apiurl": "/ext/m195/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 34
+ },
+ {
+  "apiurl": "/ext/m195/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m195/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m195/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/ext/m195/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m196/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/ext/m196/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 34
+ },
+ {
+  "apiurl": "/ext/m196/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 34
+ },
+ {
+  "apiurl": "/ext/m196/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m196/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m196/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/ext/m196/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m197/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/ext/m197/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 34
+ },
+ {
+  "apiurl": "/ext/m197/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 34
+ },
+ {
+  "apiurl": "/ext/m197/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m197/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m197/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/ext/m197/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/ext/m198/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/ext/m198/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 34
+ },
+ {
+  "apiurl": "/ext/m198/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 34
+ },
+ {
+  "apiurl": "/ext/m198/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m198/tick_info",
+  "title": "[체결정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/ext/m198/intra_info",
+  "title": "[주기정보(10초)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 13
+ },
+ {
+  "apiurl": "/ext/m198/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/etc/economic/checkcode",
+  "title": "[경제지표 코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/etc/economic/indicator",
+  "title": "[경제지표]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "check_code",
+   "syear",
+   "eyear"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/etc/comp/comp_comment",
+  "title": "[기업소개]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/comp/comp_basic",
+  "title": "[기업 기본정보]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 30
+ },
+ {
+  "apiurl": "/etc/comp/comp_holder",
+  "title": "[기업 주주현황]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/etc/comp/comp_sales",
+  "title": "[기업 매출액 구성비]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm"
+  ],
+  "res_count": 5
+ },
+ {
+  "apiurl": "/etc/comp/comp_sales_hist",
+  "title": "[기업 매출액 구성비 추이]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 5
+ },
+ {
+  "apiurl": "/etc/comp/comp_market",
+  "title": "[기업 시장점유율]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/comp/comp_market_hist",
+  "title": "[기업 시장점유율 추이]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/ifrs/comp_perf_date",
+  "title": "[실적발표일]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 7
+ },
+ {
+  "apiurl": "/etc/ifrs/comp_ifrs_code",
+  "title": "[IFRS 계정코드 일람]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/etc/ifrs/comp_ifrs",
+  "title": "[IFRS 회계년도 전체]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/ifrs/comp_ifrs_item",
+  "title": "[IFRS 회계년도 계정별]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm",
+   "icode"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/ifrs/comp_ifrs_hist",
+  "title": "[IFRS 계정별 추이]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "icode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/gaap/comp_gaap_code",
+  "title": "[GAAP 계정코드 일람]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/etc/gaap/comp_gaap",
+  "title": "[GAAP 회계년도 전체]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/gaap/comp_gaap_item",
+  "title": "[GAAP 회계년도 계정별]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm",
+   "icode"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/gaap/comp_gaap_hist",
+  "title": "[GAAP 계정별 추이]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "icode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/cons/comp_cons_code",
+  "title": "[컨센서스 계정코드 일람]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 10
+ },
+ {
+  "apiurl": "/etc/cons/comp_cons",
+  "title": "[컨센서스 회계년도 전체]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/cons/comp_cons_item",
+  "title": "[컨센서스 회계년도 계정별]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "yyyymm",
+   "icode"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/cons/comp_cons_hist",
+  "title": "[컨센서스 계정별 추이]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "icode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 6
+ },
+ {
+  "apiurl": "/etc/trend/trend_bank",
+  "title": "[금융기관 수신고 - 은행]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate",
+   "dcnt"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/etc/trend/trend_inv",
+  "title": "[금융기관 수신고 - 투신]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate",
+   "dcnt"
+  ],
+  "res_count": 8
+ },
+ {
+  "apiurl": "/etc/trend/trend_secu",
+  "title": "[금융기관 수신고 - 증권사]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate",
+   "dcnt"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/etc/trend/trend_comp",
+  "title": "[금융기관 수신고 - 종금]",
+  "type": "infodb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate",
+   "dcnt"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/ext/m215/code_info",
+  "title": "[코드정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 3
+ },
+ {
+  "apiurl": "/ext/m215/basic_info",
+  "title": "[기본정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/ext/m215/basic_info_port",
+  "title": "[기본정보(복수종목)]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "codelist"
+  ],
+  "res_count": 12
+ },
+ {
+  "apiurl": "/ext/m215/hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 22
+ },
+ {
+  "apiurl": "/ext/m215/term_hist_info",
+  "title": "[일별정보]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "term",
+   "sdate",
+   "edate"
+  ],
+  "res_count": 16
+ },
+ {
+  "apiurl": "/news/news/news_basic",
+  "title": "[뉴스-제목-전체-일별 구간]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate",
+   "dcnt"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/news/news/news_jong",
+  "title": "[뉴스-제목-종목별-일별 구간]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate",
+   "dcnt"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/news/news/news_body",
+  "title": "[뉴스-본문]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "ndate",
+   "ncode"
+  ],
+  "res_count": 4
+ },
+ {
+  "apiurl": "/news/news/news_mtvcd",
+  "title": "[뉴스-뉴스원]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key"
+  ],
+  "res_count": 2
+ },
+ {
+  "apiurl": "/news/gongsi/gongsi_basic",
+  "title": "[공시-제목-전체-일별 구간]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "sdate",
+   "edate",
+   "dcnt"
+  ],
+  "res_count": 15
+ },
+ {
+  "apiurl": "/news/gongsi/gongsi_jong",
+  "title": "[공시-제목-종목별-일별 구간]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "jcode",
+   "sdate",
+   "edate",
+   "dcnt"
+  ],
+  "res_count": 14
+ },
+ {
+  "apiurl": "/news/gongsi/gongsi_body",
+  "title": "[공시-본문]",
+  "type": "webdb",
+  "params": [
+   "cust_id",
+   "auth_key",
+   "ndate",
+   "ncode"
+  ],
+  "res_count": 4
+ }
+]

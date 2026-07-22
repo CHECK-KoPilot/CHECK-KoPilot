@@ -1,0 +1,4580 @@
+[
+ {
+  "name": "주식-API",
+  "state": "off",
+  "d1": [
+   {
+    "name": "거래소 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m001code",
+      "state": "off"
+     },
+     {
+      "name": "코드 정보(ETF)",
+      "rpath": "m001codeetf",
+      "state": "off"
+     },
+     {
+      "name": "코드 정보(ETN)",
+      "rpath": "m001codeetn",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m001basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체)",
+      "rpath": "m001basicall",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m001basicport",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체_복수종목)",
+      "rpath": "m001basicallport",
+      "state": "off"
+     },
+     {
+      "name": "투자자 정보(복수종목)",
+      "rpath": "m001investport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m001hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m001hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목-최우선)",
+      "rpath": "m001hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보",
+      "rpath": "m001rank",
+      "state": "off"
+     },
+     {
+      "name": "신고가 정보",
+      "rpath": "m001newhigh",
+      "state": "off"
+     },
+     {
+      "name": "소속 업종 정보",
+      "rpath": "m001upjong",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m001hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m001termhist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(투자자)",
+      "rpath": "m001investhist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(복수종목_지정일)",
+      "rpath": "m001histport",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m001tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(일자별)",
+      "rpath": "m001tickdate",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m001intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m001intradate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(투자자-당일)",
+      "rpath": "m001rankinvest",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(투자자-기간합샨)",
+      "rpath": "m001rankinvestdate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(공매도-기간합샨)",
+      "rpath": "m001rankshortdate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(대량매매-기간합샨)",
+      "rpath": "m001rankmassdate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(대량매매)",
+      "rpath": "m001masshist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(대차잔고)",
+      "rpath": "m001loanhist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(신용잔고)",
+      "rpath": "m001credithist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(공매도)",
+      "rpath": "m001shorthist",
+      "state": "off"
+     },
+     {
+      "name": "회원사 매매집계",
+      "rpath": "m001memberdate",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(일중)",
+      "rpath": "m001program",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(기본정보)",
+      "rpath": "m001programbasic",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(일중)",
+      "rpath": "m001programall",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(기본정보)",
+      "rpath": "m001programallbasic",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "거래소 업종",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m002code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m002basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m002hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m002termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m002tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m002intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m002intradate",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m002investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(당일)",
+      "rpath": "m002investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(일자별)",
+      "rpath": "m002investintradate",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m002investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "코스닥 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m003code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m003basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체)",
+      "rpath": "m003basicall",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m003basicport",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체_복수종목)",
+      "rpath": "m003basicallport",
+      "state": "off"
+     },
+     {
+      "name": "투자자 정보(복수종목)",
+      "rpath": "m003investport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m003hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m003hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목-최우선)",
+      "rpath": "m003hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보",
+      "rpath": "m003rank",
+      "state": "off"
+     },
+     {
+      "name": "신고가 정보",
+      "rpath": "m003newhigh",
+      "state": "off"
+     },
+     {
+      "name": "소속 업종 정보",
+      "rpath": "m003upjong",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m003hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m003termhist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(투자자)",
+      "rpath": "m003investhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m003tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(일자별)",
+      "rpath": "m003tickdate",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m003intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m003intradate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(투자자-당일)",
+      "rpath": "m003rankinvest",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(투자자-기간합샨)",
+      "rpath": "m003rankinvestdate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(공매도-기간합샨)",
+      "rpath": "m003rankshortdate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(대량매매-기간합샨)",
+      "rpath": "m003rankmassdate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(대량매매)",
+      "rpath": "m003masshist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(대차잔고)",
+      "rpath": "m003loanhist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(신용잔고)",
+      "rpath": "m003credithist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(공매도)",
+      "rpath": "m003shorthist",
+      "state": "off"
+     },
+     {
+      "name": "회원사 매매집계",
+      "rpath": "m003memberdate",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(일중)",
+      "rpath": "m003program",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(기본정보)",
+      "rpath": "m003programbasic",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(일중)",
+      "rpath": "m003programall",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(기본정보)",
+      "rpath": "m003programallbasic",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "코스닥 업종",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m004code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m004basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m004hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m004termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m004tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m004intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m004intradate",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m004investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(당일)",
+      "rpath": "m004investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(일자별)",
+      "rpath": "m004investintradate",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m004investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "NXT-KSP 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m222code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m222basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체)",
+      "rpath": "m222basicall",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m222basicport",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체_복수종목)",
+      "rpath": "m222basicallport",
+      "state": "off"
+     },
+     {
+      "name": "투자자 정보(복수종목)",
+      "rpath": "m222investport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m222hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m222hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목-최우선)",
+      "rpath": "m222hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보",
+      "rpath": "m222rank",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m222hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m222termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m222tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(일자별)",
+      "rpath": "m222tickdate",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m222intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m222intradate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(투자자-당일)",
+      "rpath": "m222rankinvest",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(일중)",
+      "rpath": "m222program",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(기본정보)",
+      "rpath": "m222programbasic",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(일중)",
+      "rpath": "m222programall",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(기본정보)",
+      "rpath": "m222programallbasic",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "NXT-KSP 업종",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m226code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m226basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m226hist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m226investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(당일)",
+      "rpath": "m226investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(일자별)",
+      "rpath": "m226investintradate",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m226investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "NXT-KSQ 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m223code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m223basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체)",
+      "rpath": "m223basicall",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m223basicport",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체_복수종목)",
+      "rpath": "m223basicallport",
+      "state": "off"
+     },
+     {
+      "name": "투자자 정보(복수종목)",
+      "rpath": "m223investport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m223hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m223hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목-최우선)",
+      "rpath": "m223hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보",
+      "rpath": "m223rank",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m223hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m223termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m223tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(일자별)",
+      "rpath": "m223tickdate",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m223intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m223intradate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(투자자-당일)",
+      "rpath": "m223rankinvest",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(일중)",
+      "rpath": "m223program",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(기본정보)",
+      "rpath": "m223programbasic",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(일중)",
+      "rpath": "m223programall",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(기본정보)",
+      "rpath": "m223programallbasic",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "NXT-KSQ 업종",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m227code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m227basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m227hist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m227investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(당일)",
+      "rpath": "m227investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(일자별)",
+      "rpath": "m227investintradate",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m227investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "통합-KSP 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m224code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m224basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체)",
+      "rpath": "m224basicall",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m224basicport",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체_복수종목)",
+      "rpath": "m224basicallport",
+      "state": "off"
+     },
+     {
+      "name": "투자자 정보(복수종목)",
+      "rpath": "m224investport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m224hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m224hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목-최우선)",
+      "rpath": "m224hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보",
+      "rpath": "m224rank",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m224hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m224termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m224tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(일자별)",
+      "rpath": "m224tickdate",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m224intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m224intradate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(투자자-당일)",
+      "rpath": "m224rankinvest",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(일중)",
+      "rpath": "m224program",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(기본정보)",
+      "rpath": "m224programbasic",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(일중)",
+      "rpath": "m224programall",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(기본정보)",
+      "rpath": "m224programallbasic",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "통합-KSP 업종",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m228code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m228basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m228hist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m228investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(당일)",
+      "rpath": "m228investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(일자별)",
+      "rpath": "m228investintradate",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m228investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "통합-KSQ 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m225code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m225basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체)",
+      "rpath": "m225basicall",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m225basicport",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(전체_복수종목)",
+      "rpath": "m225basicallport",
+      "state": "off"
+     },
+     {
+      "name": "투자자 정보(복수종목)",
+      "rpath": "m225investport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m225hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m225hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목-최우선)",
+      "rpath": "m225hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보",
+      "rpath": "m225rank",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m225hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m225termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m225tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(일자별)",
+      "rpath": "m225tickdate",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m225intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m225intradate",
+      "state": "off"
+     },
+     {
+      "name": "순위 정보(투자자-당일)",
+      "rpath": "m225rankinvest",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(일중)",
+      "rpath": "m225program",
+      "state": "off"
+     },
+     {
+      "name": "프로그램매매(기본정보)",
+      "rpath": "m225programbasic",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(일중)",
+      "rpath": "m225programall",
+      "state": "off"
+     },
+     {
+      "name": "전체 프로그램매매(기본정보)",
+      "rpath": "m225programallbasic",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "통합-KSQ 업종",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m229code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m229basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m229hist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m229investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(당일)",
+      "rpath": "m229investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보(일자별)",
+      "rpath": "m229investintradate",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m229investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "수익증권",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m008code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m008basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m008hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m008termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m008tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m008intra",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "신주인수권",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m009code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m009basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m009hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m009termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m009tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m009intra",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "OTCBB",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m010code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m010basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m010hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m010termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m010tick",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KONEX 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m118code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m118basic",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m118hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m118hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m118termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m118tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m118intra",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KONEX 업종",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m121code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m121basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m121hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m121termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m121tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m121intra",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "섹터지수",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m167code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m167basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m167hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m167termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m167tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m167intra",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "국내기타지수",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "업종코드 정보",
+      "rpath": "m168code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m168basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m168hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m168termhist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m168tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m168intra",
+      "state": "off"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "파생-API",
+  "state": "off",
+  "d1": [
+   {
+    "name": "KOSPI200 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m005code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m005basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m005basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m005hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m005hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m005hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m005hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m005tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(과거)",
+      "rpath": "m005tickdate",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m005intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m005intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m005termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m005investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m005investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m005investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSPI200 선물(야간)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m236code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m236basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m236basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m236hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m236hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m236hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m236hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m236tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(과거)",
+      "rpath": "m236tickdate",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m236intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m236intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m236termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m236investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m236investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m236investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSPI200 옵션",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m006code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m006basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m006basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m006hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m006hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m006hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m006hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m006tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m006intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m006intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m006termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m006investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m006investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m006investhist",
+      "state": "off"
+     },
+     {
+      "name": "과거종목(코드 정보)",
+      "rpath": "m006oldcode",
+      "state": "off"
+     },
+     {
+      "name": "과거종목(일별 정보)",
+      "rpath": "m006oldhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSPI200 옵션(야간)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m234code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m234basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m234basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m234hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m234hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m234hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m234hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m234tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m234intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m234intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m234termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m234investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m234investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m234investhist",
+      "state": "off"
+     },
+     {
+      "name": "과거종목(코드 정보)",
+      "rpath": "m234oldcode",
+      "state": "off"
+     },
+     {
+      "name": "과거종목(일별 정보)",
+      "rpath": "m234oldhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "주식 옵션",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m012code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m012basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m012basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m012hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m012hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m012hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m012hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m012tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m012intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m012intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m012termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m012investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m012investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m012investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "국채3년 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m017code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m017basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m017basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m017hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m017hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m017tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m017intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m017intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m017termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m017investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m017investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m017investhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m017investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m017investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m017investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "국채3년 선물(야간)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m237code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m237basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m237basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m237hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m237hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m237tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m237intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m237intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m237termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m237investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m237investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m237investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "국채5년 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m062code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m062basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m062basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m062hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m062hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m062tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m062intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m062intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m062termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m062investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m062investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m062investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "국채10년 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m016code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m016basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m016basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m016hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m016hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m016tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m016intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m016intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m016termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m016investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m016investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m016investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "국채10년 선물(야간)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m239code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m239basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m239basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m239hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m239hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m239tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m239intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m239intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m239termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m239investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m239investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m239investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "국채30년 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m221code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m221basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m221basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m221hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m221hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m221tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m221intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m221intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m221termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m221investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m221investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m221investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "USD 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m013code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m013basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m013basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m013hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m013hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m013tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m013intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m013intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m013termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m013investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m013investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m013investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "USD 선물(야간)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m238code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m238basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m238basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m238hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m238hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m238tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m238intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m238intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m238termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m238investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m238investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m238investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "YEN 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m018code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m018basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m018basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m018hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m018hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m018tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m018intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m018intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m018termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "EURO 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m019code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m019basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m019basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m019hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m019hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m019tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m019intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m019intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m019termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSDAQ150 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m067code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m067basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m067basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m067hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m067hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m067hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m067hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m067tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m067intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m067intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m067termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m067investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m067investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m067investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSDAQ150 선물(야간)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m233code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m233basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m233basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m233hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m233hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m233hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m233hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m233tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m233intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m233intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m233termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m233investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m233investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m233investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "주식 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m091code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m091basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m091basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m091hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m091hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m091hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m091hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m091tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m091intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m091intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m091termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "주식 선물(통계정보)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m093code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m093basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m093basicport",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m093hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m093termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m093investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보(복수종목)",
+      "rpath": "m093investbasicport",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m093investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m093investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "섹터지수 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m100code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m100basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m100basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m100hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m100hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m100hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m100hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m100tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m100intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m100intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m100termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSPI200 미니 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m103code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m103basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m103basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m103hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m103hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m103hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m103hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m103tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m103intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m103intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m103termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m103investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m103investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m103investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSPI200 미니 선물(야간)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m232code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m232basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m232basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m232hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m232hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m232hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m232hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m232tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m232intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m232intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m232termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m232investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 주기 정보",
+      "rpath": "m232investintra",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m232investhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "CNH 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m105code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m105basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m105basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m105hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m105hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m105tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m105intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m105intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m105termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KRX300 선물",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m181code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m181basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m181basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m181hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m181hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m181tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m181intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m181intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m181termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSPI200 미니옵션",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m104code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m104basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m104basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m104hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m104hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m104hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m104hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m104tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m104intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m104intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m104termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m104investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m104investhist",
+      "state": "off"
+     },
+     {
+      "name": "과거종목(코드 정보)",
+      "rpath": "m104oldcode",
+      "state": "off"
+     },
+     {
+      "name": "과거종목(일별 정보)",
+      "rpath": "m104oldhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSPI200 미니옵션(야간)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m235code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m235basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m235basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m235hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m235hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m235hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m235hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m235tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m235intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m235intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m235termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m235investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m235investhist",
+      "state": "off"
+     },
+     {
+      "name": "과거종목(코드 정보)",
+      "rpath": "m235oldcode",
+      "state": "off"
+     },
+     {
+      "name": "과거종목(일별 정보)",
+      "rpath": "m235oldhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSDAQ150 옵션",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m180code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m180basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m180basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m180hoga",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m180hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m180tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m180intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m180intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m180termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "KOSPI200 위클리 옵션",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m182code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m182basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m182basicport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m182hoga",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목)",
+      "rpath": "m182hogaport",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보(복수종목_최우선)",
+      "rpath": "m182hogaporttop",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m182hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(당일)",
+      "rpath": "m182tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m182intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m182intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주기)",
+      "rpath": "m182termhist",
+      "state": "off"
+     },
+     {
+      "name": "투자자 기본 정보",
+      "rpath": "m182investbasic",
+      "state": "off"
+     },
+     {
+      "name": "투자자 일별 정보",
+      "rpath": "m182investhist",
+      "state": "off"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "채권-API",
+  "state": "off",
+  "d1": [
+   {
+    "name": "채권발행정보",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "채권발행정보",
+      "rpath": "m058basic",
+      "state": "off"
+     },
+     {
+      "name": "채권(신용그룹코드 맵핑)",
+      "rpath": "m058creditgroup",
+      "state": "off"
+     },
+     {
+      "name": "채권현금흐름",
+      "rpath": "m058hcsfw",
+      "state": "off"
+     },
+     {
+      "name": "시가평가(당일)",
+      "rpath": "m058umkvld",
+      "state": "off"
+     },
+     {
+      "name": "시가평가(당일)-일별",
+      "rpath": "m058umkvld_hist",
+      "state": "off"
+     },
+     {
+      "name": "시가평가(익일)",
+      "rpath": "m058hmkvld",
+      "state": "off"
+     },
+     {
+      "name": "시가평가(익일)-일별",
+      "rpath": "m058hmkvld_hist",
+      "state": "off"
+     },
+     {
+      "name": "발행정보-상세",
+      "rpath": "m058hadre",
+      "state": "off"
+     },
+     {
+      "name": "FRN-상세",
+      "rpath": "m058hfrnrefe",
+      "state": "off"
+     },
+     {
+      "name": "FRN-현금흐름",
+      "rpath": "m058hfrncsfw",
+      "state": "off"
+     },
+     {
+      "name": "지표물 리스트",
+      "rpath": "m058jipyolist",
+      "state": "off"
+     },
+     {
+      "name": "국고채 발행 입찰",
+      "rpath": "m058ubidrt",
+      "state": "off"
+     },
+     {
+      "name": "국고채 교환 및 매입",
+      "rpath": "m058ukbuyback",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "장내국채",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m161code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m161basic",
+      "state": "off"
+     },
+     {
+      "name": "호가 정보",
+      "rpath": "m161hoga",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m161tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(지표코드)",
+      "rpath": "m161tickbyjipyo",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m161hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(지표코드)",
+      "rpath": "m161histbyjipyo",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "통합채권(체결정보)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m038code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m038basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m038basicport",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(종목별)",
+      "rpath": "m038tick",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보(전체)",
+      "rpath": "m038ticktotal",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m038hist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "장외(K-BOND)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "장외호가정보(종목별)",
+      "rpath": "m020tick",
+      "state": "off"
+     },
+     {
+      "name": "장외호가정보(전체)",
+      "rpath": "m020ticktotal",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "통합채권 호가",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m050code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m050basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m050basicport",
+      "state": "off"
+     },
+     {
+      "name": "통합채권 호가(종목별)",
+      "rpath": "m050tick",
+      "state": "off"
+     },
+     {
+      "name": "통합채권 호가(복수종목)",
+      "rpath": "m050tickport",
+      "state": "off"
+     },
+     {
+      "name": "통합채권 호가(전체)",
+      "rpath": "m050ticktotal",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "시가그룹",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m060code",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m060hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m060termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "장외채권최종호가수익률",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m097code",
+      "state": "off"
+     },
+     {
+      "name": "최종호가수익률",
+      "rpath": "m097basic",
+      "state": "off"
+     },
+     {
+      "name": "최종호가수익률-일별",
+      "rpath": "m097hist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "콜",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m056code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m056basic",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m056calltick",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m056hist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "RP",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "일별 체결(만기별)",
+      "rpath": "m043hist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "RFR(무위험지표금리)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m037code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m037basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m037basicport",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m037hist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "발행기관별 시가평가",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "발행기관별 민평커브",
+      "rpath": "m074htsyd",
+      "state": "off"
+     },
+     {
+      "name": "발행기관별 민평커브-일별",
+      "rpath": "m074htsyd_hist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "외국환중개(원달러)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m023code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m023basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m023hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m023termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "외국환중개(외환스왑)",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m026code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m026basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m026hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m026termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "해외금리",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m025code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m025basic",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(당일)",
+      "rpath": "m025intra",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보(일자별)",
+      "rpath": "m025intradate",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m025hist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "해외환율",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m174code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m174basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m174hist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "금리스왑",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m048code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m048basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m048hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m048termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "기타",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "채권선물 바스켓",
+      "rpath": "bondbasket",
+      "state": "off"
+     },
+     {
+      "name": "채권선물 바스켓-일별",
+      "rpath": "bondbasket_hist",
+      "state": "off"
+     },
+     {
+      "name": "CD/CP시가평가-일별",
+      "rpath": "cdcp_hist",
+      "state": "off"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "해외-API (license)",
+  "state": "off",
+  "d1": [
+   {
+    "name": "미국 지수",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "지수코드 정보",
+      "rpath": "m184code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m184basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m184hist",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m184intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m184termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "일본 지수",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "지수코드 정보",
+      "rpath": "m185code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m185basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m185hist",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m185intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m185termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "홍콩 지수",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "지수코드 정보",
+      "rpath": "m186code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m186basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m186hist",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m186intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m186termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "중국 지수",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "지수코드 정보",
+      "rpath": "m187code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m187basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m187hist",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m187intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m187termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "대만 지수",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "지수코드 정보",
+      "rpath": "m188code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m188basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m188hist",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m188intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m188termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "세계 지수",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "지수코드 정보",
+      "rpath": "m193code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m193basic",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m193hist",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m193intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m193termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "미국 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m194code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m194basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m194basicport",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m194hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m194tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m194intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m194termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "일본 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m195code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m195basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m195basicport",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m195hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m195tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m195intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m195termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "홍콩 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m196code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m196basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m196basicport",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m196hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m196tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m196intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m196termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "중국 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m197code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m197basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m197basicport",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m197hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m197tick",
+      "state": "off"
+     },
+     {
+      "name": "주기 정보",
+      "rpath": "m197intra",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m197termhist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "대만 종목",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m198code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m198basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m198basicport",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m198hist",
+      "state": "off"
+     },
+     {
+      "name": "체결 정보",
+      "rpath": "m198tick",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m198termhist",
+      "state": "off"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "뉴스/공시-API",
+  "state": "off",
+  "d1": [
+   {
+    "name": "뉴스",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "제목-전체-일별 구간",
+      "rpath": "newsbasic",
+      "state": "off"
+     },
+     {
+      "name": "제목-종목별-일별 구간",
+      "rpath": "newsjong",
+      "state": "off"
+     },
+     {
+      "name": "본문조회",
+      "rpath": "newsbody",
+      "state": "off"
+     },
+     {
+      "name": "뉴스원코드일람",
+      "rpath": "newsmtvcd",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "공시",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "제목-전체-일별 구간",
+      "rpath": "gongsibasic",
+      "state": "off"
+     },
+     {
+      "name": "제목-종목별-일별 구간",
+      "rpath": "gongsijong",
+      "state": "off"
+     },
+     {
+      "name": "본문조회",
+      "rpath": "gongsibody",
+      "state": "off"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "기타-API",
+  "state": "off",
+  "d1": [
+   {
+    "name": "경제지표",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "경제지표 코드정보",
+      "rpath": "economiccode",
+      "state": "off"
+     },
+     {
+      "name": "경제지표",
+      "rpath": "economicbasic",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "기업정보",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "기업 소개",
+      "rpath": "compcomment",
+      "state": "off"
+     },
+     {
+      "name": "기업 기본정보",
+      "rpath": "compbasic",
+      "state": "off"
+     },
+     {
+      "name": "주주 현황",
+      "rpath": "compholder",
+      "state": "off"
+     },
+     {
+      "name": "매출액 구성비",
+      "rpath": "compsales",
+      "state": "off"
+     },
+     {
+      "name": "매출액 구성비(추이)",
+      "rpath": "compsaleshist",
+      "state": "off"
+     },
+     {
+      "name": "시장점유율",
+      "rpath": "compmarket",
+      "state": "off"
+     },
+     {
+      "name": "시장점유율(추이)",
+      "rpath": "compmarkethist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "IFRS",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "실적발표일",
+      "rpath": "compperfdate",
+      "state": "off"
+     },
+     {
+      "name": "IFRS(code)",
+      "rpath": "compifrscode",
+      "state": "off"
+     },
+     {
+      "name": "회계년도별 전체",
+      "rpath": "compifrs",
+      "state": "off"
+     },
+     {
+      "name": "회계년도별 계정별",
+      "rpath": "compifrsitem",
+      "state": "off"
+     },
+     {
+      "name": "계정별 추이",
+      "rpath": "compifrshist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "GAAP",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "GAAP(code)",
+      "rpath": "compgaapcode",
+      "state": "off"
+     },
+     {
+      "name": "회계년도별 전체",
+      "rpath": "compgaap",
+      "state": "off"
+     },
+     {
+      "name": "회계년도별 계정별",
+      "rpath": "compgaapitem",
+      "state": "off"
+     },
+     {
+      "name": "계정별 추이",
+      "rpath": "compgaaphist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "컨센서스",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "컨센서스(code)",
+      "rpath": "compconscode",
+      "state": "off"
+     },
+     {
+      "name": "회계년도별 전체",
+      "rpath": "compcons",
+      "state": "off"
+     },
+     {
+      "name": "회계년도별 계정별",
+      "rpath": "compconsitem",
+      "state": "off"
+     },
+     {
+      "name": "계정별 추이",
+      "rpath": "compconshist",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "금융기관 수신고",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "은행",
+      "rpath": "trendbank",
+      "state": "off"
+     },
+     {
+      "name": "투신",
+      "rpath": "trendinv",
+      "state": "off"
+     },
+     {
+      "name": "증권사",
+      "rpath": "trendsecu",
+      "state": "off"
+     },
+     {
+      "name": "종금",
+      "rpath": "trendcomp",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "가상자산",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "코드 정보",
+      "rpath": "m215code",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보",
+      "rpath": "m215basic",
+      "state": "off"
+     },
+     {
+      "name": "기본 정보(복수종목)",
+      "rpath": "m215basicport",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보",
+      "rpath": "m215hist",
+      "state": "off"
+     },
+     {
+      "name": "일별 정보(주/월/분기)",
+      "rpath": "m215termhist",
+      "state": "off"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "name": "시작하기",
+  "state": "on",
+  "d1": [
+   {
+    "name": "서비스 소개",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "CHECK API 소개",
+      "rpath": "introhome",
+      "state": "off"
+     },
+     {
+      "name": "API 이용방법",
+      "rpath": "introinfo",
+      "state": "off"
+     },
+     {
+      "name": "이용요금",
+      "rpath": "introfee",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "API 공지",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "공지사항",
+      "rpath": "notiinfo",
+      "state": "off"
+     },
+     {
+      "name": "API 변경이력",
+      "rpath": "notiapimodify",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "API 일람",
+    "state": "off",
+    "auth": "off",
+    "d2": [
+     {
+      "name": "주식 API",
+      "rpath": "introstockapi",
+      "state": "off"
+     },
+     {
+      "name": "파생 API",
+      "rpath": "introfutureapi",
+      "state": "off"
+     },
+     {
+      "name": "채권 API",
+      "rpath": "introbondapi",
+      "state": "off"
+     },
+     {
+      "name": "해외 API",
+      "rpath": "introextapi",
+      "state": "off"
+     },
+     {
+      "name": "뉴스-공시 API",
+      "rpath": "intronewsapi",
+      "state": "off"
+     },
+     {
+      "name": "기타 API",
+      "rpath": "introetcapi",
+      "state": "off"
+     }
+    ]
+   },
+   {
+    "name": "My Page",
+    "state": "off",
+    "auth": "on",
+    "d2": [
+     {
+      "name": "계정 정보",
+      "rpath": "intromyinfo",
+      "state": "off"
+     },
+     {
+      "name": "API 사용량 내역(일별)",
+      "rpath": "intromyapiusagebyday",
+      "state": "off"
+     },
+     {
+      "name": "API 사용량 내역(건별)",
+      "rpath": "intromyapiusage",
+      "state": "off"
+     },
+     {
+      "name": "API 조회 내역",
+      "rpath": "intromyapiuse",
+      "state": "off"
+     }
+    ]
+   }
+  ]
+ }
+]
