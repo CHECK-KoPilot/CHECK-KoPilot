@@ -1,9 +1,25 @@
+# OS
 .DS_Store
+
+# 빌드 산출물
 check-kopilot/backend/build/
 check-kopilot/backend/.gradle/
 check-kopilot/frontend/node_modules/
 check-kopilot/frontend/dist/
+
+# 에디터
 *.iml
 .idea/
+.vscode/
+
+# 비밀값 — CHECK API cust_id/auth_key, LLM API 키
 .env
-.claude/settings.local.json
+.env.*
+!.env.example
+
+# 개인 개발 도구 설정 (각자 관리)
+.claude/
+skills-lock.json
+
+# 재생성 가능한 덤프
+repomix-output.xml
