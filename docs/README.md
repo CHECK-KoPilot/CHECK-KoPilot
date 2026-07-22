@@ -9,6 +9,7 @@
 | [spec.md](spec.md) | **설계 스펙** — 문제 정의, 지표 카탈로그 6종, 아키텍처, 화면·UX, 가드레일, 데모 시나리오 |
 | [plan.md](plan.md) | **구현 계획** — Task 1~20. 각 Task에 파일·인터페이스·Step별 코드 전문 |
 | [check-api/](check-api/) | **CHECK API 조사 결과** — 호출 규약, 엔드포인트 776건, F코드 사전 1,841개 |
+| [../.github/CONTRIBUTING.md](../.github/CONTRIBUTING.md) | **협업 규칙** — 이슈·라벨·브랜치·커밋·PR 컨벤션 |
 
 ## 코드
 

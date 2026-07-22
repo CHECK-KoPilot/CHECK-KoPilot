@@ -1,0 +1,56 @@
+name: 구현 작업 (Task)
+description: plan.md의 Task 또는 새로운 구현 작업
+title: "[Task N] "
+labels: ["type/feat"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        `docs/plan.md`에 있는 Task라면 제목의 `N`을 그 번호로 바꾸세요.
+        새 작업이면 `[Task N]` 대신 `[신규]`를 쓰고 아래를 채웁니다.
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: 목표
+      description: 이 작업이 끝나면 무엇이 가능해지는지 한두 문장으로.
+      placeholder: 수익률 갭 지표를 계산해 답변 카드 JSON으로 돌려줄 수 있다.
+    validations:
+      required: true
+
+  - type: textarea
+    id: files
+    attributes:
+      label: 대상 파일
+      description: 만들거나 고칠 파일 경로. plan.md의 Task 본문에서 그대로 옮겨오면 됩니다.
+      placeholder: |
+        - backend/src/main/java/.../executor/ReturnGapExecutor.java
+        - backend/src/test/java/.../executor/ReturnGapExecutorTest.java
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 조건
+      description: 체크박스로. 이게 다 체크되면 PR을 올립니다.
+      value: |
+        - [ ]
+        - [ ] 테스트 통과
+    validations:
+      required: true
+
+  - type: input
+    id: depends
+    attributes:
+      label: 선행 Task
+      description: 먼저 끝나야 하는 이슈 번호. 없으면 `없음`.
+      placeholder: "#5"
+
+  - type: textarea
+    id: refs
+    attributes:
+      label: 참고 문서
+      placeholder: |
+        - docs/plan.md Task 5
+        - docs/check-api/README.md

@@ -1,0 +1,26 @@
+name: 문서 · 설정 · 정리
+description: 기능 변경이 아닌 작업 (문서, 빌드 설정, 리팩터링, 테스트 보강)
+title: "[Chore] "
+labels: ["type/chore"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: 할 일
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: 이유
+      description: 왜 지금 해야 하는지. 데모에 영향이 있으면 그것도 적어주세요.
+    validations:
+      required: true
+
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 조건
+      value: |
+        - [ ]

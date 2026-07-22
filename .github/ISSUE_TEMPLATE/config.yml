@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 협업 규칙 (브랜치·커밋·PR)
+    url: https://github.com/CHECK-KoPilot/CHECK-KoPilot/blob/main/.github/CONTRIBUTING.md
+    about: 이슈를 만들기 전에 팀 협업 규칙을 먼저 확인하세요.
+  - name: 구현 계획 (Task 1~20)
+    url: https://github.com/CHECK-KoPilot/CHECK-KoPilot/blob/main/docs/plan.md
+    about: Task 이슈는 이 문서의 번호를 그대로 씁니다.
