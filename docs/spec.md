@@ -1,5 +1,7 @@
 # 설계 스펙: Check Kopilot — 트레이더용 자연어 CHECK API 코파일럿
 
+> 구현 계획: [plan.md](plan.md) · CHECK API 조사: [check-api/README.md](check-api/README.md) · 문서 인덱스: [README.md](README.md)
+
 - 작성일: 2026-07-18
 - 상태: 사용자 승인된 설계 (구현 계획 수립 전)
 - 맥락: 코스콤 미니프로젝트(해커톤), 개발 기간 1~2주, CHECK API 키 보유, 상용 LLM API 사용 가능

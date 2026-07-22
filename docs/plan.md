@@ -1,5 +1,7 @@
 # Check Kopilot 구현 계획 (Implementation Plan)
 
+> 설계 스펙: [spec.md](spec.md) · CHECK API 조사: [check-api/README.md](check-api/README.md) · 문서 인덱스: [README.md](README.md)
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 트레이더가 자연어로 질문하면 Claude가 지표 tool을 선택하고, 백엔드 Java 코드가 CHECK API 호출·계산을 수행해 근거 패널·차트·xlsx가 달린 검증 가능한 답변 카드를 돌려주는 채팅형 웹앱(MVP)을 만든다.
