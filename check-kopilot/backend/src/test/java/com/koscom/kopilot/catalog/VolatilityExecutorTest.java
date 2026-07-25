@@ -2,6 +2,7 @@ package com.koscom.kopilot.catalog;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koscom.kopilot.checkapi.FixtureCheckApiClient;
+import com.koscom.kopilot.guide.ApiSpecIndex;
 import com.koscom.kopilot.domain.MetricResult;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class VolatilityExecutorTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final ExecutorSupport support =
-            new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver());
+            new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver(), ApiSpecIndex.loadFromClasspath());
     private final VolatilityExecutor executor = new VolatilityExecutor(support);
 
     // 에코프로 픽스처: 일간수익률 {+10%, −10%, +10%} → 연율화 변동성 = √(252/75)×100 = 183.30303%

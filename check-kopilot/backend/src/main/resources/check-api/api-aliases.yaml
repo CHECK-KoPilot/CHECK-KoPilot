@@ -1,0 +1,8 @@
+aliases:
+  stock-daily: /stock/m001/hist_info
+  kosdaq-daily: /stock/m003/hist_info
+  index-daily: /stock/m002/hist_info
+  kosdaq-index-daily: /stock/m004/hist_info
+  stock-investor: /stock/m001/invest_hist
+  stock-code: /stock/m001/code_info
+  etf-code: /stock/m001/code_etf_info
