@@ -1,57 +1,85 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AppLayout from "../components/layout/AppLayout";
 import ChatMessageList from "../components/chat/ChatMessageList";
 import ChatInputBar from "../components/chat/ChatInputBar";
-import {
-  mockMessages,
-  demoResponseTemplates,
-} from "../data/mockConversation";
+import { streamChat } from "../lib/sse";
+import { getSessionId, resetSessionId } from "../lib/session";
 
-function pickRandomResponse() {
-  const template =
-    demoResponseTemplates[
-      Math.floor(Math.random() * demoResponseTemplates.length)
-    ];
-  return { ...template, id: `a-${Date.now()}` };
-}
+const CARD_EVENT_TYPES = {
+  card: "indicator",
+  clarify: "clarification",
+  guide: "guide",
+};
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sending, setSending] = useState(false);
+  const scrolledUserIdRef = useRef(null);
 
-  const handleSend = (text) => {
-    // 임시: 실제 백엔드 연동 전까지, 자유 입력에는 데모 응답 4종 중 하나를 무작위로 보여준다.
+  // 새로 보낸 질문 말풍선이 화면 위쪽에 오도록 스크롤
+  useEffect(() => {
+    const lastUserMessage = [...messages].reverse().find((m) => m.type === "user");
+    if (!lastUserMessage || lastUserMessage.id === scrolledUserIdRef.current) return;
+    scrolledUserIdRef.current = lastUserMessage.id;
+    requestAnimationFrame(() => {
+      document
+        .getElementById(lastUserMessage.id)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [messages]);
+
+  const ask = async (text) => {
     setMessages((prev) => [
       ...prev,
       { id: `u-${Date.now()}`, type: "user", text },
-      pickRandomResponse(),
     ]);
-  };
+    setSending(true);
 
-  const handleSelectSuggestion = (text) => {
-    // 미리 정해둔 추천 질문은 무작위가 아니라, 항상 같은 지표 답변 카드를 확정적으로 보여준다.
-    const template = demoResponseTemplates.find((m) => m.id === "a1");
-    setMessages((prev) => [
-      ...prev,
-      { id: `u-${Date.now()}`, type: "user", text },
-      { ...template, id: `a-${Date.now()}`, title: text },
-    ]);
-  };
+    try {
+      await streamChat(getSessionId(), text, (event, data) => {
+        if (event === "text") {
+          setMessages((prev) => [
+            ...prev,
+            { id: `a-${Date.now()}`, type: "assistant", text: data.text },
+          ]);
+          return;
+        }
 
-  const handleSelectCandidate = (clarificationMessage, candidate) => {
-    const sample = mockMessages.find((m) => m.id === "a1");
-    setMessages((prev) => [
-      ...prev,
-      {
-        ...sample,
-        id: `a-${Date.now()}`,
-        title: `${candidate.name} · 지난주 시세 요약`,
-      },
-    ]);
+        const cardType = CARD_EVENT_TYPES[event];
+        if (cardType) {
+          setMessages((prev) => [
+            ...prev,
+            { id: `a-${Date.now()}`, type: cardType, ...data },
+          ]);
+          return;
+        }
+
+        if (event === "error") {
+          setMessages((prev) => [
+            ...prev,
+            { id: `err-${Date.now()}`, type: "error", text: data.message },
+          ]);
+        }
+      });
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `err-${Date.now()}`,
+          type: "error",
+          text: "일시적인 오류가 발생했습니다. 다시 시도해 주세요.",
+        },
+      ]);
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleNewChat = () => {
     setMessages([]);
+    scrolledUserIdRef.current = null;
+    resetSessionId();
   };
 
   return (
@@ -63,15 +91,9 @@ export default function ChatPage() {
     >
       <div className="flex h-full flex-col">
         <div className="min-h-0 flex-1 overflow-y-auto">
-          <ChatMessageList
-            messages={messages}
-            onSelectCandidate={handleSelectCandidate}
-          />
+          <ChatMessageList messages={messages} />
         </div>
-        <ChatInputBar
-          onSend={handleSend}
-          onSelectSuggestion={handleSelectSuggestion}
-        />
+        <ChatInputBar onSend={ask} onSelectSuggestion={ask} disabled={sending} />
       </div>
     </AppLayout>
   );

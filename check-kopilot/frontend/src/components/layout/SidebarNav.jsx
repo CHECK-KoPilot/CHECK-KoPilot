@@ -47,7 +47,6 @@ export default function SidebarNav({
       >
         <div className="flex items-center gap-2 p-3">
           <button
-            data-tour="new-chat"
             onClick={() => {
               onNewChat?.();
               onClose();
