@@ -59,4 +59,64 @@ class CalculationsTest {
                 .isInstanceOfSatisfying(MetricException.class,
                         e -> assertThat(e.code()).isEqualTo("DATA_INSUFFICIENT"));
     }
+
+    // 회귀: 날짜 내림차순으로 입력해도 오름차순 입력과 동일한 결과가 나와야 한다 (부호 뒤집힘 방지).
+    @Test
+    void periodReturnPct_isOrderIndependent() {
+        List<DailyQuote> ascending = List.of(
+                q("2026-07-14", 100), q("2026-07-15", 102), q("2026-07-17", 105));
+        List<DailyQuote> descending = List.of(
+                q("2026-07-17", 105), q("2026-07-15", 102), q("2026-07-14", 100));
+
+        double expected = Calculations.periodReturnPct(ascending);
+        assertThat(expected).isCloseTo(5.0, within(1e-9));
+        assertThat(Calculations.periodReturnPct(descending)).isCloseTo(expected, within(1e-9));
+    }
+
+    @Test
+    void dailyReturns_isOrderIndependent() {
+        List<DailyQuote> ascending = List.of(
+                q("2026-07-14", 100), q("2026-07-15", 110),
+                q("2026-07-16", 99), q("2026-07-17", 108.9));
+        List<DailyQuote> descending = List.of(
+                q("2026-07-17", 108.9), q("2026-07-16", 99),
+                q("2026-07-15", 110), q("2026-07-14", 100));
+
+        List<Double> fromDescending = Calculations.dailyReturns(descending);
+        assertThat(fromDescending.get(0)).isCloseTo(0.10, within(1e-9));
+        assertThat(fromDescending.get(1)).isCloseTo(-0.10, within(1e-9));
+        assertThat(fromDescending.get(2)).isCloseTo(0.10, within(1e-9));
+        assertThat(fromDescending).isEqualTo(Calculations.dailyReturns(ascending));
+    }
+
+    @Test
+    void periodReturnPct_rejectsZeroStartPrice() {
+        List<DailyQuote> quotes = List.of(q("2026-07-14", 0), q("2026-07-15", 105));
+        assertThatThrownBy(() -> Calculations.periodReturnPct(quotes))
+                .isInstanceOfSatisfying(MetricException.class,
+                        e -> assertThat(e.code()).isEqualTo("DATA_INVALID"));
+    }
+
+    @Test
+    void dailyReturns_rejectsZeroPriceInSeries() {
+        List<DailyQuote> quotes = List.of(
+                q("2026-07-14", 100), q("2026-07-15", 0), q("2026-07-16", 105));
+        assertThatThrownBy(() -> Calculations.dailyReturns(quotes))
+                .isInstanceOfSatisfying(MetricException.class,
+                        e -> assertThat(e.code()).isEqualTo("DATA_INVALID"));
+    }
+
+    @Test
+    void sampleStdDev_rejectsSingleValue() {
+        assertThatThrownBy(() -> Calculations.sampleStdDev(List.of(0.05)))
+                .isInstanceOfSatisfying(MetricException.class,
+                        e -> assertThat(e.code()).isEqualTo("DATA_INSUFFICIENT"));
+    }
+
+    @Test
+    void sampleStdDev_rejectsEmptyList() {
+        assertThatThrownBy(() -> Calculations.sampleStdDev(List.of()))
+                .isInstanceOfSatisfying(MetricException.class,
+                        e -> assertThat(e.code()).isEqualTo("DATA_INSUFFICIENT"));
+    }
 }
