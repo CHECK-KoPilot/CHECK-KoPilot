@@ -17,4 +17,14 @@ public class CatalogConfig {
     public ReturnGapExecutor returnGapExecutor(ExecutorSupport support) {
         return new ReturnGapExecutor(support);
     }
+
+    @Bean
+    public VolatilityExecutor volatilityExecutor(ExecutorSupport s) {
+        return new VolatilityExecutor(s);
+    }
+
+    @Bean
+    public PeriodSummaryExecutor periodSummaryExecutor(ExecutorSupport s) {
+        return new PeriodSummaryExecutor(s);
+    }
 }
