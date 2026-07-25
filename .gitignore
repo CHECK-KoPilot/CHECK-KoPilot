@@ -6,6 +6,7 @@ check-kopilot/backend/build/
 check-kopilot/backend/.gradle/
 check-kopilot/frontend/node_modules/
 check-kopilot/frontend/dist/
+check-kopilot/frontend/dev-dist/
 
 # 에디터
 *.iml
