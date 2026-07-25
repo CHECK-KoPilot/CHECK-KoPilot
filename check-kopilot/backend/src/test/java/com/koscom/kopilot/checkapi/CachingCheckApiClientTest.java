@@ -17,6 +17,12 @@ class CachingCheckApiClientTest {
         public Optional<String> get(String key) { return Optional.ofNullable(map.get(key)); }
     }
 
+    /** 캐시 쓰기 실패(예: MySQL 일시 장애)를 재현하기 위한 스텁 - put에서 항상 던진다 */
+    static class ThrowingOnPutStore implements CachingCheckApiClient.KeyValueStore {
+        public void put(String key, String json) { throw new RuntimeException("write failed"); }
+        public Optional<String> get(String key) { return Optional.empty(); }
+    }
+
     static CheckApiClient broken() {
         return new CheckApiClient() {
             public List<DailyQuote> dailyQuotes(StockInfo i, LocalDate f, LocalDate t) {
@@ -69,5 +75,19 @@ class CachingCheckApiClientTest {
         CachingCheckApiClient c = new CachingCheckApiClient(broken(), new MapStore(), new MapStore());
         assertThatThrownBy(() -> c.dailyQuotes(samsung, from, to))
                 .isInstanceOf(CheckApiException.class);
+    }
+
+    @Test
+    void fallbackWriteFailure_stillReturnsFreshData() {
+        // 델리게이트는 성공하지만 폴백(MySQL) 쓰기가 실패하는 경우 - 신선한 응답을 그대로 반환해야 한다
+        CachingCheckApiClient c = new CachingCheckApiClient(new FixtureCheckApiClient(), new MapStore(), new ThrowingOnPutStore());
+        assertThat(c.dailyQuotes(samsung, from, to)).hasSize(5);
+    }
+
+    @Test
+    void shortTermWriteFailure_stillReturnsFreshData() {
+        // 단기 캐시(Redis) 쓰기가 실패해도 신선한 응답을 그대로 반환해야 한다
+        CachingCheckApiClient c = new CachingCheckApiClient(new FixtureCheckApiClient(), new ThrowingOnPutStore(), new MapStore());
+        assertThat(c.dailyQuotes(samsung, from, to)).hasSize(5);
     }
 }

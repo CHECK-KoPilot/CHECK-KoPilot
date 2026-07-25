@@ -49,17 +49,29 @@ public class CachingCheckApiClient implements CheckApiClient {
     private <T> T fetch(String key, java.util.function.Supplier<T> call, TypeReference<T> type) {
         Optional<String> hot = shortTerm.get(key);
         if (hot.isPresent()) return read(hot.get(), type);
+
+        T fresh;
         try {
-            T fresh = call.get();
-            String json = write(fresh);
-            shortTerm.put(key, json);
-            fallback.put(key, json);
-            return fresh;
+            fresh = call.get();
         } catch (RuntimeException e) {
             Optional<String> snapshot = fallback.get(key);
             if (snapshot.isPresent()) return read(snapshot.get(), type);
             throw e;
         }
+
+        // 여기 도달 = delegate 호출 성공. 이후 캐시 쓰기 실패는 성공 응답을 막지 않는다.
+        String json = write(fresh);
+        try {
+            shortTerm.put(key, json);
+        } catch (RuntimeException ignore) {
+            // 단기 캐시 저장 실패는 무시 - 신선한 응답은 이미 확보됨
+        }
+        try {
+            fallback.put(key, json);
+        } catch (RuntimeException ignore) {
+            // 폴백 저장 실패는 무시 - 신선한 응답은 이미 확보됨
+        }
+        return fresh;
     }
 
     private String write(Object o) {
