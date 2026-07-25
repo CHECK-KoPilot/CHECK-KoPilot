@@ -35,10 +35,13 @@ public class RestCheckApiClient implements CheckApiClient {
     private final CheckApiProperties props;
 
     public RestCheckApiClient(CheckApiProperties props) {
+        this(props, RestClient.builder());
+    }
+
+    /** 테스트에서 요청 인터셉터/{@code MockRestServiceServer}를 주입하기 위한 생성자. */
+    RestCheckApiClient(CheckApiProperties props, RestClient.Builder builder) {
         this.props = props;
-        this.rest = RestClient.builder()
-                .baseUrl(props.baseUrl())
-                .build();
+        this.rest = builder.baseUrl(props.baseUrl()).build();
     }
 
     @Override
