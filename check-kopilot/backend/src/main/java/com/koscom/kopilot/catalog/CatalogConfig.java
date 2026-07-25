@@ -27,4 +27,19 @@ public class CatalogConfig {
     public PeriodSummaryExecutor periodSummaryExecutor(ExecutorSupport s) {
         return new PeriodSummaryExecutor(s);
     }
+
+    @Bean
+    public NavDisparityExecutor navDisparityExecutor(ExecutorSupport s) {
+        return new NavDisparityExecutor(s);
+    }
+
+    @Bean
+    public MaDisparityExecutor maDisparityExecutor(ExecutorSupport s) {
+        return new MaDisparityExecutor(s);
+    }
+
+    @Bean
+    public ReturnRankingExecutor returnRankingExecutor(ExecutorSupport s) {
+        return new ReturnRankingExecutor(s);
+    }
 }
