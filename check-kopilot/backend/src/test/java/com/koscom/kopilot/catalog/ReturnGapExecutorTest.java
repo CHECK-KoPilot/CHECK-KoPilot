@@ -47,7 +47,7 @@ class ReturnGapExecutorTest {
                         exception -> assertThat(exception.code()).isEqualTo("PERIOD_INVERTED"));
     }
 
-    private static double headlineValue(MetricResult result, String label) {
+    public static double headlineValue(MetricResult result, String label) {
         return result.headline().stream()
                 .filter(headline -> headline.label().equals(label))
                 .findFirst()
