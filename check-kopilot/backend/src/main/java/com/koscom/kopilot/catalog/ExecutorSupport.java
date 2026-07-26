@@ -157,6 +157,7 @@ public class ExecutorSupport {
 
     public MetricResult.Evidence.ApiCall apiCall(String apiId, String apiName, StockInfo instrument, Period period) {
         return new MetricResult.Evidence.ApiCall(
+                apiId,
                 apiName,
                 "%s(%s) %s ~ %s".formatted(instrument.name(), instrument.code(), period.from(), period.to()),
                 specUrl(apiId));

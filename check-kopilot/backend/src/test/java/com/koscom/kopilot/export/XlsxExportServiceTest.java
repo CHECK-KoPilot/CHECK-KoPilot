@@ -43,7 +43,8 @@ class XlsxExportServiceTest {
             List.of(new MetricResult.Headline("수익률 갭", 3.0, "%p")),
             new MetricResult.ChartSpec("line", List.of()),
             new MetricResult.Evidence(
-                List.of(new MetricResult.Evidence.ApiCall("일별 시세 조회", "삼성전자(005930) 2026-07-13 ~ 2026-07-17", "https://example")),
+                List.of(new MetricResult.Evidence.ApiCall("stock-daily", "일별 시세 조회",
+                        "삼성전자(005930) 2026-07-13 ~ 2026-07-17", "https://example")),
                 List.of(new MetricResult.Evidence.RawSeries("삼성전자", List.of(
                         new MetricResult.Evidence.Row(LocalDate.parse("2026-07-13"), 100.0),
                         new MetricResult.Evidence.Row(LocalDate.parse("2026-07-17"), 105.0)))),
