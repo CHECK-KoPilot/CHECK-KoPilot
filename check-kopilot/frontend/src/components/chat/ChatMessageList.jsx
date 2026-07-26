@@ -1,11 +1,12 @@
 import { AlertCircle } from "lucide-react";
 import UserMessage from "./UserMessage";
 import KopilotIcon from "../common/KopilotIcon";
+import TutorialButton from "./TutorialButton";
 import IndicatorAnswerCard from "./cards/IndicatorAnswerCard";
 import ClarificationCard from "./cards/ClarificationCard";
 import GuideRecipeCard from "./cards/GuideRecipeCard";
 
-function EmptyState() {
+function EmptyState({ onStartTour }) {
   return (
     <div className="flex h-full min-h-[50vh] flex-col items-center justify-center gap-3 px-4 text-center">
       <KopilotIcon className="h-14 w-14 rounded-2xl shadow-sm lg:h-16 lg:w-16" />
@@ -17,13 +18,19 @@ function EmptyState() {
           궁금한 금융 데이터를 자연어로 물어보세요
         </p>
       </div>
+      <TutorialButton onClick={onStartTour} />
     </div>
   );
 }
 
-export default function ChatMessageList({ messages, onSelectCandidate }) {
+export default function ChatMessageList({
+  messages,
+  onSelectCandidate,
+  onStartTour,
+  tourCardId,
+}) {
   if (messages.length === 0) {
-    return <EmptyState />;
+    return <EmptyState onStartTour={onStartTour} />;
   }
 
   return (
@@ -60,7 +67,10 @@ export default function ChatMessageList({ messages, onSelectCandidate }) {
         if (message.type === "indicator") {
           return (
             <div key={message.id} id={message.id}>
-              <IndicatorAnswerCard message={message} />
+              <IndicatorAnswerCard
+                message={message}
+                tourTarget={message.id === tourCardId}
+              />
             </div>
           );
         }

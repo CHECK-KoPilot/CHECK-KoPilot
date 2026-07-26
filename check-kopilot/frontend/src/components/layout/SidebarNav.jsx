@@ -51,6 +51,7 @@ export default function SidebarNav({
               onNewChat?.();
               onClose();
             }}
+            data-tour="new-chat"
             className={cn(
               "flex flex-1 items-center gap-2 rounded-lg bg-linear-to-br from-accent-500 to-accent-300 px-3 py-2.5",
               "text-sm font-medium text-white shadow-sm shadow-accent-700/20 hover:from-accent-600 hover:to-accent-400",
