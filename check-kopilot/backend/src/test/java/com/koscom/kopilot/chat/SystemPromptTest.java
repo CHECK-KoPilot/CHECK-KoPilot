@@ -38,4 +38,13 @@ class SystemPromptTest {
         assertThat(prompt).contains("투자 판단·권유·전망");
         assertThat(prompt).contains("수치 계산은 절대 직접 하지 않는다");
     }
+
+    @Test
+    void teachesCheckApiCallConventionForRecipes() {
+        // 레시피에 GET·쿼리스트링 예시가 나가면 사용자가 그대로 따라 하다 인증 실패한다
+        // (CHECK API는 POST 전용, 인증정보는 JSON body — 실호출로 확정된 규약)
+        assertThat(prompt).contains("POST 전용");
+        assertThat(prompt).contains("JSON body");
+        assertThat(prompt).contains("data_list");
+    }
 }

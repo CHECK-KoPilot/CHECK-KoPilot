@@ -107,7 +107,11 @@ export default function ChatPage() {
     >
       <div className="flex h-full flex-col">
         <div className="min-h-0 flex-1 overflow-y-auto">
-          <ChatMessageList messages={messages} onSelectCandidate={handleSelectCandidate} />
+          <ChatMessageList
+            messages={messages}
+            onSelectCandidate={handleSelectCandidate}
+            onAskFollowUp={ask}
+          />
         </div>
         <ChatInputBar onSend={ask} onSelectSuggestion={ask} disabled={sending} />
       </div>
