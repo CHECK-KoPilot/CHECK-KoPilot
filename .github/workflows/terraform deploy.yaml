@@ -1,0 +1,70 @@
+name: Infra CI/CD (Terraform Deploy)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'check-kopilot/infra/terraform/**'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'check-kopilot/infra/terraform/**'
+
+jobs:
+  terraform-plan:
+    name: Terraform Plan
+    runs-on: self-hosted
+    if: github.event_name == 'pull_request'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: '1.5.0'
+        
+    - name: Terraform Init
+      working-directory: ./check-kopilot/infra/terraform
+      run: terraform init
+      
+    - name: Terraform Format Check
+      working-directory: ./check-kopilot/infra/terraform
+      run: terraform fmt -check
+      
+    - name: Terraform Validate
+      working-directory: ./check-kopilot/infra/terraform
+      run: terraform validate
+      
+    - name: Terraform Plan
+      working-directory: ./check-kopilot/infra/terraform
+      env:
+        TF_VAR_access_key: ${{ secrets.NCP_ACCESS_KEY }}
+        TF_VAR_secret_key: ${{ secrets.NCP_SECRET_KEY }}
+      run: terraform plan -out=tfplan
+
+  terraform-apply:
+    name: Terraform Apply
+    runs-on: self-hosted
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: '1.5.0'
+        
+    - name: Terraform Init
+      working-directory: ./check-kopilot/infra/terraform
+      run: terraform init
+      
+    - name: Terraform Apply
+      working-directory: ./check-kopilot/infra/terraform
+      env:
+        TF_VAR_access_key: ${{ secrets.NCP_ACCESS_KEY }}
+        TF_VAR_secret_key: ${{ secrets.NCP_SECRET_KEY }}
+      run: terraform apply -auto-approve
