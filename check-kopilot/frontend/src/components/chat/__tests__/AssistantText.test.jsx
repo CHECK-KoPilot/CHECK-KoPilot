@@ -32,6 +32,16 @@ describe("AssistantText", () => {
     expect(container.textContent).toBe(plain);
   });
 
+  it("### 헤딩 줄을 굵은 제목으로 세우고 # 기호는 지운다", () => {
+    const { container } = render(
+      <AssistantText text={"앞말\n### 1. API 선택\n본문입니다"} />
+    );
+
+    expect(screen.getByText("1. API 선택")).toBeInTheDocument();
+    expect(container.textContent).not.toContain("#");
+    expect(screen.getByText("본문입니다")).toBeInTheDocument();
+  });
+
   it("코드 펜스만 있는 응답은 pre 블록 하나로 끝난다", () => {
     const { container } = render(<AssistantText text={"```\ncode\n```"} />);
 
