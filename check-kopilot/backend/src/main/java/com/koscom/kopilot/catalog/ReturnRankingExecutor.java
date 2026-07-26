@@ -34,14 +34,14 @@ public class ReturnRankingExecutor implements MetricExecutor {
             "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD"));
     }
 
-    @Override public List<String> requiredParams() { return List.of("targets", "from", "to"); }
+    @Override public List<String> requiredParams() { return List.of("targets"); }
 
     @Override public MetricResult execute(JsonNode args) {
         JsonNode targetsNode = args.path("targets");
         if (!targetsNode.isArray() || targetsNode.size() < 2 || targetsNode.size() > 10) {
             throw new MetricException("PARAM_INVALID", "targets는 2~10개 종목 배열이어야 합니다");
         }
-        ExecutorSupport.Period p = s.parsePeriod(args);
+        ExecutorSupport.Period p = s.parsePeriodOrRecent(args);
 
         record Entry(StockInfo info, double ret, List<DailyQuote> quotes) {}
         List<Entry> entries = new ArrayList<>();

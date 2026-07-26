@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ExecutorSupportTest {
 
@@ -34,5 +35,57 @@ class ExecutorSupportTest {
 
         assertThat(apiIds).allSatisfy(apiId ->
                 assertThat(support.specUrl(apiId)).startsWith("https://checkapi.koscom.co.kr/stock/"));
+    }
+
+    // --- 기간 기본값 (parsePeriodOrRecent) ---
+
+    private static com.fasterxml.jackson.databind.JsonNode json(String raw) {
+        try {
+            return new com.fasterxml.jackson.databind.ObjectMapper().readTree(raw);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    @Test
+    void periodOmitted_fallsBackToRecentWindow() {
+        var p = support.parsePeriodOrRecent(json("{}"));
+
+        assertThat(p.to()).isEqualTo(java.time.LocalDate.now());
+        assertThat(p.from()).isEqualTo(java.time.LocalDate.now()
+                .minusDays(ExecutorSupport.DEFAULT_PERIOD_DAYS));
+    }
+
+    @Test
+    void onlyFromGiven_keepsItAndEndsToday() {
+        // 준 값을 버리고 통째로 기본 기간을 쓰면 "묻지 않은 기간의 답"이 나간다
+        var p = support.parsePeriodOrRecent(json("{\"from\":\"2026-01-05\"}"));
+
+        assertThat(p.from()).isEqualTo(java.time.LocalDate.parse("2026-01-05"));
+        assertThat(p.to()).isEqualTo(java.time.LocalDate.now());
+    }
+
+    @Test
+    void onlyToGiven_keepsItAndBacksOffWindow() {
+        var p = support.parsePeriodOrRecent(json("{\"to\":\"2026-06-30\"}"));
+
+        assertThat(p.to()).isEqualTo(java.time.LocalDate.parse("2026-06-30"));
+        assertThat(p.from()).isEqualTo(java.time.LocalDate.parse("2026-06-30")
+                .minusDays(ExecutorSupport.DEFAULT_PERIOD_DAYS));
+    }
+
+    @Test
+    void blankPeriodStringsCountAsOmitted() {
+        var p = support.parsePeriodOrRecent(json("{\"from\":\"\",\"to\":\"  \"}"));
+
+        assertThat(p.to()).isEqualTo(java.time.LocalDate.now());
+    }
+
+    @Test
+    void oneSidedPeriodStillValidates() {
+        assertThatThrownBy(() -> support.parsePeriodOrRecent(json("{\"to\":\"2099-01-01\"}")))
+                .isInstanceOf(com.koscom.kopilot.domain.MetricException.class);
+        assertThatThrownBy(() -> support.parsePeriodOrRecent(json("{\"from\":\"엉터리\"}")))
+                .isInstanceOf(com.koscom.kopilot.domain.MetricException.class);
     }
 }

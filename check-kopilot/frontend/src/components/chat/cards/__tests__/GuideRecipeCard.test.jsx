@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import GuideRecipeCard from "../GuideRecipeCard";
+import GuideRecipeCard, { implementationPrompt } from "../GuideRecipeCard";
 
 const message = {
   topic: "외국인 순매수 동향",
@@ -69,5 +69,20 @@ describe("GuideRecipeCard", () => {
     const body = JSON.parse(options.body);
     expect(body.matchedApiIds).toBe("stock-investor");
     expect(typeof body.sessionId).toBe("string");
+  });
+});
+
+describe("구현 방법 자세히 버튼", () => {
+  it("이미 찾은 API를 지목한 후속 질문을 다음 턴으로 보낸다", async () => {
+    // 같은 검색을 반복하지 않고 곧바로 상세로 들어가게 한다
+    const prompt = implementationPrompt("외국인 순매수", [{ name: "[일별정보] 투자자" }]);
+
+    expect(prompt).toContain("외국인 순매수");
+    expect(prompt).toContain("[일별정보] 투자자");
+    expect(prompt).toContain("F코드");
+  });
+
+  it("매칭된 API가 없으면 종목 언급 없이도 질문을 만든다", () => {
+    expect(implementationPrompt("공매도 잔고", [])).toContain("공매도 잔고");
   });
 });

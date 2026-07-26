@@ -43,4 +43,33 @@ class JdbcStockResolverTest {
         assertThatThrownBy(() -> resolver.resolve("없는회사12345"))
                 .isInstanceOf(StockNotFoundException.class);
     }
+
+    // --- 별칭 ---
+    // 공식 상장명이 "NAVER"라 "네이버"로는 못 찾았다. 자연어 제품에서 이건 버그에 가깝다.
+
+    @Test
+    void colloquialAlias_resolvesToOfficialListing() {
+        assertThat(resolver.resolve("네이버").code()).isEqualTo("035420");
+        assertThat(resolver.resolve("포스코").code()).isEqualTo("005490");
+        assertThat(resolver.resolve("한전").code()).isEqualTo("015760");
+    }
+
+    @Test
+    void spacelessIndexAlias_resolves() {
+        // 마스터 이름은 "코스피 200"이라 "코스피200"은 LIKE로도 안 걸린다
+        assertThat(resolver.resolve("코스피200").code()).isEqualTo("KOSPI-51");
+        assertThat(resolver.resolve("코스닥150").code()).isEqualTo("KOSDAQ-203");
+    }
+
+    @Test
+    void officialNameStillWinsOverAlias() {
+        // 별칭은 정확일치 이름을 밀어내지 않는다
+        assertThat(resolver.resolve("NAVER").code()).isEqualTo("035420");
+        assertThat(resolver.resolve("KT").code()).isEqualTo("030200");
+    }
+
+    @Test
+    void aliasAppearsInPartialSearchCandidates() {
+        assertThat(resolver.search("네이버")).extracting(StockInfo::code).contains("035420");
+    }
 }

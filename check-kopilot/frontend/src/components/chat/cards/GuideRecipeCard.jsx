@@ -1,10 +1,27 @@
 import { useState } from "react";
-import { ChevronDown, Compass, ExternalLink, Check } from "lucide-react";
+import { ChevronDown, Compass, ExternalLink, Check, Download, Code2 } from "lucide-react";
 import Button from "../../common/Button";
 import { cn } from "../../../lib/utils";
 import { getSessionId } from "../../../lib/session";
+import { downloadRecipeMarkdown } from "../../../lib/recipeFile";
 
-export default function GuideRecipeCard({ message }) {
+/**
+ * "구현 방법 자세히" 버튼이 다음 턴으로 보낼 질문.
+ * 이미 찾아둔 API를 지목해줘야 LLM이 같은 검색을 반복하지 않고 곧바로 상세로 들어간다.
+ */
+export function implementationPrompt(topic, matched = []) {
+  const apis = matched.map((api) => api.name).filter(Boolean).join(", ");
+  return [
+    `'${topic}'을(를) 직접 구현하는 방법을 자세히 알려줘.`,
+    apis ? `앞서 찾은 ${apis}를 기준으로,` : "",
+    "①어떤 API를 어떤 파라미터로 호출하는지 ②응답에서 어떤 F코드 필드를 쓰는지",
+    "③그 값들을 어떤 순서로 계산해 결과를 얻는지 ④호출 예시까지 단계별로 설명해줘.",
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
+export default function GuideRecipeCard({ message, explanation, onAskFollowUp }) {
   const [requested, setRequested] = useState(false);
   const [pending, setPending] = useState(false);
   const [catalogOpen, setCatalogOpen] = useState(false);
@@ -134,7 +151,24 @@ export default function GuideRecipeCard({ message }) {
         </section>
       )}
 
-      <div className="flex justify-end">
+      <div className="flex flex-wrap justify-end gap-2">
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => downloadRecipeMarkdown(message, explanation)}
+        >
+          <Download size={14} />
+          레시피 저장
+        </Button>
+        <Button
+          variant="secondary"
+          size="sm"
+          disabled={!onAskFollowUp}
+          onClick={() => onAskFollowUp?.(implementationPrompt(topic, matched))}
+        >
+          <Code2 size={14} />
+          구현 방법 자세히
+        </Button>
         <Button
           variant={requested ? "secondary" : "primary"}
           size="sm"

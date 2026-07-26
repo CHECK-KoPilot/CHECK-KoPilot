@@ -65,7 +65,7 @@
 
 ## 8. 아키텍처
 
-접근 방식: **LLM tool calling** (Claude API / Spring AI). 카탈로그의 각 지표를 tool로 정의하고, 파라미터가 모호하면 LLM이 자연스럽게 되묻는다. 범용 NL2API(임의 질문 → 임의 API 조합)는 검증·정확성 보장이 어려워 배제했다.
+접근 방식: **LLM tool calling** (OpenAI API / Spring AI). 카탈로그의 각 지표를 tool로 정의하고, 파라미터가 모호하면 LLM이 자연스럽게 되묻는다. 범용 NL2API(임의 질문 → 임의 API 조합)는 검증·정확성 보장이 어려워 배제했다.
 
 ```
 [React SPA]  채팅 UI · 답변 카드(수치/차트/근거 패널) · xlsx 다운로드

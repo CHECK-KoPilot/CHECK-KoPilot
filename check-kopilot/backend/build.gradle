@@ -26,11 +26,55 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.ai:spring-ai-starter-model-anthropic'
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'org.apache.poi:poi-ooxml:5.3.0'
     runtimeOnly 'com.mysql:mysql-connector-j'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') { useJUnitPlatform() }
+
+/*
+ * ../.env(gitignore 대상)를 bootRun 환경변수로 주입한다.
+ * API 키를 커밋하지 않으면서 `./gradlew bootRun`만으로 기동하기 위한 장치다.
+ * 셸에 이미 export된 값이 있으면 그쪽이 우선한다 — CI나 일회성 오버라이드를 막지 않기 위함.
+ */
+def loadDotenv() {
+    def values = [:]
+    def file = rootProject.file('../.env')
+    if (!file.exists()) return values
+    file.eachLine('UTF-8') { line ->
+        def trimmed = line.trim()
+        if (trimmed.isEmpty() || trimmed.startsWith('#')) return
+        def separator = trimmed.indexOf('=')
+        if (separator <= 0) return
+        def key = trimmed.substring(0, separator).trim()
+        def value = trimmed.substring(separator + 1).trim()
+        if (value.length() >= 2 && value.startsWith('"') && value.endsWith('"')) {
+            value = value.substring(1, value.length() - 1)
+        }
+        if (!value.isEmpty()) values[key] = value
+    }
+    return values
+}
+
+tasks.named('bootRun') {
+    loadDotenv().each { key, value ->
+        if (System.getenv(key) == null) environment key, value
+    }
+}
+
+// EvalRunner(RUN_EVAL=true)는 실 LLM을 호출한다. 평가를 돌릴 때만 키가 흘러들어가고,
+// 평소 테스트는 test/resources의 더미 키를 그대로 쓴다.
+tasks.named('test') {
+    useJUnitPlatform()
+    if (System.getenv('RUN_EVAL') == 'true') {
+        environment 'RUN_EVAL', 'true'
+        loadDotenv().each { key, value ->
+            if (System.getenv(key) == null) environment key, value
+        }
+        // 환경변수는 태스크 입력이 아니라 소스 변경 없이 재실행하면 UP-TO-DATE로 건너뛴다.
+        // 프롬프트만 고치고 재측정하는 게 이 도구의 주 용도라 그때마다 낡은 리포트가 남았다.
+        outputs.upToDateWhen { false }
+    }
+}
