@@ -4,6 +4,7 @@ import ChatMessageList from "../components/chat/ChatMessageList";
 import ChatInputBar from "../components/chat/ChatInputBar";
 import { streamChat, endSession } from "../lib/sse";
 import { getSessionId, resetSessionId } from "../lib/session";
+import { loadTranscript, saveTranscript, clearTranscript } from "../lib/transcript";
 
 const CARD_EVENT_TYPES = {
   card: "indicator",
@@ -12,10 +13,16 @@ const CARD_EVENT_TYPES = {
 };
 
 export default function ChatPage() {
-  const [messages, setMessages] = useState([]);
+  // 서버는 새로고침 후에도 세션 컨텍스트를 기억한다 — 화면도 같이 복원해야 맥락이 어긋나지 않는다
+  const [sessionId, setSessionId] = useState(getSessionId);
+  const [messages, setMessages] = useState(() => loadTranscript(getSessionId()));
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const scrolledUserIdRef = useRef(null);
+
+  useEffect(() => {
+    saveTranscript(sessionId, messages);
+  }, [sessionId, messages]);
 
   // 새로 보낸 질문 말풍선이 화면 위쪽에 오도록 스크롤
   useEffect(() => {
@@ -37,7 +44,7 @@ export default function ChatPage() {
     setSending(true);
 
     try {
-      await streamChat(getSessionId(), text, (event, data) => {
+      await streamChat(sessionId, text, (event, data) => {
         if (event === "text") {
           setMessages((prev) => [
             ...prev,
@@ -81,11 +88,14 @@ export default function ChatPage() {
   };
 
   const handleNewChat = () => {
-    // 떠나는 세션의 서버 컨텍스트를 정리한다. UUID만 새로 만들면 Redis에 TTL 2시간 동안 남는다.
-    endSession(getSessionId());
+    // 떠나는 세션은 양쪽을 함께 정리한다 — 서버 컨텍스트(Redis)와 화면 기록.
+    // UUID만 새로 만들면 서버 컨텍스트가 TTL 2시간 동안 남는다.
+    const leaving = getSessionId();
+    endSession(leaving);
+    clearTranscript(leaving);
     setMessages([]);
     scrolledUserIdRef.current = null;
-    resetSessionId();
+    setSessionId(resetSessionId());
   };
 
   return (

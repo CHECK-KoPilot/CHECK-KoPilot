@@ -28,7 +28,11 @@ spring:
 kopilot:
   cache-ttl: PT10M           # CHECK API 단기 응답 캐시(Redis) TTL
   session-ttl: PT2H          # 익명 세션 대화 컨텍스트(Redis) TTL
-  max-history-turns: 20      # Claude에 재전송할 최대 과거 턴 수 (컨텍스트 비용 상한)
+  # LLM에 재전송할 최대 과거 "메시지" 수 (턴이 아니다).
+  # tool을 쓰는 한 턴은 user + assistant(tool 호출) + tool 응답 + assistant = 4메시지라 40 ≈ 10턴이다.
+  # 하한 17: 한 턴이 tool 반복 상한(8회)을 다 쓰면 17메시지가 되는데, 그보다 작게 잡으면
+  # 창에서 UserMessage가 밀려나 컨텍스트가 통째로 비워진다(ChatService.MAX_TOOL_ITERATIONS 참조).
+  max-history-messages: 40
 
 admin:
   # 로그인 인증이 없으므로 Admin API는 공유 시크릿으로만 보호한다 (Task 15 참고)
