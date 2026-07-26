@@ -46,11 +46,47 @@ public class ExecutorSupport {
      * 카드 제목·근거 패널에 그대로 드러나므로 사용자가 무엇으로 계산됐는지 항상 확인할 수 있다.</p>
      */
     public Period parsePeriodOrRecent(JsonNode args) {
-        if (args.hasNonNull("from") && args.hasNonNull("to")) {
+        String rawFrom = text(args, "from");
+        String rawTo = text(args, "to");
+        if (rawFrom != null && rawTo != null) {
             return parsePeriod(args);
         }
+        // 한쪽만 왔으면 그 값을 버리지 않는다 — "1월부터 지금까지"에 from만 채워 오는 일이 흔한데,
+        // 통째로 기본값을 쓰면 묻지 않은 기간의 답이 나간다.
         LocalDate today = LocalDate.now();
+        if (rawFrom != null) {
+            return validated(parseDate(rawFrom, rawTo), today);
+        }
+        if (rawTo != null) {
+            LocalDate to = parseDate(rawTo, rawFrom);
+            return validated(to.minusDays(DEFAULT_PERIOD_DAYS), to);
+        }
         return new Period(today.minusDays(DEFAULT_PERIOD_DAYS), today);
+    }
+
+    private static String text(JsonNode args, String field) {
+        JsonNode node = args.path(field);
+        if (node.isMissingNode() || node.isNull()) return null;
+        String value = node.asText("").trim();
+        return value.isEmpty() ? null : value;   // {"from":""}도 미지정으로 본다
+    }
+
+    private LocalDate parseDate(String raw, String other) {
+        try {
+            return LocalDate.parse(raw);
+        } catch (RuntimeException e) {
+            throw new MetricException("PERIOD_INVALID", "날짜 형식 오류: " + raw + " ~ " + other);
+        }
+    }
+
+    private Period validated(LocalDate from, LocalDate to) {
+        if (from.isAfter(to)) {
+            throw new MetricException("PERIOD_INVERTED", "시작일이 종료일보다 늦습니다: " + from + " > " + to);
+        }
+        if (to.isAfter(LocalDate.now())) {
+            throw new MetricException("PERIOD_FUTURE", "미래 날짜는 조회할 수 없습니다: " + to);
+        }
+        return new Period(from, to);
     }
 
     public Period parsePeriod(JsonNode args) {

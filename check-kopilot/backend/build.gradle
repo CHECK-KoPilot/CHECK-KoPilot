@@ -33,7 +33,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') { useJUnitPlatform() }
 
 /*
  * ../.env(gitignore 대상)를 bootRun 환경변수로 주입한다.
@@ -68,10 +67,14 @@ tasks.named('bootRun') {
 // EvalRunner(RUN_EVAL=true)는 실 LLM을 호출한다. 평가를 돌릴 때만 키가 흘러들어가고,
 // 평소 테스트는 test/resources의 더미 키를 그대로 쓴다.
 tasks.named('test') {
+    useJUnitPlatform()
     if (System.getenv('RUN_EVAL') == 'true') {
         environment 'RUN_EVAL', 'true'
         loadDotenv().each { key, value ->
             if (System.getenv(key) == null) environment key, value
         }
+        // 환경변수는 태스크 입력이 아니라 소스 변경 없이 재실행하면 UP-TO-DATE로 건너뛴다.
+        // 프롬프트만 고치고 재측정하는 게 이 도구의 주 용도라 그때마다 낡은 리포트가 남았다.
+        outputs.upToDateWhen { false }
     }
 }

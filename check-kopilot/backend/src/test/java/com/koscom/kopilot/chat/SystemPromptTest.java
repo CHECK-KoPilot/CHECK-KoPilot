@@ -29,8 +29,11 @@ class SystemPromptTest {
     }
 
     @Test
-    void stillRefusesToGuessWhenNothingToInherit() {
-        assertThat(prompt).contains("이어받을 것이 없으면");
+    void asksBackOnlyWhenTargetIsMissing() {
+        // 되묻는 조건은 "대상 없음" 하나여야 한다. 기간에도 되묻게 두면 이어가기 규칙과 정면으로 부딪혀
+        // 같은 질문이 실행마다 되묻기/호출을 오간다(실제로 그랬다).
+        assertThat(prompt).contains("대상(종목·ETF)이 질문에도 앞선 대화에도 없으면");
+        assertThat(prompt).contains("기간은 되묻지 않는다");
     }
 
     @Test
@@ -46,5 +49,12 @@ class SystemPromptTest {
         assertThat(prompt).contains("POST 전용");
         assertThat(prompt).contains("JSON body");
         assertThat(prompt).contains("data_list");
+    }
+
+    @Test
+    void asksForOneToolCallWithGroupedTargets() {
+        // 종목마다 tool을 나눠 부르면 단일 종목 카드가 여러 장 나오고 비교가 빠진다(평가셋에서 실측).
+        assertThat(prompt).contains("한 번에 tool은 하나만 호출한다");
+        assertThat(prompt).contains("targets 배열에 함께 넣어");
     }
 }

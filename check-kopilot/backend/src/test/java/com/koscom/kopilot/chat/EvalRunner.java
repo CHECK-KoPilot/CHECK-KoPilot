@@ -1,5 +1,7 @@
 package com.koscom.kopilot.chat;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 import org.springframework.ai.chat.messages.AssistantMessage;
@@ -20,10 +22,12 @@ import org.yaml.snakeyaml.Yaml;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +49,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("fixture")
 @EnabledIfEnvironmentVariable(named = "RUN_EVAL", matches = "true")
 class EvalRunner {
+
+    /** 회귀 하한. 기준선은 100%지만 표본 1회·temperature 0.2라 흔들림을 감안해 여유를 둔다. */
+    private static final double MIN_ACCURACY = 90.0;
 
     @Autowired ChatModel chatModel;
     @Autowired KopilotTools tools;
@@ -123,7 +130,7 @@ class EvalRunner {
         List<String> history = (List<String>) c.getOrDefault("history", List.of());
 
         List<Message> messages = new ArrayList<>();
-        messages.add(new SystemMessage(SystemPrompt.render(LocalDate.now())));
+        messages.add(new SystemMessage(SystemPrompt.render(LocalDate.now(ZoneId.of("Asia/Seoul")))));
         // history는 user/assistant가 번갈아 오는 평문 — tool 호출이 없는 대화만 재현한다
         for (int i = 0; i < history.size(); i++) {
             messages.add(i % 2 == 0
@@ -138,17 +145,35 @@ class EvalRunner {
         String actual = out.hasToolCalls() ? out.getToolCalls().get(0).name() : "no_tool";
         String arguments = out.hasToolCalls() ? String.valueOf(out.getToolCalls().get(0).arguments()) : "";
 
+        // 병렬 호출을 첫 건만 보고 PASS 주면 "덤으로 딸려온 tool"이 집계에서 사라진다
+        if (out.hasToolCalls() && out.getToolCalls().size() > 1) {
+            String names = out.getToolCalls().stream()
+                    .map(AssistantMessage.ToolCall::name).collect(Collectors.joining("+"));
+            return new Result(false, expect, names, "tool을 " + out.getToolCalls().size() + "개 동시 호출", question);
+        }
         if (!actual.equals(expect)) {
             return new Result(false, expect, actual, "tool 불일치", question);
         }
+        // 키를 무시하고 부분 문자열만 보면 target_a/target_b가 뒤바뀌어도 통과한다
+        // (return_gap은 A−B라 부호가 뒤집힌다). 키 단위로 값을 꺼내 비교한다.
+        JsonNode parsed = parseArguments(arguments);
         for (Map.Entry<String, Object> e : expectedParams.entrySet()) {
             String wanted = String.valueOf(e.getValue());
-            if (!arguments.contains(wanted)) {
+            String got = parsed.path(e.getKey()).asText("");
+            if (!got.contains(wanted)) {
                 return new Result(false, expect, actual,
-                        "인자 %s에 '%s' 없음 — %s".formatted(e.getKey(), wanted, arguments), question);
+                        "인자 %s = '%s' (기대 '%s') — %s".formatted(e.getKey(), got, wanted, arguments), question);
             }
         }
         return new Result(true, expect, actual, "", question);
+    }
+
+    private JsonNode parseArguments(String arguments) {
+        try {
+            return new ObjectMapper().readTree(arguments.isBlank() ? "{}" : arguments);
+        } catch (Exception e) {
+            return new ObjectMapper().createObjectNode();
+        }
     }
 
     private void report(List<Result> results) throws Exception {
@@ -181,6 +206,12 @@ class EvalRunner {
         Files.createDirectories(Path.of("build"));
         Files.writeString(Path.of("build/eval-report.txt"), report.toString());
 
-        assertThat(results).isNotEmpty();   // 게이트가 아니라 측정 — 리포트가 산출물이다
+        // 리포트가 산출물이지 통과/실패 게이트가 아니다. 다만 조용한 하락은 막는다 —
+        // 프롬프트를 고치고 재측정하는 게 이 도구의 용도인데, 늘 초록불이면 알아채지 못한다.
+        assertThat(results).isNotEmpty();
+        assertThat(accuracy)
+                .as("의도 인식 정확도가 하한 %.0f%% 아래로 떨어졌다 — build/eval-report.txt의 FAIL 확인",
+                        MIN_ACCURACY)
+                .isGreaterThanOrEqualTo(MIN_ACCURACY);
     }
 }
