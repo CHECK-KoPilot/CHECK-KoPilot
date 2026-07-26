@@ -175,7 +175,19 @@ public class ExecutorSupport {
         return specIndex.docUrl(apiId);
     }
 
+    /**
+     * 카드에 실을 수치의 마지막 관문.
+     *
+     * <p>비유한값을 걸러내는 게 반올림만큼 중요하다. {@code Math.round(Infinity)}는 예외가 아니라
+     * {@code Long.MAX_VALUE}를 돌려주기 때문에, 0으로 나눈 결과가 조용히
+     * 922,337,203,685,477.63% 같은 "그럴듯한 숫자"로 둔갑해 근거 패널까지 달고 나간다(이슈 #58).
+     * 원인이 무엇이든 여기서 끊어야 백엔드가 잘못된 계산 결과를 내지 않는다는 원칙이 지켜진다.
+     */
     public static double round4(double value) {
+        if (!Double.isFinite(value)) {
+            throw new MetricException("CALCULATION_INVALID",
+                    "계산 결과가 유효한 수치가 아닙니다. 원본 데이터에 결측이 있을 수 있습니다.");
+        }
         return Math.round(value * 10000.0) / 10000.0;
     }
 

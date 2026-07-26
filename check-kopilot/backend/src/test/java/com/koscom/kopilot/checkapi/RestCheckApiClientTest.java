@@ -144,6 +144,48 @@ class RestCheckApiClientTest {
         assertThat(captured.get(1)).contains("\"jcode\":\"1\"");
     }
 
+    /**
+     * 이슈 #58. 2026-07-24 KODEX 200 응답에 NAV가 빈 중복 행이 실제로 섞여 왔다.
+     * 그 0이 괴리율 나눗셈에 닿으면 Infinity가 되고, round4가 이를 Long.MAX_VALUE/10⁴ 이라는
+     * "그럴듯한 숫자"로 바꿔 카드에 실어 보냈다. 흠은 이 클래스 안에서 끝나야 한다.
+     */
+    @Test
+    void etfNav_dropsRowWithMissingNavAndKeepsOneRowPerDate() {
+        StockInfo kodex = new StockInfo("069500", "KODEX 200", "KOSPI", "ETF");
+        String json = """
+                {"success":true,"results":[
+                  {"F12506":20260724,"F15001":"106365"},
+                  {"F12506":20260724,"F15001":"106365","F15301":"106253.71"},
+                  {"F12506":20260723,"F15001":"113230","F15301":"113375.02"}
+                ]}
+                """;
+
+        List<NavQuote> navs = clientReturning(json).etfNav(kodex, from, to);
+
+        assertThat(navs).hasSize(2);
+        assertThat(navs).extracting(NavQuote::date)
+                .containsExactly(LocalDate.parse("2026-07-23"), LocalDate.parse("2026-07-24"));
+        assertThat(navs).allSatisfy(n -> assertThat(n.nav()).isGreaterThan(0));
+    }
+
+    @Test
+    void dailyQuotes_dropsRowWithBlankClose() {
+        // 빈 문자열도 결측으로 읽는다 — new BigDecimal("")은 0이 아니라 예외라
+        // 응답 한 칸이 비었다고 호출 전체가 죽으면 안 된다. 종가가 0이면 기간수익률이 (last/0 - 1)로 터진다
+        String json = """
+                {"success":true,"results":[
+                  {"F12506":20260722,"F15001":"260500","F15009":"260000","F15010":"261000","F15011":"259500","F15015":"1000000"},
+                  {"F12506":20260721,"F15001":"","F15009":"255000","F15010":"258000","F15011":"254500","F15015":"900000"},
+                  {"F12506":20260720,"F15001":"250000","F15009":"249000","F15010":"252000","F15011":"248000","F15015":"800000"}
+                ]}
+                """;
+
+        List<DailyQuote> quotes = clientReturning(json).dailyQuotes(samsung, from, to);
+
+        assertThat(quotes).extracting(DailyQuote::date)
+                .containsExactly(LocalDate.parse("2026-07-20"), LocalDate.parse("2026-07-22"));
+    }
+
     @Test
     void unmappedIndex_throwsCheckApiException() {
         StockInfo unknown = new StockInfo("KRX300", "KRX 300", "KOSPI", "INDEX");

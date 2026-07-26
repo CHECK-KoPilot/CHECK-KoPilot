@@ -46,7 +46,10 @@ public class NavDisparityExecutor implements MetricExecutor {
         }
         ExecutorSupport.Period p = s.parsePeriodOrRecent(args);
 
-        List<NavQuote> navs = s.api().etfNav(info, p.from(), p.to());
+        // NAV가 0이면 괴리율 계산이 0으로 나누기가 된다. 클라이언트가 이미 그런 행을 걷어내지만,
+        // 나눗셈 바로 앞에서도 한 번 더 막는다 — 다른 CheckApiClient 구현이 들어와도 계약은 같다.
+        List<NavQuote> navs = s.api().etfNav(info, p.from(), p.to()).stream()
+                .filter(n -> n.nav() > 0).toList();
         if (navs.isEmpty()) throw new MetricException("DATA_INSUFFICIENT", "NAV 데이터가 없습니다");
 
         List<MetricResult.ChartSpec.Point> series = navs.stream()
@@ -72,9 +75,13 @@ public class NavDisparityExecutor implements MetricExecutor {
                             navs.stream().map(n -> new MetricResult.Evidence.Row(n.date(), n.nav())).toList())),
                 "괴리율(%) = (시장가 − NAV) / NAV × 100",
                 List.of(new MetricResult.Evidence.Step("최신 괴리율 (" + latest.date() + ")",
-                        "(%s − %s) / %s × 100 = %s%%".formatted(
+                            "(%s − %s) / %s × 100 = %s%%".formatted(
                                 ExecutorSupport.fmt(latest.marketPrice()), ExecutorSupport.fmt(latest.nav()),
-                                ExecutorSupport.fmt(latest.nav()), ExecutorSupport.fmt(latestDisp))))));
+                                ExecutorSupport.fmt(latest.nav()), ExecutorSupport.fmt(latestDisp))),
+                        // 평균의 모집단을 밝힌다 — NAV가 비어 온 날은 제외되므로 기간 일수와 다를 수 있다
+                        new MetricResult.Evidence.Step("기간 평균 괴리율",
+                            "유효 데이터 %d일 평균 = %s%%".formatted(
+                                navs.size(), ExecutorSupport.fmt(avgDisp))))));
     }
 
     static double disparityPct(NavQuote n) { return (n.marketPrice() - n.nav()) / n.nav() * 100; }

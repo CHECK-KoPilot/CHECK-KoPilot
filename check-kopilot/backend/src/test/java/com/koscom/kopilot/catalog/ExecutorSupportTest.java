@@ -88,4 +88,23 @@ class ExecutorSupportTest {
         assertThatThrownBy(() -> support.parsePeriodOrRecent(json("{\"from\":\"엉터리\"}")))
                 .isInstanceOf(com.koscom.kopilot.domain.MetricException.class);
     }
+
+    /**
+     * 이슈 #58. Math.round(Infinity)는 예외가 아니라 Long.MAX_VALUE라서, 0으로 나눈 결과가
+     * 922,337,203,685,477.63% 라는 그럴듯한 숫자로 둔갑해 근거 패널까지 달고 카드에 실렸다.
+     */
+    @Test
+    void round4_rejectsNonFiniteInsteadOfPrintingHugeNumber() {
+        for (double bad : new double[] {
+                Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.NaN }) {
+            assertThatThrownBy(() -> ExecutorSupport.round4(bad))
+                    .isInstanceOfSatisfying(com.koscom.kopilot.domain.MetricException.class,
+                            e -> assertThat(e.code()).isEqualTo("CALCULATION_INVALID"));
+        }
+    }
+
+    @Test
+    void round4_roundsToFourDecimals() {
+        assertThat(ExecutorSupport.round4(-22.755418)).isEqualTo(-22.7554);
+    }
 }
