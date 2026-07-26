@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
   listConversations,
+  ensureConversation,
   touchConversation,
   removeConversation,
 } from "../conversations";
@@ -43,6 +44,27 @@ describe("conversations", () => {
     expect(loadTranscript("sess-0")).toEqual([]);
     expect(loadTranscript("sess-1")).toHaveLength(1);
     vi.restoreAllMocks();
+  });
+
+  it("ensureConversation은 이미 있는 대화의 순서를 건드리지 않는다", () => {
+    // 대화를 열어보기만 한 것으로 목록 맨 위로 올라가면 훑던 기준이 사라진다
+    vi.spyOn(Date, "now").mockReturnValue(1000);
+    touchConversation("sess-1", "먼저 물어본 것");
+    Date.now.mockReturnValue(2000);
+    touchConversation("sess-2", "나중에 물어본 것");
+
+    Date.now.mockReturnValue(9999);
+    const list = ensureConversation("sess-1", "먼저 물어본 것");
+
+    expect(list.map((c) => c.id)).toEqual(["sess-2", "sess-1"]);
+    expect(list.find((c) => c.id === "sess-1").updatedAt).toBe(1000);
+    vi.restoreAllMocks();
+  });
+
+  it("ensureConversation은 인덱스에 없는 대화만 새로 올린다", () => {
+    const list = ensureConversation("sess-1", "복원된 대화");
+
+    expect(list.map((c) => c.id)).toEqual(["sess-1"]);
   });
 
   it("삭제하면 목록에서 빠진다", () => {
