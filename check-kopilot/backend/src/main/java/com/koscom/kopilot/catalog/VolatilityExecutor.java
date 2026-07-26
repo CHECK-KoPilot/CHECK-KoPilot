@@ -58,7 +58,7 @@ public class VolatilityExecutor implements MetricExecutor {
             headline.add(new MetricResult.Headline(info.name() + " 연율화 변동성",
                     ExecutorSupport.round4(annPct), "%"));
             barPoints.add(new MetricResult.ChartSpec.Point(info.name(), ExecutorSupport.round4(annPct)));
-            apiCalls.add(s.apiCall(info.isIndex() ? "index-daily" : "stock-daily", "일별 시세 조회", info, p));
+            apiCalls.add(s.apiCall(s.dailyApiId(info), "일별 시세 조회", info, p));
             raw.add(s.rawRows(info.name(), quotes));
             steps.add(new MetricResult.Evidence.Step(info.name(),
                     "일간수익률 표준편차 %s × √252 × 100 = %s%%".formatted(

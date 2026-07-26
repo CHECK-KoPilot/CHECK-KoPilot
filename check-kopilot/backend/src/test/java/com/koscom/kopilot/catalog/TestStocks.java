@@ -18,7 +18,7 @@ public final class TestStocks {
             new StockInfo("066970", "엘앤에프", "KOSDAQ", "STOCK"),
             new StockInfo("003670", "포스코퓨처엠", "KOSPI", "STOCK"),
             new StockInfo("360750", "TIGER 미국S&P500", "KOSPI", "ETF"),
-            new StockInfo("KOSPI", "코스피", "INDEX", "INDEX"));
+            new StockInfo("KOSPI", "코스피", "KOSPI", "INDEX"));
 
     private TestStocks() {
     }

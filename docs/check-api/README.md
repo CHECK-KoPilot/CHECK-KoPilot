@@ -40,7 +40,9 @@ F06508_11  desc="종목투자자별순매수거래량11"  detail="외국인"
 전체 필드의 43.3%가 `detail`을 갖는다. `fcodes.json`은 `desc(detail)` 형태로 병합해 저장했다.
 `detail`은 코드값 설명도 담는다(예: `F18070` 시장조치 = 00 정상 / 10 시초가산출 / 20 투자주의 / …).
 
-문서 페이지 URL 형식: `https://checkapi.koscom.co.kr/#/<카테고리>/<rpath>` (예: `#/stock/m001hist`)
+문서 페이지 URL 형식: `https://checkapi.koscom.co.kr/<카테고리>/<rpath>`
+예: `https://checkapi.koscom.co.kr/stock/m003code`, `https://checkapi.koscom.co.kr/future/m005intra`
+호출 경로와 달리 모듈과 접미사 사이에 슬래시가 없다 — 호출 `/stock/m001/hist_info` ↔ 문서 `/stock/m001hist`.
 
 ## 카테고리별 규모
 
