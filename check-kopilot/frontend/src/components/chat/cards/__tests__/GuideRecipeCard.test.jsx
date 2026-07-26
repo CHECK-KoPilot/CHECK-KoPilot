@@ -37,6 +37,18 @@ describe("GuideRecipeCard", () => {
       message.matched[0].docUrl
     );
     expect(screen.getByText("외국인 순매수")).toBeInTheDocument();
+    expect(screen.getByText("code*")).toBeInTheDocument();
+    expect(screen.getByText("fromDate*")).toBeInTheDocument();
+  });
+
+  it("다른 후보 API 목록은 기본적으로 접혀 있다가 토글하면 펼쳐진다", () => {
+    render(<GuideRecipeCard message={message} />);
+
+    expect(screen.getAllByText("투자자별 매매동향")).toHaveLength(1);
+
+    fireEvent.click(screen.getByRole("button", { name: /다른 후보 API \(1건\)/ }));
+
+    expect(screen.getAllByText("투자자별 매매동향")).toHaveLength(2);
   });
 
   it("'카탈로그 추가 요청' 버튼을 누르면 /api/catalog-requests에 세션·주제·매칭 API를 전송한다", async () => {

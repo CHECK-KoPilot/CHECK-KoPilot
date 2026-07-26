@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Compass, ExternalLink, Check } from "lucide-react";
+import { ChevronDown, Compass, ExternalLink, Check } from "lucide-react";
 import Button from "../../common/Button";
+import { cn } from "../../../lib/utils";
 import { getSessionId } from "../../../lib/session";
 
 export default function GuideRecipeCard({ message }) {
   const [requested, setRequested] = useState(false);
   const [pending, setPending] = useState(false);
+  const [catalogOpen, setCatalogOpen] = useState(false);
   const { topic, matched = [], catalog = [] } = message;
 
   const requestCatalog = async () => {
@@ -102,21 +104,33 @@ export default function GuideRecipeCard({ message }) {
       )}
 
       {catalog.length > 0 && (
-        <section className="mb-4">
-          <p className="mb-1.5 text-xs font-semibold text-slate-500">
-            관련 카탈로그 지표
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {catalog.map((c) => (
-              <span
-                key={c.apiId}
-                title={c.summary}
-                className="rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600"
-              >
-                {c.name}
-              </span>
-            ))}
-          </div>
+        <section className="mb-4 rounded-xl border border-slate-200">
+          <button
+            onClick={() => setCatalogOpen((v) => !v)}
+            className="flex w-full items-center justify-between px-3 py-2 text-left"
+          >
+            <span className="text-xs font-semibold text-slate-500">
+              다른 후보 API ({catalog.length}건)
+            </span>
+            <ChevronDown
+              size={14}
+              className={cn("text-slate-400 transition-transform", catalogOpen && "rotate-180")}
+            />
+          </button>
+
+          {catalogOpen && (
+            <div className="flex flex-wrap gap-1.5 border-t border-slate-100 px-3 py-2.5">
+              {catalog.map((c) => (
+                <span
+                  key={c.apiId}
+                  title={c.summary}
+                  className="rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600"
+                >
+                  {c.name}
+                </span>
+              ))}
+            </div>
+          )}
         </section>
       )}
 
