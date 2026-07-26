@@ -10,8 +10,8 @@ import java.util.concurrent.Executors;
 @Configuration
 public class ChatConfig {
 
-    // ChatModel(AnthropicChatModel) 빈은 spring-ai-starter-model-anthropic 자동 구성이 제공한다.
-    // API 키는 spring.ai.anthropic.api-key ← 환경변수 ANTHROPIC_API_KEY
+    // ChatModel(OpenAiChatModel) 빈은 spring-ai-starter-model-openai 자동 구성이 제공한다.
+    // API 키는 spring.ai.openai.api-key ← 환경변수 OPENAI_API_KEY (check-kopilot/.env)
 
     @Bean
     public KopilotTools kopilotTools(CatalogService catalog) { return new KopilotTools(catalog); }

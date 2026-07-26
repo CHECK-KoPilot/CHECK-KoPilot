@@ -11,11 +11,11 @@ spring:
       host: localhost
       port: 6379
   ai:
-    anthropic:
-      api-key: ${ANTHROPIC_API_KEY:}
+    openai:
+      api-key: ${OPENAI_API_KEY:}
       chat:
         options:
-          model: claude-opus-4-8
+          model: gpt-4o
           max-tokens: 4096
           temperature: 0.2
 

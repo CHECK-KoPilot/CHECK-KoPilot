@@ -15,7 +15,8 @@ import java.util.Map;
  * Spring AI Message와 안정적인 JSON DTO 사이의 변환기.
  *
  * <p>Spring AI 구현체를 직접 직렬화하지 않는다. 라이브러리 내부 구조 변경에 저장 포맷이
- * 끌려가지 않게 하기 위함이다. Anthropic tool_use/tool_result 매칭에 필요한 id는 보존한다.</p>
+ * 끌려가지 않게 하기 위함이다. tool 호출과 그 응답을 짝지어주는 id는 반드시 보존한다
+ * (OpenAI의 tool_calls[].id ↔ tool_call_id).</p>
  */
 public class ConversationCodec {
 
@@ -31,8 +32,8 @@ public class ConversationCodec {
 
     /**
      * 최근 max개 메시지만 남기되 tool 호출 짝을 깨뜨리지 않는다.
-     * Anthropic은 대응하는 tool_use 없는 tool_result(또는 그 반대)를 400으로 거부하므로,
-     * "히스토리는 항상 UserMessage로 시작하고 tool_use로 끝나지 않는다"를 불변식으로 강제한다.
+     * LLM API는 짝이 맞지 않는 tool 메시지(응답 없는 호출, 호출 없는 응답)를 400으로 거부하므로,
+     * "히스토리는 항상 UserMessage로 시작하고 응답 없는 tool 호출로 끝나지 않는다"를 불변식으로 강제한다.
      */
     public List<Message> trimToRecent(List<Message> messages, int max) {
         if (messages == null || messages.isEmpty() || max <= 0) {

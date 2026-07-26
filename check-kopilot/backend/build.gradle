@@ -26,7 +26,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    implementation 'org.springframework.ai:spring-ai-starter-model-anthropic'
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'org.apache.poi:poi-ooxml:5.3.0'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -34,3 +34,33 @@ dependencies {
 }
 
 tasks.named('test') { useJUnitPlatform() }
+
+/*
+ * ../.env(gitignore 대상)를 bootRun 환경변수로 주입한다.
+ * API 키를 커밋하지 않으면서 `./gradlew bootRun`만으로 기동하기 위한 장치다.
+ * 셸에 이미 export된 값이 있으면 그쪽이 우선한다 — CI나 일회성 오버라이드를 막지 않기 위함.
+ */
+def loadDotenv() {
+    def values = [:]
+    def file = rootProject.file('../.env')
+    if (!file.exists()) return values
+    file.eachLine('UTF-8') { line ->
+        def trimmed = line.trim()
+        if (trimmed.isEmpty() || trimmed.startsWith('#')) return
+        def separator = trimmed.indexOf('=')
+        if (separator <= 0) return
+        def key = trimmed.substring(0, separator).trim()
+        def value = trimmed.substring(separator + 1).trim()
+        if (value.length() >= 2 && value.startsWith('"') && value.endsWith('"')) {
+            value = value.substring(1, value.length() - 1)
+        }
+        if (!value.isEmpty()) values[key] = value
+    }
+    return values
+}
+
+tasks.named('bootRun') {
+    loadDotenv().each { key, value ->
+        if (System.getenv(key) == null) environment key, value
+    }
+}

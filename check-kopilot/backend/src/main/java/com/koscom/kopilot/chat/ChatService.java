@@ -11,6 +11,7 @@ import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.model.tool.ToolCallingChatOptions;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -31,15 +32,21 @@ public class ChatService {
     private final ToolDispatcher dispatcher;
     private final ConversationStore conversations;
     private final ChatLogService logs;
+    private final String model;
+    private final int maxTokens;
     private final ObjectMapper mapper = new ObjectMapper();
 
     public ChatService(ChatModel chatModel, KopilotTools tools, ToolDispatcher dispatcher,
-                       ConversationStore conversations, ChatLogService logs) {
+                       ConversationStore conversations, ChatLogService logs,
+                       @Value("${spring.ai.openai.chat.options.model}") String model,
+                       @Value("${spring.ai.openai.chat.options.max-tokens}") int maxTokens) {
         this.chatModel = chatModel;
         this.tools = tools;
         this.dispatcher = dispatcher;
         this.conversations = conversations;
         this.logs = logs;
+        this.model = model;
+        this.maxTokens = maxTokens;
     }
 
     public void handle(String sessionId, String userMessage, EventSink sink) {
@@ -53,12 +60,12 @@ public class ChatService {
             messages.add(new UserMessage(userMessage));
 
             // 핵심: 자동 tool 실행 OFF — tool 호출은 아래 루프가 직접 디스패치한다.
-            // yml 병합에 기대지 않도록 모델·토큰도 빌더에 직접 지정한다.
+            // 모델·토큰은 yml 병합에 기대지 않고 빌더에 직접 싣되, 값은 yml을 단일 출처로 읽는다.
             ToolCallingChatOptions options = ToolCallingChatOptions.builder()
                     .toolCallbacks(tools.build())
                     .internalToolExecutionEnabled(false)
-                    .model("claude-opus-4-8")
-                    .maxTokens(4096)
+                    .model(model)
+                    .maxTokens(maxTokens)
                     .build();
 
             String finalText = "";

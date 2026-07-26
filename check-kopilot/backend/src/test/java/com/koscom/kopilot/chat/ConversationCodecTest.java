@@ -66,7 +66,7 @@ class ConversationCodecTest {
 
         List<Message> trimmed = codec.trimToRecent(history, 10);
 
-        // 고아 tool_result로 시작하면 Anthropic이 400으로 거부한다 — 세션이 통째로 죽는다
+        // 고아 tool 응답으로 시작하면 LLM API가 400으로 거부한다 — 세션이 통째로 죽는다
         assertThat(trimmed.get(0)).isInstanceOf(UserMessage.class);
         assertThat(trimmed).hasSizeLessThanOrEqualTo(10);
     }

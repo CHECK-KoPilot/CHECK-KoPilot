@@ -85,6 +85,11 @@ class ChatServiceTest {
         return new KopilotTools(new CatalogService(List.of(new ReturnGapExecutor(support))));
     }
 
+    /** 모델 ID·토큰 상한은 운영에서 yml이 주입한다 — 루프 동작과 무관하므로 테스트는 고정값을 쓴다. */
+    private ChatService chatService(ChatModel model) {
+        return new ChatService(model, tools(), dispatcher(), conversations, logs, "gpt-4o", 4096);
+    }
+
     private static AssistantMessage toolCall(String id, String name, String args) {
         return new AssistantMessage("", Map.of(),
                 List.of(new AssistantMessage.ToolCall(id, "function", name, args)));
@@ -98,7 +103,7 @@ class ChatServiceTest {
                         + "\"from\":\"2026-07-13\",\"to\":\"2026-07-17\"}"),
                 new AssistantMessage("삼성전자가 코스피를 앞섰습니다."));
 
-        new ChatService(model, tools(), dispatcher(), conversations, logs)
+        chatService(model)
                 .handle("sess-1", "삼성전자랑 코스피 수익률 갭", sink);
 
         assertThat(events).containsExactly("card", "text", "done");
@@ -112,11 +117,11 @@ class ChatServiceTest {
                         + "\"from\":\"2026-07-13\",\"to\":\"2026-07-17\"}"),
                 new AssistantMessage("해설"));
 
-        new ChatService(model, tools(), dispatcher(), conversations, logs)
+        chatService(model)
                 .handle("sess-1", "질문", sink);
 
-        // 2회차 호출 프롬프트에 tool_use id가 그대로 실린 ToolResponseMessage가 있어야 한다.
-        // Anthropic은 tool_use/tool_result의 id 불일치를 400으로 거부한다.
+        // 2회차 호출 프롬프트에 tool 호출 id가 그대로 실린 ToolResponseMessage가 있어야 한다.
+        // OpenAI는 tool_calls/tool_call_id 불일치를 400으로 거부한다.
         List<Message> second = seenPrompts.get(1).getInstructions();
         ToolResponseMessage toolMsg = second.stream()
                 .filter(ToolResponseMessage.class::isInstance)
@@ -132,7 +137,7 @@ class ChatServiceTest {
         ChatModel model = new ScriptedChatModel(
                 new AssistantMessage("투자 판단은 제공하지 않습니다. 대신 수익률·변동성을 확인하실 수 있습니다."));
 
-        new ChatService(model, tools(), dispatcher(), conversations, logs)
+        chatService(model)
                 .handle("sess-1", "삼성전자 사야 돼?", sink);
 
         assertThat(events).containsExactly("text", "done");
@@ -146,7 +151,7 @@ class ChatServiceTest {
                         + "\"from\":\"2026-07-17\",\"to\":\"2026-07-13\"}"),   // 기간 역전
                 new AssistantMessage("기간이 뒤집혀 있습니다. 시작일을 다시 알려주세요."));
 
-        new ChatService(model, tools(), dispatcher(), conversations, logs)
+        chatService(model)
                 .handle("sess-1", "질문", sink);
 
         // 카드 이벤트 없이, error 이벤트로 스트림을 끊지도 않고, 되묻기 텍스트로 끝난다
@@ -168,7 +173,7 @@ class ChatServiceTest {
         }
         ChatModel model = new ScriptedChatModel(endless);
 
-        new ChatService(model, tools(), dispatcher(), conversations, logs)
+        chatService(model)
                 .handle("sess-1", "질문", sink);
 
         // 스크립트가 8개뿐이므로 9번째 호출이 일어나면 AssertionError로 터진다 = 상한이 지켜졌다
@@ -180,7 +185,7 @@ class ChatServiceTest {
     void savesContextWithoutSystemMessage() {
         ChatModel model = new ScriptedChatModel(new AssistantMessage("답변"));
 
-        new ChatService(model, tools(), dispatcher(), conversations, logs)
+        chatService(model)
                 .handle("sess-1", "질문", sink);
 
         // 시스템 프롬프트는 매 턴 새로 만든다(오늘 날짜가 바뀌므로) — 저장하면 중복 누적된다
