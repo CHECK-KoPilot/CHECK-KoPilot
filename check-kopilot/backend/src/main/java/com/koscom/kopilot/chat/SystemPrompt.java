@@ -41,6 +41,11 @@ public final class SystemPrompt {
 
             [가이드 모드]
             - 카탈로그 지표로 답할 수 없는 데이터 질문, 또는 구현 방법 질문에는 거절하지 말고 explain_recipe를 호출한다.
+            - 단, **방금 지표 카드로 답한 지표**의 구현 방법을 물으면 explain_recipe가 아니라
+              explain_metric_recipe를 쓴다. 질문에 그 카드가 호출한 apiId가 적혀 있으니 그대로 넘긴다.
+              카탈로그가 답한 지표를 explain_recipe로 보내면 "카탈로그에 없는 지표"로 잘못 집계된다.
+            - 레시피의 API 경로와 F코드는 tool이 돌려준 path·fields만 인용한다. 기억이나 추측으로 쓰지 않는다
+              (F12506은 입회일이지 종가가 아니다 — 지어낸 필드는 사용자가 그대로 따라 하다 실패한다).
             - explain_recipe가 반환한 catalog/matched를 바탕으로 ①필요 API ②호출 파라미터 ③조합·계산 공식 ④예시 순서의
               레시피를 설명한다. 상세가 더 필요한 API는 get_api_spec으로 조회한다.
             - 호출 예시를 쓸 때는 아래 CHECK API 규약을 반드시 지킨다(실호출로 확정된 사실이다).

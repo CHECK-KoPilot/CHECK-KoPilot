@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 class KopilotToolsTest {
 
     @Test
-    void buildsEightToolDefinitionsWithNamesAndJsonSchema() {
+    void buildsNineToolDefinitionsWithNamesAndJsonSchema() {
         ApiSpecIndex index = ApiSpecIndex.loadFromClasspath();
         ExecutorSupport support = new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver(), index);
         CatalogService catalog = new CatalogService(List.of(
@@ -23,10 +23,11 @@ class KopilotToolsTest {
 
         List<ToolCallback> tools = new KopilotTools(catalog).build();
 
-        assertThat(tools).hasSize(8);
+        assertThat(tools).hasSize(9);
         assertThat(tools).extracting(t -> t.getToolDefinition().name()).containsExactlyInAnyOrder(
                 "return_gap", "volatility", "nav_disparity", "ma_disparity",
-                "return_ranking", "period_summary", "explain_recipe", "get_api_spec");
+                "return_ranking", "period_summary",
+                "explain_recipe", "explain_metric_recipe", "get_api_spec");
 
         String returnGapSchema = tools.stream()
                 .filter(t -> t.getToolDefinition().name().equals("return_gap"))
