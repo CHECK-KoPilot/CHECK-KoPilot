@@ -2,7 +2,7 @@ name: CD Backend (GitOps)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "prod" ]
     paths:
       - 'check-kopilot/backend/**'
   workflow_dispatch:
@@ -34,6 +34,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./check-kopilot/backend
+        file: ./check-kopilot/backend/Dockerfile
         push: true
         tags: ${{ secrets.NCR_REGISTRY_URL }}/kopilot-backend:${{ env.IMAGE_TAG }}
         

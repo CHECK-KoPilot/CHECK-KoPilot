@@ -2,11 +2,11 @@ name: CI Backend
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "prod" ]
     paths:
       - 'check-kopilot/backend/**'
   pull_request:
-    branches: [ "main" ]
+    branches: [ "prod" ]
     paths:
       - 'check-kopilot/backend/**'
 
