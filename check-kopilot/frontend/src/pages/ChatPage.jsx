@@ -76,6 +76,10 @@ export default function ChatPage() {
     }
   };
 
+  const handleSelectCandidate = (candidate) => {
+    ask(`${candidate.name}(${candidate.code}) 기준으로 진행해줘`);
+  };
+
   const handleNewChat = () => {
     setMessages([]);
     scrolledUserIdRef.current = null;
@@ -91,7 +95,7 @@ export default function ChatPage() {
     >
       <div className="flex h-full flex-col">
         <div className="min-h-0 flex-1 overflow-y-auto">
-          <ChatMessageList messages={messages} />
+          <ChatMessageList messages={messages} onSelectCandidate={handleSelectCandidate} />
         </div>
         <ChatInputBar onSend={ask} onSelectSuggestion={ask} disabled={sending} />
       </div>

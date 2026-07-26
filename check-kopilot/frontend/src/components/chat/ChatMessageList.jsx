@@ -2,6 +2,8 @@ import { AlertCircle } from "lucide-react";
 import UserMessage from "./UserMessage";
 import KopilotIcon from "../common/KopilotIcon";
 import IndicatorAnswerCard from "./cards/IndicatorAnswerCard";
+import ClarificationCard from "./cards/ClarificationCard";
+import GuideRecipeCard from "./cards/GuideRecipeCard";
 
 function EmptyState() {
   return (
@@ -19,17 +21,7 @@ function EmptyState() {
   );
 }
 
-// clarify/guide 전용 카드 컴포넌트는 Task18에서 별도로 붙인다.
-// 그 전까지는 원문 JSON으로 표시한다.
-function RawEventCard({ message }) {
-  return (
-    <div className="w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs">
-      <pre className="overflow-x-auto whitespace-pre-wrap">{JSON.stringify(message, null, 2)}</pre>
-    </div>
-  );
-}
-
-export default function ChatMessageList({ messages }) {
+export default function ChatMessageList({ messages, onSelectCandidate }) {
   if (messages.length === 0) {
     return <EmptyState />;
   }
@@ -72,10 +64,20 @@ export default function ChatMessageList({ messages }) {
             </div>
           );
         }
-        if (message.type === "clarification" || message.type === "guide") {
+        if (message.type === "clarification") {
           return (
             <div key={message.id} id={message.id}>
-              <RawEventCard message={message} />
+              <ClarificationCard
+                message={message}
+                onSelect={(candidate) => onSelectCandidate?.(candidate)}
+              />
+            </div>
+          );
+        }
+        if (message.type === "guide") {
+          return (
+            <div key={message.id} id={message.id}>
+              <GuideRecipeCard message={message} />
             </div>
           );
         }
