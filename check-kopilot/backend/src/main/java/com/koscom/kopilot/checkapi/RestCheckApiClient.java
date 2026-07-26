@@ -12,6 +12,8 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 실제 CHECK API 호출 구현. 외부 명세 의존부는 이 클래스에만 존재한다.
@@ -33,11 +35,13 @@ public class RestCheckApiClient implements CheckApiClient {
     private static final String NAV_DATA_LIST = "F12506,F15001,F15301";
 
     /**
-     * 지수의 업종코드. 종목 마스터는 지수를 KOSPI/KOSDAQ 문자열로 식별하지만 CHECK API가 받는 jcode는
+     * 대표지수의 업종코드. 종목 마스터는 지수를 KOSPI/KOSDAQ 문자열로 식별하지만 CHECK API가 받는 jcode는
      * 업종코드이며, 대표지수는 코스피·코스닥 모두 1이다(시장 구분은 m002/m004 경로가 담당).
-     * 업종지수(대형주 2, 중형주 3, …)를 마스터에 추가하면 여기 매핑도 함께 늘린다.
      */
     private static final Map<String, String> INDEX_JCODES = Map.of("KOSPI", "1", "KOSDAQ", "1");
+
+    /** 업종지수 식별자 {@code <시장>-<업종코드>} (예: {@code KOSPI-8} 화학, {@code KOSDAQ-65} 화학) */
+    private static final Pattern SECTOR_INDEX = Pattern.compile("^(?:KOSPI|KOSDAQ)-(\\d+)$");
 
     private final RestClient rest;
     private final CheckApiProperties props;
@@ -94,12 +98,17 @@ public class RestCheckApiClient implements CheckApiClient {
         return path;
     }
 
-    /** 종목·ETF는 단축코드가 곧 jcode지만, 지수는 마스터 식별자를 업종코드로 바꿔 보낸다. */
+    /** 종목·ETF·ETN은 단축코드가 곧 jcode지만, 지수는 마스터 식별자를 업종코드로 바꿔 보낸다. */
     private String jcode(StockInfo instrument) {
         if (!instrument.isIndex()) {
             return instrument.code();
         }
-        String indexCode = INDEX_JCODES.get(instrument.code().toUpperCase());
+        String code = instrument.code().toUpperCase();
+        Matcher sector = SECTOR_INDEX.matcher(code);
+        if (sector.matches()) {
+            return sector.group(1);
+        }
+        String indexCode = INDEX_JCODES.get(code);
         if (indexCode == null) {
             throw new CheckApiException("지수 업종코드 매핑이 없습니다: " + instrument.code());
         }

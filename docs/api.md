@@ -16,10 +16,11 @@
 | # | Method | Path | 통신 방식 | 설명 |
 | --- | --- | --- | --- | --- |
 | 1 | POST | `/api/chat/{sessionId}` | **SSE** (`text/event-stream`) | 자연어 질문 → 카드/되묻기/가이드 스트리밍 |
-| 2 | GET | `/api/cards/{cardId}/xlsx` | **REST** (파일) | 카드 3시트 xlsx 다운로드 |
-| 3 | POST | `/api/catalog-requests` | **REST** (JSON) | 카탈로그 추가요청 적재 |
-| 4 | GET | `/api/admin/demand/summary` | **REST** (JSON) | 관리자 수요 요약 |
-| 5 | GET | `/api/admin/stats` | **REST** (JSON) | 관리자 통계 |
+| 2 | DELETE | `/api/chat/{sessionId}` | **REST** | 새 대화 — 서버 대화 컨텍스트 폐기 |
+| 3 | GET | `/api/cards/{cardId}/xlsx` | **REST** (파일) | 카드 3시트 xlsx 다운로드 |
+| 4 | POST | `/api/catalog-requests` | **REST** (JSON) | 카탈로그 추가요청 적재 |
+| 5 | GET | `/api/admin/demand/summary` | **REST** (JSON) | 관리자 수요 요약 |
+| 6 | GET | `/api/admin/stats` | **REST** (JSON) | 관리자 통계 |
 
 > 왜 채팅만 SSE인가: 질문 하나가 카드(계산 완료 즉시) → 해설(LLM 재호출 후)처럼 **시간차 나는 조각들**을 만들어, 준비되는 대로 밀어내기 위해서. 나머지 엔드포인트는 요청-응답 한 번으로 끝나므로 REST.
 
@@ -236,7 +237,36 @@ data: {"message":"일시적인 오류가 발생했습니다. 다시 시도해 �
 
 ---
 
-## 2. 카드 엑셀(xlsx) 다운로드 — REST
+## 2. 새 대화 — 세션 컨텍스트 폐기
+
+### Description
+`DELETE /api/chat/{sessionId}`
+
+사용자가 "새 대화"를 누르면 서버가 들고 있는 **살아 있는 대화 컨텍스트**(Redis)를 즉시 버린다.
+프론트가 localStorage의 세션 UUID만 새로 만들면 이전 컨텍스트는 TTL(`kopilot.session-ttl`, 기본 2시간) 동안 남는다.
+
+영속 이력(`chat_log`)과 저장된 카드(`card`)는 지우지 않는다 — 지우는 것은 LLM에 재전송되는 맥락뿐이다.
+
+### Request
+| 이름 | 타입 | 설명 |
+| --- | --- | --- |
+| sessionId | string (path) | 클라이언트가 생성한 세션 UUID |
+
+본문 없음.
+
+### Response
+- `204 No Content` — 폐기 완료. 존재하지 않는 세션에도 204(멱등)
+- `400 Bad Request` — sessionId 형식 위반 (`^[A-Za-z0-9_-]{8,64}$`)
+
+### Example
+```
+DELETE /api/chat/11111111-1111-4111-8111-111111111111
+→ 204 No Content
+```
+
+---
+
+## 3. 카드 엑셀(xlsx) 다운로드 — REST
 
 ### Description
 답변 카드의 계산 결과를 Excel 파일로 다운로드 (결과요약 / 원본데이터 / 계산과정 3시트).
@@ -264,7 +294,7 @@ Content-Disposition: attachment; filename=kopilot-2f1c9a80.xlsx
 
 ---
 
-## 3. 카탈로그 추가 요청 (수요조사) — REST
+## 4. 카탈로그 추가 요청 (수요조사) — REST
 
 ### Description
 카탈로그에 없는 지표에 대한 수요를 명시적으로 기록 (가이드 카드의 "카탈로그 추가 요청" 버튼).
@@ -296,7 +326,7 @@ Content-Type: application/json
 
 ---
 
-## 4. 관리자 — 수요 요약 (REST)
+## 5. 관리자 — 수요 요약 (REST)
 
 ### Description
 수요조사 집계를 요청수 내림차순으로 조회.
@@ -339,7 +369,7 @@ header X-Admin-Token: kopilot-demo
 
 ---
 
-## 5. 관리자 — 통계 (REST)
+## 6. 관리자 — 통계 (REST)
 
 ### Description
 발표용 집계 통계(질문·카드·가이드 수, 카탈로그 응답 비율) 조회.

@@ -34,6 +34,61 @@ public class ExecutorSupport {
         return stocks.resolve(nameOrCode);
     }
 
+    /** 기간을 생략했을 때 쓰는 기본 조회 구간 (캘린더 일수) */
+    public static final int DEFAULT_PERIOD_DAYS = 90;
+
+    /**
+     * 기간이 없으면 최근 {@value #DEFAULT_PERIOD_DAYS}일로 대신한다.
+     *
+     * <p>기간을 필수로 두면 "에코프로랑 에코프로비엠 변동성 비교해줘" 같은 자연스러운 질문마다
+     * 되묻게 되고, 실제로는 LLM이 되묻기와 임의 기간 추측 사이를 오갔다(평가셋에서 같은 질문이
+     * 실행마다 다른 결과를 냈다). 기본값을 명시하면 동작이 결정적이 되고, 적용된 기간은
+     * 카드 제목·근거 패널에 그대로 드러나므로 사용자가 무엇으로 계산됐는지 항상 확인할 수 있다.</p>
+     */
+    public Period parsePeriodOrRecent(JsonNode args) {
+        String rawFrom = text(args, "from");
+        String rawTo = text(args, "to");
+        if (rawFrom != null && rawTo != null) {
+            return parsePeriod(args);
+        }
+        // 한쪽만 왔으면 그 값을 버리지 않는다 — "1월부터 지금까지"에 from만 채워 오는 일이 흔한데,
+        // 통째로 기본값을 쓰면 묻지 않은 기간의 답이 나간다.
+        LocalDate today = LocalDate.now();
+        if (rawFrom != null) {
+            return validated(parseDate(rawFrom, rawTo), today);
+        }
+        if (rawTo != null) {
+            LocalDate to = parseDate(rawTo, rawFrom);
+            return validated(to.minusDays(DEFAULT_PERIOD_DAYS), to);
+        }
+        return new Period(today.minusDays(DEFAULT_PERIOD_DAYS), today);
+    }
+
+    private static String text(JsonNode args, String field) {
+        JsonNode node = args.path(field);
+        if (node.isMissingNode() || node.isNull()) return null;
+        String value = node.asText("").trim();
+        return value.isEmpty() ? null : value;   // {"from":""}도 미지정으로 본다
+    }
+
+    private LocalDate parseDate(String raw, String other) {
+        try {
+            return LocalDate.parse(raw);
+        } catch (RuntimeException e) {
+            throw new MetricException("PERIOD_INVALID", "날짜 형식 오류: " + raw + " ~ " + other);
+        }
+    }
+
+    private Period validated(LocalDate from, LocalDate to) {
+        if (from.isAfter(to)) {
+            throw new MetricException("PERIOD_INVERTED", "시작일이 종료일보다 늦습니다: " + from + " > " + to);
+        }
+        if (to.isAfter(LocalDate.now())) {
+            throw new MetricException("PERIOD_FUTURE", "미래 날짜는 조회할 수 없습니다: " + to);
+        }
+        return new Period(from, to);
+    }
+
     public Period parsePeriod(JsonNode args) {
         String rawFrom = args.path("from").asText(null);
         String rawTo = args.path("to").asText(null);

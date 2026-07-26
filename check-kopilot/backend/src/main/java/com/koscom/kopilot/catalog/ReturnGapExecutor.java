@@ -39,14 +39,14 @@ public class ReturnGapExecutor implements MetricExecutor {
 
     @Override
     public List<String> requiredParams() {
-        return List.of("target_a", "target_b", "from", "to");
+        return List.of("target_a", "target_b");
     }
 
     @Override
     public MetricResult execute(JsonNode args) {
         StockInfo targetA = support.resolveTarget(support.requiredText(args, "target_a"));
         StockInfo targetB = support.resolveTarget(support.requiredText(args, "target_b"));
-        ExecutorSupport.Period period = support.parsePeriod(args);
+        ExecutorSupport.Period period = support.parsePeriodOrRecent(args);
 
         List<DailyQuote> quotesA = support.api().dailyQuotes(targetA, period.from(), period.to());
         List<DailyQuote> quotesB = support.api().dailyQuotes(targetB, period.from(), period.to());

@@ -15,7 +15,7 @@ public final class TestStocks {
             new StockInfo("035720", "카카오", "KOSPI", "STOCK"),
             new StockInfo("086520", "에코프로", "KOSDAQ", "STOCK"),
             new StockInfo("247540", "에코프로비엠", "KOSDAQ", "STOCK"),
-            new StockInfo("066970", "엘앤에프", "KOSDAQ", "STOCK"),
+            new StockInfo("066970", "엘앤에프", "KOSPI", "STOCK"),   // 2024년 코스피 이전 — 마스터와 일치
             new StockInfo("003670", "포스코퓨처엠", "KOSPI", "STOCK"),
             new StockInfo("360750", "TIGER 미국S&P500", "KOSPI", "ETF"),
             new StockInfo("KOSPI", "코스피", "KOSPI", "INDEX"));
