@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, system-ui, "Segoe UI", Roboto, sans-serif;
+
+  /* 상승/하락은 국내 증시 관례에 따라 상승=red, 하락=blue */
+  --color-up-500: #ef4444;
+  --color-up-600: #dc2626;
+  --color-up-50: #fef2f2;
+  --color-down-500: #3b82f6;
+  --color-down-600: #2563eb;
+  --color-down-50: #eff6ff;
+
+  /* 맑고 채도 높은 오렌지 포인트 컬러 — 앱 전체의 단일 브랜드 액센트 */
+  --color-accent-50: #fef1e6;
+  --color-accent-100: #fee4cd;
+  --color-accent-200: #fdd6b4;
+  --color-accent-300: #fcc392;
+  --color-accent-400: #fba860;
+  --color-accent-500: #fa8d2e;
+  --color-accent-600: #f97706;
+  --color-accent-700: #db6906;
+  --color-accent-800: #bd5b05;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@keyframes loading-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}

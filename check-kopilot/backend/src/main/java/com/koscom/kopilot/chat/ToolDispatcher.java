@@ -12,6 +12,7 @@ import com.koscom.kopilot.checkapi.StockInfo;
 import com.koscom.kopilot.checkapi.StockNotFoundException;
 import com.koscom.kopilot.domain.MetricException;
 import com.koscom.kopilot.domain.MetricResult;
+import com.koscom.kopilot.demand.DemandRecorder;
 import com.koscom.kopilot.export.CardSink;
 import com.koscom.kopilot.guide.GuideService;
 import org.springframework.stereotype.Service;
@@ -28,19 +29,21 @@ public class ToolDispatcher {
     private final CatalogService catalog;
     private final GuideService guide;
     private final CardSink cards;
+    private final DemandRecorder demand;
     private final ObjectMapper mapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())
             .disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-    public ToolDispatcher(CatalogService catalog, GuideService guide, CardSink cards) {
+    public ToolDispatcher(CatalogService catalog, GuideService guide, CardSink cards, DemandRecorder demand) {
         this.catalog = catalog;
         this.guide = guide;
         this.cards = cards;
+        this.demand = demand;
     }
 
     public DispatchResult dispatch(String sessionId, String toolName, JsonNode args) {
         try {
-            if (EXPLAIN_RECIPE.equals(toolName)) return explainRecipe(args);
+            if (EXPLAIN_RECIPE.equals(toolName)) return explainRecipe(sessionId, args);
             if (GET_API_SPEC.equals(toolName)) return getApiSpec(args);
             return metric(sessionId, toolName, args);
         } catch (AmbiguousStockException e) {
@@ -63,6 +66,12 @@ public class ToolDispatcher {
         } catch (CheckApiException e) {
             String json = mapper.createObjectNode().put("status", "error")
                     .put("code", "CHECK_API_ERROR").put("message", e.getMessage()).toString();
+            return new DispatchResult(json, true, null);
+        } catch (IllegalArgumentException e) {
+            // 정의되지 않은 tool 이름(CatalogService.byName) — LLM 환각/오타 대비.
+            // 예외로 루프를 깨는 대신 구조화 에러로 돌려 Claude가 복구/재시도하게 한다.
+            String json = mapper.createObjectNode().put("status", "error")
+                    .put("code", "UNKNOWN_TOOL").put("message", e.getMessage()).toString();
             return new DispatchResult(json, true, null);
         }
     }
@@ -87,15 +96,24 @@ public class ToolDispatcher {
         }
     }
 
-    private DispatchResult explainRecipe(JsonNode args) {
+    private DispatchResult explainRecipe(String sessionId, JsonNode args) {
         String topic = args.path("topic").asText("");
         // LLM이 사용자 표현을 명세 용어로 확장해 넘긴 검색어 (예: "수급" → ["투자자별","순매수"])
         List<String> keywords = new ArrayList<>();
         args.path("keywords").forEach(n -> keywords.add(n.asText()));
-        // 방어적 폴백: LLM이 keywords 없이 topic만 넘긴 경우(스키마는 필수지만 만일을 대비)
-        // 구문 전체를 하나의 검색어로 넣으면 FieldDictionary.search가 라벨과 매칭하지 못하므로 단어 단위로 쪼갠다
-        if (keywords.isEmpty() && !topic.isBlank()) keywords.addAll(List.of(topic.trim().split("\\s+")));
+        // 키워드 미지정 시 topic을 공백으로 토큰화한다. search는 term별 부분일치라
+        // topic 통짜("외국인 순매수 수급")를 한 키워드로 쓰면 어떤 F코드 라벨과도 매칭되지 않는다.
+        if (keywords.isEmpty() && !topic.isBlank()) {
+            for (String w : topic.trim().split("\\s+")) keywords.add(w);
+        }
         GuideService.GuideResult r = guide.recipeContext(topic, keywords);
+
+        // 버튼 클릭 여부와 무관하게, 가이드 카드가 뜬 것 자체가 "카탈로그가 못 답한 수요"다
+        String matchedIds = r.matched().stream()
+                .map(com.koscom.kopilot.guide.ApiSpecEntry::apiId)
+                .collect(java.util.stream.Collectors.joining(","));
+        demand.record(sessionId, topic, matchedIds, DemandRecorder.AUTO);
+
         ObjectNode payload = mapper.createObjectNode().put("topic", topic);
         payload.set("matched", mapper.valueToTree(r.matched()));
         payload.set("catalog", mapper.valueToTree(r.catalog()));

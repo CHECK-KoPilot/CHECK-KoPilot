@@ -3,6 +3,7 @@ package com.koscom.kopilot.chat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koscom.kopilot.catalog.*;
 import com.koscom.kopilot.checkapi.FixtureCheckApiClient;
+import com.koscom.kopilot.demand.DemandRecorder;
 import com.koscom.kopilot.domain.MetricResult;
 import com.koscom.kopilot.export.CardSink;
 import com.koscom.kopilot.guide.ApiSpecIndex;
@@ -19,6 +20,7 @@ class ToolDispatcherTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final List<MetricResult> savedCards = new ArrayList<>();
+    private final List<String> recordedDemand = new ArrayList<>();
 
     private ToolDispatcher dispatcher() {
         ApiSpecIndex index = ApiSpecIndex.loadFromClasspath();
@@ -28,8 +30,10 @@ class ToolDispatcherTest {
                 new NavDisparityExecutor(support), new MaDisparityExecutor(support),
                 new ReturnRankingExecutor(support), new PeriodSummaryExecutor(support)));
         CardSink sink = (sessionId, r) -> savedCards.add(r);
-        return new ToolDispatcher(catalog,
-                new GuideService(index, FieldDictionary.loadFromClasspath()), sink);
+        DemandRecorder demand = (sessionId, topic, apiIds, source) ->
+                recordedDemand.add(source + "|" + topic + "|" + apiIds);
+        return new ToolDispatcher(catalog, new GuideService(index, FieldDictionary.loadFromClasspath()),
+                sink, demand);
     }
 
     @Test
@@ -68,21 +72,37 @@ class ToolDispatcherTest {
 
     @Test
     void explainRecipe_emitsGuideEvent_withCatalogAndMatches() throws Exception {
+        // 운영 계약: LLM이 topic과 함께 확장 keywords를 넘긴다(스펙 8절). 검색 정밀도는 keywords가 좌우한다.
         var r = dispatcher().dispatch("sess-1", "explain_recipe", mapper.readTree("""
-            {"topic":"외국인 순매수 동향","keywords":["외국인","순매수"]}"""));
+            {"topic":"외국인 순매수 수급","keywords":["외국인","순매수"]}"""));
 
         assertThat(r.isError()).isFalse();
         assertThat(r.push().event()).isEqualTo("guide");
         assertThat(r.toolResultJson()).contains("stock-investor").contains("catalog");
+
+        // 버튼 클릭 없이도 수요가 적재된다(AUTO)
+        assertThat(recordedDemand).hasSize(1);
+        assertThat(recordedDemand.get(0)).startsWith("AUTO|외국인 순매수 수급|").contains("stock-investor");
     }
 
     @Test
     void getApiSpec_returnsFullEntries_noEvent() throws Exception {
+        // 주의: apiIds는 api-aliases.yaml에 정의된 별칭이어야 한다 (미정의 id는 결과에서 누락됨)
         var r = dispatcher().dispatch("sess-1", "get_api_spec", mapper.readTree("""
-            {"apiIds":["stock-daily","stock-investor"]}"""));
+            {"apiIds":["stock-daily","etf-code"]}"""));
 
         assertThat(r.isError()).isFalse();
         assertThat(r.push()).isNull();
-        assertThat(r.toolResultJson()).contains("stock-daily").contains("stock-investor");
+        assertThat(r.toolResultJson()).contains("stock-daily").contains("etf-code");
+    }
+
+    @Test
+    void unknownTool_returnsStructuredErrorNotException() throws Exception {
+        // LLM이 정의되지 않은 tool을 부르면 예외로 루프가 깨지면 안 되고, 구조화 에러로 돌아와야 한다.
+        var r = dispatcher().dispatch("sess-1", "does_not_exist", mapper.readTree("{}"));
+
+        assertThat(r.isError()).isTrue();
+        assertThat(r.toolResultJson()).contains("UNKNOWN_TOOL");
+        assertThat(r.push()).isNull();
     }
 }
