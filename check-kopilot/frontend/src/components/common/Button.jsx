@@ -16,6 +16,7 @@ const sizes = {
 };
 
 export default function Button({
+  as: Component = "button",
   variant = "primary",
   size = "md",
   className,
@@ -23,7 +24,7 @@ export default function Button({
   ...props
 }) {
   return (
-    <button
+    <Component
       className={cn(
         "inline-flex items-center justify-center gap-1.5 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed",
         variants[variant],
@@ -33,6 +34,6 @@ export default function Button({
       {...props}
     >
       {children}
-    </button>
+    </Component>
   );
 }
