@@ -5,15 +5,25 @@ import ChartPanel from "./ChartPanel";
 import EvidencePanel from "./EvidencePanel";
 
 export default function IndicatorAnswerCard({ message, tourTarget = false }) {
-  const { cardId, title, from, to, headline, chart, commentary, evidence } = message;
+  const { cardId, title, from, to, targets, headline, chart, commentary, evidence } = message;
 
   return (
     <div className="w-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:p-5">
       <div className="mb-3">
         <h3 className="text-sm font-semibold text-slate-900 lg:text-base">{title}</h3>
-        <p className="text-xs text-slate-400 lg:text-sm">
-          {from} ~ {to}
-        </p>
+        <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+          {targets?.map((t) => (
+            <span
+              key={t.code}
+              className="rounded-full bg-accent-50 px-2 py-0.5 text-xs font-medium text-accent-700"
+            >
+              {t.name} {t.code}
+            </span>
+          ))}
+          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
+            {from} ~ {to}
+          </span>
+        </div>
       </div>
 
       <div className="mb-3" data-tour={tourTarget ? "key-metrics" : undefined}>
@@ -50,7 +60,7 @@ export default function IndicatorAnswerCard({ message, tourTarget = false }) {
           data-tour={tourTarget ? "excel-download" : undefined}
         >
           <Download size={14} />
-          Excel 다운로드
+          xlsx 다운로드
         </Button>
       </div>
     </div>
