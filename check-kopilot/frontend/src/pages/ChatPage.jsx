@@ -11,6 +11,7 @@ import {
 import { loadTranscript, saveTranscript, clearTranscript } from "../lib/transcript";
 import {
   listConversations,
+  ensureConversation,
   touchConversation,
   removeConversation,
 } from "../lib/conversations";
@@ -31,6 +32,7 @@ export default function ChatPage() {
   const scrollRef = useRef(null);
   const pinnedUserIdRef = useRef(null);
   const followingRef = useRef(false);
+  const syncedRef = useRef(null);
 
   useEffect(() => {
     saveTranscript(sessionId, messages);
@@ -38,9 +40,23 @@ export default function ChatPage() {
 
   // 첫 질문을 그 대화의 제목으로 삼는다. 질문이 하나도 없는 대화는 인덱스에 올리지 않는다 —
   // "새 대화"만 눌러도 빈 항목이 목록에 쌓이면 안 된다.
+  //
+  // 목록 순서는 마지막 질문 시각이다. 대화를 여는 것만으로 순서가 바뀌면 사용자가 훑던
+  // 기준이 사라지므로, 메시지가 실제로 늘었을 때만 시각을 올린다.
   useEffect(() => {
+    const previous = syncedRef.current;
+    syncedRef.current = { sessionId, count: messages.length };
+
     const firstQuestion = messages.find((m) => m.type === "user");
     if (!firstQuestion) return;
+
+    // 방금 연 대화(최초 렌더·전환)는 순서를 건드리지 않는다.
+    // 인덱스에 없을 때만 올린다 — 이 기능이 들어오기 전부터 있던 대화가 여기 해당한다.
+    if (!previous || previous.sessionId !== sessionId) {
+      setConversations(ensureConversation(sessionId, firstQuestion.text));
+      return;
+    }
+    if (messages.length <= previous.count) return;
     setConversations(touchConversation(sessionId, firstQuestion.text));
   }, [sessionId, messages]);
 

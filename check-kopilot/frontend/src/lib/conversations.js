@@ -35,7 +35,10 @@ export function listConversations() {
 }
 
 /**
- * 대화를 인덱스에 올리거나 갱신한다. 제목은 그 대화의 첫 질문이다.
+ * 대화를 인덱스에 올리고 마지막 질문 시각을 지금으로 올린다. 제목은 그 대화의 첫 질문이다.
+ * 목록 순서를 정하는 값이므로 **질문이 오갈 때만** 부른다 — 여는 것만으로 순서가 바뀌면
+ * 사용자가 훑던 기준이 사라진다(그 경우는 `ensureConversation`).
+ *
  * 상한을 넘으면 가장 오래된 대화를 본문까지 지운다 — 인덱스에서만 빼면 transcript가 남아 샌다.
  */
 export function touchConversation(id, title) {
@@ -49,6 +52,15 @@ export function touchConversation(id, title) {
   }
   write(next.slice(0, MAX));
   return next.slice(0, MAX);
+}
+
+/**
+ * 인덱스에 없으면 올리고, 이미 있으면 그대로 둔다.
+ * 대화를 열어보기만 한 것으로 목록 순서가 바뀌면 안 되므로 `updatedAt`을 건드리지 않는다.
+ */
+export function ensureConversation(id, title) {
+  if (read().some((c) => c.id === id)) return listConversations();
+  return touchConversation(id, title);
 }
 
 export function removeConversation(id) {
