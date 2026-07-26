@@ -23,10 +23,26 @@ public class ChatController {
 
     private final ChatService chatService;
     private final ExecutorService chatExecutor;
+    private final ConversationStore conversations;
 
-    public ChatController(ChatService chatService, ExecutorService chatExecutor) {
+    public ChatController(ChatService chatService, ExecutorService chatExecutor,
+                          ConversationStore conversations) {
         this.chatService = chatService;
         this.chatExecutor = chatExecutor;
+        this.conversations = conversations;
+    }
+
+    /**
+     * "새 대화" — 서버가 들고 있는 대화 컨텍스트를 즉시 버린다.
+     *
+     * <p>프론트가 localStorage의 세션 UUID만 새로 만들면 이전 컨텍스트는 TTL(2시간) 동안 Redis에 남는다.
+     * 데모 중 세션을 반복해서 갈아엎으면 그만큼 키가 쌓이므로, 떠날 때 명시적으로 정리한다.
+     * 영속 이력은 {@code chat_log}가 갖고 있으므로 여기서 지우는 것은 "살아 있는 맥락"뿐이다.</p>
+     */
+    @DeleteMapping("/api/chat/{sessionId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void endSession(@PathVariable String sessionId) {
+        conversations.clear(requireValidSession(sessionId));
     }
 
     @PostMapping(value = "/api/chat/{sessionId}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)

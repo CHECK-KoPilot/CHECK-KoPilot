@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import AppLayout from "../components/layout/AppLayout";
 import ChatMessageList from "../components/chat/ChatMessageList";
 import ChatInputBar from "../components/chat/ChatInputBar";
-import { streamChat } from "../lib/sse";
+import { streamChat, endSession } from "../lib/sse";
 import { getSessionId, resetSessionId } from "../lib/session";
 
 const CARD_EVENT_TYPES = {
@@ -81,6 +81,8 @@ export default function ChatPage() {
   };
 
   const handleNewChat = () => {
+    // 떠나는 세션의 서버 컨텍스트를 정리한다. UUID만 새로 만들면 Redis에 TTL 2시간 동안 남는다.
+    endSession(getSessionId());
     setMessages([]);
     scrolledUserIdRef.current = null;
     resetSessionId();

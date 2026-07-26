@@ -3,6 +3,7 @@ package com.koscom.kopilot.chat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koscom.kopilot.catalog.*;
 import com.koscom.kopilot.checkapi.FixtureCheckApiClient;
+import com.koscom.kopilot.demand.DemandRecorder;
 import com.koscom.kopilot.domain.MetricResult;
 import com.koscom.kopilot.export.CardSink;
 import com.koscom.kopilot.guide.ApiSpecIndex;
@@ -76,8 +77,9 @@ class ChatServiceTest {
                 new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver(), index);
         CatalogService catalog = new CatalogService(List.of(new ReturnGapExecutor(support)));
         CardSink cards = (sessionId, r) -> { };
+        DemandRecorder demand = (sessionId, topic, apiIds, source) -> { };
         return new ToolDispatcher(catalog,
-                new GuideService(index, FieldDictionary.loadFromClasspath()), cards);
+                new GuideService(index, FieldDictionary.loadFromClasspath()), cards, demand);
     }
 
     private KopilotTools tools() {
