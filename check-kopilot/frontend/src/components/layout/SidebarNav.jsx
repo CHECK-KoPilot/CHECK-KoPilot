@@ -1,4 +1,4 @@
-import { LayoutGrid, User, Settings, X } from "lucide-react";
+import { LayoutGrid, User, Settings, X, Trash2 } from "lucide-react";
 import { cn } from "../../lib/utils";
 import KopilotMark from "../common/KopilotMark";
 
@@ -8,12 +8,26 @@ const navLinks = [
   { icon: Settings, label: "설정" },
 ];
 
+const DAY = 24 * 60 * 60 * 1000;
+
+/** 목록 머리글에 쓸 날짜 라벨. 가까운 날은 "오늘/어제"가 훑기 쉽다 */
+function dateLabel(updatedAt) {
+  const day = (ms) => Math.floor(new Date(ms).setHours(0, 0, 0, 0) / DAY);
+  const diff = day(Date.now()) - day(updatedAt ?? Date.now());
+  if (diff <= 0) return "오늘";
+  if (diff === 1) return "어제";
+  return new Date(updatedAt).toISOString().slice(0, 10);
+}
+
+/** 최근순 배열을 순서 그대로 날짜별로 묶는다 */
 function groupByDate(conversations) {
-  return conversations.reduce((acc, conv) => {
-    acc[conv.date] = acc[conv.date] || [];
-    acc[conv.date].push(conv);
-    return acc;
-  }, {});
+  const groups = new Map();
+  for (const conv of conversations) {
+    const label = dateLabel(conv.updatedAt);
+    if (!groups.has(label)) groups.set(label, []);
+    groups.get(label).push(conv);
+  }
+  return [...groups.entries()];
 }
 
 export default function SidebarNav({
@@ -21,6 +35,9 @@ export default function SidebarNav({
   onClose,
   onNewChat,
   conversations = [],
+  activeConversationId,
+  onSelectConversation,
+  onDeleteConversation,
 }) {
   const grouped = groupByDate(conversations);
 
@@ -74,20 +91,38 @@ export default function SidebarNav({
               아직 대화 내역이 없습니다
             </p>
           ) : (
-            Object.entries(grouped).map(([date, items]) => (
+            grouped.map(([date, items]) => (
               <div key={date} className="mb-4">
                 <p className="mb-1.5 px-2 text-xs font-medium text-slate-400 lg:text-[13px]">
                   {date}
                 </p>
                 <div className="space-y-0.5">
                   {items.map((conv) => (
-                    <button
+                    <div
                       key={conv.id}
-                      className="block w-full truncate rounded-md px-2 py-1.5 text-left text-sm text-slate-600 hover:bg-slate-200/60 lg:py-2 lg:text-[15px]"
-                      title={conv.title}
+                      className={cn(
+                        "group flex items-center rounded-md pr-1 hover:bg-slate-200/60",
+                        conv.id === activeConversationId && "bg-slate-200/80"
+                      )}
                     >
-                      {conv.title}
-                    </button>
+                      <button
+                        onClick={() => {
+                          onSelectConversation?.(conv.id);
+                          onClose();
+                        }}
+                        className="min-w-0 flex-1 truncate px-2 py-1.5 text-left text-sm text-slate-600 lg:py-2 lg:text-[15px]"
+                        title={conv.title}
+                      >
+                        {conv.title}
+                      </button>
+                      <button
+                        onClick={() => onDeleteConversation?.(conv.id)}
+                        aria-label={`${conv.title} 대화 삭제`}
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded text-slate-400 opacity-0 hover:bg-slate-300/60 hover:text-slate-600 focus-visible:opacity-100 group-hover:opacity-100"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
                   ))}
                 </div>
               </div>
