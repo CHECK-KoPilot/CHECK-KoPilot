@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class CardStore {
+public class CardStore implements CardSink {
 
     private final JdbcTemplate jdbc;
     private final ObjectMapper mapper = new ObjectMapper()
