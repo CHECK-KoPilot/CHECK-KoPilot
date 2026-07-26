@@ -2,6 +2,7 @@ package com.koscom.kopilot.catalog;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koscom.kopilot.checkapi.FixtureCheckApiClient;
+import com.koscom.kopilot.guide.ApiSpecIndex;
 import com.koscom.kopilot.domain.MetricResult;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ class PeriodSummaryExecutorTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final ExecutorSupport support =
-            new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver());
+            new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver(), ApiSpecIndex.loadFromClasspath());
     private final PeriodSummaryExecutor executor = new PeriodSummaryExecutor(support);
 
     // 현대차 픽스처: high 최대 110, low 최소 95, close 100→105 (+5.0%)

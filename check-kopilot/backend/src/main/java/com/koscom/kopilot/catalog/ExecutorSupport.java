@@ -7,27 +7,23 @@ import com.koscom.kopilot.checkapi.StockInfo;
 import com.koscom.kopilot.checkapi.StockResolver;
 import com.koscom.kopilot.domain.MetricException;
 import com.koscom.kopilot.domain.MetricResult;
+import com.koscom.kopilot.guide.ApiSpecIndex;
 
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 /** 실행기 공통 의존성과 검증/변환 헬퍼. */
 public class ExecutorSupport {
 
-    private static final Map<String, String> SPEC_URLS = Map.of(
-            "stock-daily", "https://checkapi.koscom.co.kr/docs/stock-daily",
-            "index-daily", "https://checkapi.koscom.co.kr/docs/index-daily",
-            "kosdaq-daily", "https://checkapi.koscom.co.kr/docs/kosdaq-daily",
-            "stock-investor", "https://checkapi.koscom.co.kr/docs/stock-investor");
-
     private final CheckApiClient checkApi;
     private final StockResolver stocks;
+    private final ApiSpecIndex specIndex;
 
-    public ExecutorSupport(CheckApiClient checkApi, StockResolver stocks) {
+    public ExecutorSupport(CheckApiClient checkApi, StockResolver stocks, ApiSpecIndex specIndex) {
         this.checkApi = checkApi;
         this.stocks = stocks;
+        this.specIndex = specIndex;
     }
 
     public CheckApiClient api() {
@@ -122,7 +118,7 @@ public class ExecutorSupport {
     }
 
     public String specUrl(String apiId) {
-        return SPEC_URLS.getOrDefault(apiId, "");
+        return specIndex.docUrl(apiId);
     }
 
     public static double round4(double value) {
