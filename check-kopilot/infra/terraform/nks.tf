@@ -5,8 +5,11 @@ resource "ncloud_nks_cluster" "cluster" {
   lb_private_subnet_no = ncloud_subnet.public_lb.id
   kube_network_plugin  = "cilium"
   subnet_no_list       = [ncloud_subnet.private_node.id]
-  vpc_no               = ncloud_vpc.vpc.id
+  vpc_no               = data.ncloud_vpc.vpc.id
   zone                 = "FKR-1"
+  log {
+    audit = true
+  }
 }
 
 resource "ncloud_nks_node_pool" "node_pool" {

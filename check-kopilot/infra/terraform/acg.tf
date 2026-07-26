@@ -1,6 +1,6 @@
 resource "ncloud_access_control_group" "db_acg" {
   name   = "team3-db-acg"
-  vpc_no = ncloud_vpc.vpc.id
+  vpc_no = data.ncloud_vpc.vpc.id
   description = "Database Access Control Group for team3"
 }
 
