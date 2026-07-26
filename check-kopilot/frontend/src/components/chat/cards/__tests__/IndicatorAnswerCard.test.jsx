@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
 import IndicatorAnswerCard from "../IndicatorAnswerCard";
 
 const message = {
@@ -21,7 +21,7 @@ const message = {
   },
   commentary: "최근 1개월간 삼성전자는 코스피 대비 초과 수익률을 기록했습니다.",
   evidence: {
-    apiCalls: [{ api: "주식 일별 시세", request: "005930", specUrl: "https://checkapi.koscom.co.kr/spec/stock-daily" }],
+    apiCalls: [{ apiId: "stock-daily", api: "주식 일별 시세", request: "005930", specUrl: "https://checkapi.koscom.co.kr/spec/stock-daily" }],
     rawData: [{ name: "삼성전자", rows: [{ date: "2026-06-25", value: 71500 }] }],
     formula: "수익률 갭 = 기간수익률(삼성전자) − 기간수익률(코스피)",
     steps: [{ label: "수익률 갭", detail: "8.42% − 3.15% = 5.27%p" }],
@@ -41,5 +41,24 @@ describe("IndicatorAnswerCard", () => {
     const link = screen.getByRole("link", { name: /xlsx 다운로드/ });
     expect(link).toHaveAttribute("href", `/api/cards/${message.cardId}/xlsx`);
     expect(link).toHaveAttribute("download");
+  });
+
+  it("'구현 방법 자세히'는 카드가 호출한 apiId와 공식을 실은 질문을 다음 턴으로 보낸다", () => {
+    // 레시피가 근거 패널과 다른 API를 가리키면 같은 화면 안에서 모순된다
+    const onAskFollowUp = vi.fn();
+    render(<IndicatorAnswerCard message={message} onAskFollowUp={onAskFollowUp} />);
+
+    fireEvent.click(screen.getByRole("button", { name: /구현 방법 자세히/ }));
+
+    expect(onAskFollowUp).toHaveBeenCalledTimes(1);
+    const prompt = onAskFollowUp.mock.calls[0][0];
+    expect(prompt).toContain("stock-daily");
+    expect(prompt).toContain(message.evidence.formula);
+  });
+
+  it("후속 질문을 보낼 수 없으면 '구현 방법 자세히'는 비활성이다", () => {
+    render(<IndicatorAnswerCard message={message} />);
+
+    expect(screen.getByRole("button", { name: /구현 방법 자세히/ })).toBeDisabled();
   });
 });
