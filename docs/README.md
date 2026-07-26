@@ -47,7 +47,9 @@
 | 16~19. 프론트엔드 | Task 16 리뷰 중(PR #34), 17~19 진행 예정 |
 | 20. E2E 데모 준비 | 진행 예정 |
 
-**미해결 3건**
-1. Spring AI `internalToolExecutionEnabled=false`는 코드 경로상 확인됨 — `OpenAiChatModel`이 `ToolExecutionEligibilityPredicate`로 판정하고 기본 구현이 이 플래그를 본다. 실 API 왕복 검증은 유효한 `OPENAI_API_KEY` 확보 후
-2. `RestCheckApiClient`의 F코드 파싱·정렬 처리에 회귀 테스트 없음 (스모크 확인만)
-3. EDU 계정 데이터가 실시장 값과 달라 보임 — 발표 신뢰도 관련, 코스콤 확인 필요
+**미해결 2건**
+1. `RestCheckApiClient`의 F코드 파싱·정렬 처리에 회귀 테스트 없음 (스모크 확인만)
+2. EDU 계정 데이터가 실시장 값과 달라 보임 — 발표 신뢰도 관련, 코스콤 확인 필요
+
+**해소됨**
+- Spring AI `internalToolExecutionEnabled=false`의 런타임 동작 (2026-07-26) — 실 OpenAI 키로 tool 루프 왕복 확인. tool 호출이 자동 실행되지 않고 `getToolCalls()`로 되돌아와 `ToolDispatcher`가 디스패치했으며, `SchemaOnlyToolCallback`의 방어 예외는 한 번도 발생하지 않았다
