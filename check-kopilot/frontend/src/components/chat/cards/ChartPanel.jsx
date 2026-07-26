@@ -37,7 +37,12 @@ export default function ChartPanel({ chart }) {
       </p>
       <div className="h-56 w-full lg:h-72">
         <ResponsiveContainer width="100%" height="100%">
-          <Chart data={rows} margin={{ top: 4, right: 8, left: -16, bottom: 0 }}>
+          {/*
+            Y축 눈금은 축 폭 안에 오른쪽 정렬로 그려진다. 왼쪽 여백을 음수로 당기거나 폭을
+            좁게 잡으면 라벨 앞글자가 잘려나가는데, 잘리는 첫 글자가 하필 마이너스 부호다
+            (괴리율 -0.4 → "0.4"). 종가처럼 여섯 자리 수도 담아야 하므로 넉넉히 잡는다.
+          */}
+          <Chart data={rows} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
             <XAxis
               dataKey="label"
@@ -49,7 +54,7 @@ export default function ChartPanel({ chart }) {
               tick={{ fontSize: 11, fill: "#94a3b8" }}
               axisLine={false}
               tickLine={false}
-              width={40}
+              width={64}
             />
             <Tooltip
               contentStyle={{
