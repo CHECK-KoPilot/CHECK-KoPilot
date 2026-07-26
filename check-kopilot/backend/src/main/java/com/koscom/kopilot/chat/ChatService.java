@@ -2,6 +2,8 @@ package com.koscom.kopilot.chat;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.messages.AssistantMessage;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +28,15 @@ import java.util.List;
 @Service
 public class ChatService {
 
+    private static final Logger log = LoggerFactory.getLogger(ChatService.class);
+
     private static final int MAX_TOOL_ITERATIONS = 8;
+
+    /** 상대 기간("최근 한 달")을 ISO 날짜로 바꾸는 기준일. 시장 기준 시간대를 따른다. */
+    private static final ZoneId MARKET_ZONE = ZoneId.of("Asia/Seoul");
+
+    private static final String ITERATION_LIMIT_TEXT =
+            "조회할 항목이 많아 한 번에 마무리하지 못했습니다. 종목이나 기간을 좁혀 다시 질문해 주세요.";
 
     private final ChatModel chatModel;
     private final KopilotTools tools;
@@ -55,7 +66,7 @@ public class ChatService {
 
             // 대화 컨텍스트: Redis에서 복원 → 이번 턴 진행 → 종료 시 통째로 저장
             List<Message> messages = new ArrayList<>();
-            messages.add(new SystemMessage(SystemPrompt.render(LocalDate.now())));
+            messages.add(new SystemMessage(SystemPrompt.render(LocalDate.now(MARKET_ZONE))));
             messages.addAll(conversations.load(sessionId));
             messages.add(new UserMessage(userMessage));
 
@@ -69,7 +80,14 @@ public class ChatService {
                     .build();
 
             String finalText = "";
+            boolean answered = false;
             for (int iteration = 0; iteration < MAX_TOOL_ITERATIONS; iteration++) {
+                // 클라이언트가 떠났으면 남은 LLM·CHECK API 호출을 낭비하지 않는다
+                if (!sink.isOpen()) {
+                    log.debug("수신자가 떠나 tool 루프를 중단한다 (session={}, iteration={})", sessionId, iteration);
+                    return;
+                }
+
                 ChatResponse response = chatModel.call(new Prompt(messages, options));
                 AssistantMessage assistant = response.getResult().getOutput();
                 messages.add(assistant);
@@ -77,7 +95,10 @@ public class ChatService {
                 if (assistant.getText() != null && !assistant.getText().isBlank()) {
                     finalText = assistant.getText();
                 }
-                if (!assistant.hasToolCalls()) break;      // tool 호출 없음 → 최종 답변
+                if (!assistant.hasToolCalls()) {           // tool 호출 없음 → 최종 답변
+                    answered = true;
+                    break;
+                }
 
                 List<ToolResponseMessage.ToolResponse> toolResponses = new ArrayList<>();
                 for (AssistantMessage.ToolCall call : assistant.getToolCalls()) {
@@ -88,14 +109,24 @@ public class ChatService {
                 messages.add(new ToolResponseMessage(toolResponses));
             }
 
+            if (!answered) {
+                // 상한을 다 쓰고 나온 경우. 빈 해설을 내보내면 사용자는 왜 멈췄는지 알 수 없다.
+                log.warn("tool 반복 상한({})에 도달해 해설 없이 종료한다 (session={})",
+                        MAX_TOOL_ITERATIONS, sessionId);
+                finalText = ITERATION_LIMIT_TEXT;
+            }
+
             conversations.save(sessionId, messages.subList(1, messages.size()));  // system 제외
             logs.log(sessionId, "assistant", null, finalText);
             sink.send("text", mapper.createObjectNode().put("text", finalText).toString());
             sink.send("done", "{}");
         } catch (Exception e) {
-            logs.log(sessionId, "error", null, String.valueOf(e));
+            // 로깅이 실패해도 에러 이벤트는 반드시 나가야 한다 — ChatLogService가 예외를 삼키지만
+            // 여기서 순서를 뒤집어 이중 방어한다(로깅 실패가 사용자 응답을 먹지 않게).
+            log.error("대화 처리 실패 (session={})", sessionId, e);
             sink.send("error", mapper.createObjectNode()
                     .put("message", "요청 처리에 실패했습니다. 다시 시도해 주세요.").toString());
+            logs.log(sessionId, "error", null, String.valueOf(e));
         }
     }
 
@@ -110,6 +141,7 @@ public class ChatService {
             if (r.push() != null) sink.send(r.push().event(), r.push().dataJson());
             return r;
         } catch (Exception e) {
+            log.error("tool 실행 실패 (session={}, tool={})", sessionId, name, e);
             logs.log(sessionId, "error", name, String.valueOf(e));
             return new DispatchResult(
                     "{\"status\":\"error\",\"code\":\"INTERNAL\",\"message\":\"tool 실행 실패\"}",

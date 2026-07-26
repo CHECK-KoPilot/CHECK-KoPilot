@@ -10,6 +10,12 @@ spring:
     redis:
       host: localhost
       port: 6379
+  http:
+    client:
+      # 기본값은 무제한 대기다. tool 루프가 최대 8회 호출하므로 상한이 없으면
+      # provider 지연 하나가 SSE 타임아웃(180초)을 넘겨 스레드와 비용을 계속 먹는다.
+      connect-timeout: 10s
+      read-timeout: 60s
   ai:
     openai:
       api-key: ${OPENAI_API_KEY:}

@@ -10,6 +10,8 @@ import com.koscom.kopilot.guide.FieldDictionary;
 import com.koscom.kopilot.guide.GuideService;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.dao.DataAccessResourceFailureException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.ToolResponseMessage;
 import org.springframework.ai.chat.metadata.ChatGenerationMetadata;
@@ -179,6 +181,82 @@ class ChatServiceTest {
         // 스크립트가 8개뿐이므로 9번째 호출이 일어나면 AssertionError로 터진다 = 상한이 지켜졌다
         assertThat(seenPrompts).hasSize(8);
         assertThat(events).endsWith("done");
+    }
+
+    @Test
+    void loggingFailure_stillEmitsErrorEvent() {
+        // chat_log는 관측성 데이터지 대화의 하드 의존성이 아니다.
+        // DB가 죽었을 때(= docker compose 없이 기동한 데모) 사용자가 빈 스트림을 받으면 안 된다.
+        JdbcTemplate deadDb = new JdbcTemplate() {
+            @Override public int update(String sql, Object... args) {
+                throw new DataAccessResourceFailureException("DB 없음");
+            }
+        };
+        ChatLogService dbBackedLogs = new ChatLogService(deadDb);
+        ChatModel model = new ScriptedChatModel(new AssistantMessage("답변"));
+
+        new ChatService(model, tools(), dispatcher(), conversations, dbBackedLogs, "gpt-4o", 4096)
+                .handle("sess-1", "질문", sink);
+
+        // 로그를 못 남겨도 대화는 정상 완주해야 한다
+        assertThat(events).containsExactly("text", "done");
+    }
+
+    @Test
+    void llmFailure_emitsErrorEvent() {
+        ChatModel failing = prompt -> {
+            throw new IllegalStateException("HTTP 401 - invalid_api_key");
+        };
+
+        new ChatService(failing, tools(), dispatcher(), conversations, logs, "gpt-4o", 4096)
+                .handle("sess-1", "질문", sink);
+
+        assertThat(events).containsExactly("error");
+    }
+
+    @Test
+    void iterationLimitExhausted_sendsExplanatoryTextNotBlank() {
+        AssistantMessage[] endless = new AssistantMessage[8];
+        for (int i = 0; i < endless.length; i++) {
+            endless[i] = toolCall("call_" + i, "return_gap",
+                    "{\"target_a\":\"삼성전자\",\"target_b\":\"코스피\","
+                    + "\"from\":\"2026-07-13\",\"to\":\"2026-07-17\"}");
+        }
+        List<String> texts = new ArrayList<>();
+        EventSink capturing = (event, dataJson) -> {
+            events.add(event);
+            if (event.equals("text")) texts.add(dataJson);
+        };
+
+        chatService(new ScriptedChatModel(endless)).handle("sess-1", "질문", capturing);
+
+        // 카드만 8장 나오고 해설이 빈 문자열이면 사용자는 왜 멈췄는지 알 수 없다
+        assertThat(texts).hasSize(1);
+        assertThat(texts.get(0)).contains("좁혀");
+    }
+
+    @Test
+    void stopsCallingLlmOnceReceiverIsGone() {
+        AssistantMessage[] endless = new AssistantMessage[8];
+        for (int i = 0; i < endless.length; i++) {
+            endless[i] = toolCall("call_" + i, "return_gap",
+                    "{\"target_a\":\"삼성전자\",\"target_b\":\"코스피\","
+                    + "\"from\":\"2026-07-13\",\"to\":\"2026-07-17\"}");
+        }
+        // 첫 카드를 받은 직후 떠나는 수신자
+        EventSink leaving = new EventSink() {
+            private boolean open = true;
+            @Override public void send(String event, String dataJson) {
+                events.add(event);
+                open = false;
+            }
+            @Override public boolean isOpen() { return open; }
+        };
+
+        chatService(new ScriptedChatModel(endless)).handle("sess-1", "질문", leaving);
+
+        // 떠난 뒤에도 8회를 다 돌면 남은 LLM·CHECK API 호출이 그대로 비용이 된다
+        assertThat(seenPrompts).hasSize(1);
     }
 
     @Test
