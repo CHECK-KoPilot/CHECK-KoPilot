@@ -1,0 +1,47 @@
+name: CD Backend (GitOps)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'check-kopilot/backend/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Set Image Tag
+      id: vars
+      run: echo "IMAGE_TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Login to NCP Container Registry (NCR)
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ secrets.NCR_REGISTRY_URL }}
+        username: ${{ secrets.NCP_ACCESS_KEY }}
+        password: ${{ secrets.NCP_SECRET_KEY }}
+        
+    - name: Build and push Backend Image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./check-kopilot/backend
+        push: true
+        tags: ${{ secrets.NCR_REGISTRY_URL }}/kopilot-backend:${{ env.IMAGE_TAG }}
+        
+    - name: Update Kubernetes Manifest (GitOps Sync)
+      run: |
+        sed -i "s|image: .*kopilot-backend:.*|image: ${{ secrets.NCR_REGISTRY_URL }}/kopilot-backend:${{ env.IMAGE_TAG }}|g" check-kopilot/k8s/backend/deployment.yaml
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add check-kopilot/k8s/backend/deployment.yaml
+        git commit -m "chore(cd): update backend image tag to ${{ env.IMAGE_TAG }} [skip ci]"
+        git push
