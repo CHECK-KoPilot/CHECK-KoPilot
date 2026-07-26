@@ -8,6 +8,7 @@
 
 const FENCE = /```(\w*)\n?([\s\S]*?)```/g;
 const INLINE = /(\*\*[\s\S]+?\*\*|`[^`]+`)/g;
+const HEADING = /^\s{0,3}(#{1,6})\s+(.+)$/;
 
 /** **굵게**와 `코드`만 태그로 바꾼다. 줄바꿈은 CSS(whitespace-pre-wrap)가 살린다 */
 function renderInline(text, keyPrefix) {
@@ -28,6 +29,42 @@ function renderInline(text, keyPrefix) {
     }
     return part;
   });
+}
+
+/**
+ * 텍스트 블록을 문단으로 옮긴다. '### 1. API 선택' 같은 헤딩 줄만 따로 떼어 굵게 세우고,
+ * 나머지 줄은 이어 붙여 한 문단으로 만든다 — 줄바꿈은 CSS가 살린다.
+ */
+function renderTextBlock(text, keyPrefix) {
+  const parts = [];
+  let buffer = [];
+
+  const flush = () => {
+    const body = buffer.join("\n").replace(/^\n+|\n+$/g, "");
+    buffer = [];
+    if (body.length === 0) return;
+    parts.push(
+      <p key={`${keyPrefix}-p${parts.length}`} className="whitespace-pre-wrap break-words">
+        {renderInline(body, `${keyPrefix}-p${parts.length}`)}
+      </p>
+    );
+  };
+
+  for (const line of text.split("\n")) {
+    const heading = HEADING.exec(line);
+    if (!heading) {
+      buffer.push(line);
+      continue;
+    }
+    flush();
+    parts.push(
+      <p key={`${keyPrefix}-h${parts.length}`} className="font-semibold text-slate-900">
+        {renderInline(heading[2], `${keyPrefix}-h${parts.length}`)}
+      </p>
+    );
+  }
+  flush();
+  return parts;
 }
 
 /** 코드 펜스를 기준으로 자른다 → [{type:'text'|'code', value}] */
@@ -64,9 +101,7 @@ export default function AssistantText({ text }) {
               <code>{block.value}</code>
             </pre>
           ) : (
-            <p key={i} className="whitespace-pre-wrap break-words">
-              {renderInline(block.value.replace(/^\n+|\n+$/g, ""), String(i))}
-            </p>
+            renderTextBlock(block.value, String(i))
           )
         )}
       </div>
