@@ -22,6 +22,7 @@ import java.util.Map;
  * 반드시 success 필드로 판정한다. results의 각 항목은 F코드를 key로 갖고 값은 대부분 문자열이다
  * (F12506 입회일만 정수). 존재하지 않는 종목코드는 에러가 아니라 results:[]로 온다.
  * 시계열은 최신→과거 내림차순으로 오므로 클라이언트에서 날짜 오름차순으로 재정렬한다.
+ * jcode는 종목이면 단축코드, 지수면 업종코드다 — 종목 마스터의 지수 식별자(KOSPI/KOSDAQ)를 여기서 변환한다.
  *
  * <p>지수 백오프 재시도 3회 (네트워크 오류에 한함 — success:false는 재시도하지 않는다).
  */
@@ -30,6 +31,13 @@ public class RestCheckApiClient implements CheckApiClient {
     private static final DateTimeFormatter YMD = DateTimeFormatter.ofPattern("yyyyMMdd");
     private static final String DAILY_DATA_LIST = "F12506,F15001,F15009,F15010,F15011,F15015";
     private static final String NAV_DATA_LIST = "F12506,F15001,F15301";
+
+    /**
+     * 지수의 업종코드. 종목 마스터는 지수를 KOSPI/KOSDAQ 문자열로 식별하지만 CHECK API가 받는 jcode는
+     * 업종코드이며, 대표지수는 코스피·코스닥 모두 1이다(시장 구분은 m002/m004 경로가 담당).
+     * 업종지수(대형주 2, 중형주 3, …)를 마스터에 추가하면 여기 매핑도 함께 늘린다.
+     */
+    private static final Map<String, String> INDEX_JCODES = Map.of("KOSPI", "1", "KOSDAQ", "1");
 
     private final RestClient rest;
     private final CheckApiProperties props;
@@ -70,7 +78,10 @@ public class RestCheckApiClient implements CheckApiClient {
         return out;
     }
 
-    /** m001(거래소 종목)/m002(거래소 업종)/m003(코스닥 종목)/m004(코스닥 업종) 중 인스트루먼트에 맞는 hist_info 경로. */
+    /**
+     * m001(거래소 종목)/m002(거래소 업종)/m003(코스닥 종목)/m004(코스닥 업종) 중 인스트루먼트에 맞는 hist_info 경로.
+     * 지수도 소속 시장(market)으로 갈린다 — 코스닥 지수는 m002가 아니라 m004다.
+     */
     private String dailyPath(StockInfo instrument) {
         boolean kosdaq = "KOSDAQ".equalsIgnoreCase(instrument.market());
         String key = instrument.isIndex()
@@ -83,11 +94,23 @@ public class RestCheckApiClient implements CheckApiClient {
         return path;
     }
 
+    /** 종목·ETF는 단축코드가 곧 jcode지만, 지수는 마스터 식별자를 업종코드로 바꿔 보낸다. */
+    private String jcode(StockInfo instrument) {
+        if (!instrument.isIndex()) {
+            return instrument.code();
+        }
+        String indexCode = INDEX_JCODES.get(instrument.code().toUpperCase());
+        if (indexCode == null) {
+            throw new CheckApiException("지수 업종코드 매핑이 없습니다: " + instrument.code());
+        }
+        return indexCode;
+    }
+
     private Map<String, Object> requestBody(StockInfo instrument, LocalDate from, LocalDate to, String dataList) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("cust_id", props.custId());
         body.put("auth_key", props.apiKey());
-        body.put("jcode", instrument.code());
+        body.put("jcode", jcode(instrument));
         body.put("sdate", from.format(YMD));
         body.put("edate", to.format(YMD));
         body.put("data_list", dataList);

@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS stock_master (
     code    VARCHAR(12)  NOT NULL,
     name    VARCHAR(80)  NOT NULL,
-    market  VARCHAR(10)  NOT NULL,          -- KOSPI | KOSDAQ | INDEX
+    market  VARCHAR(10)  NOT NULL,          -- KOSPI | KOSDAQ (지수도 소속 시장을 적는다 — 호출 엔드포인트가 갈린다)
     type    VARCHAR(10)  NOT NULL,          -- STOCK | ETF | INDEX
     PRIMARY KEY (code),
     KEY idx_stock_master_name (name)

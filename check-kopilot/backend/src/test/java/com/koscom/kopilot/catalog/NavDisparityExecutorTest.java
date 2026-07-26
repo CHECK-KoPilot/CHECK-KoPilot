@@ -2,6 +2,7 @@ package com.koscom.kopilot.catalog;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koscom.kopilot.checkapi.FixtureCheckApiClient;
+import com.koscom.kopilot.guide.ApiSpecIndex;
 import com.koscom.kopilot.domain.MetricException;
 import com.koscom.kopilot.domain.MetricResult;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ class NavDisparityExecutorTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final ExecutorSupport support =
-            new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver());
+            new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver(), ApiSpecIndex.loadFromClasspath());
     private final NavDisparityExecutor executor = new NavDisparityExecutor(support);
 
     // 픽스처: (10000,10000),(10050,10000),(10100,10000) → 최신 +1.0%, 기간평균 +0.5%

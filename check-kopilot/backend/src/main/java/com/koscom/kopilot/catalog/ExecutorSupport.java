@@ -107,14 +107,13 @@ public class ExecutorSupport {
                 specUrl(apiId));
     }
 
+    /** 근거 패널에 적을 API 식별자. RestCheckApiClient가 실제로 호출하는 엔드포인트와 일치해야 한다. */
     public String dailyApiId(StockInfo instrument) {
+        boolean kosdaq = "KOSDAQ".equalsIgnoreCase(instrument.market());
         if (instrument.isIndex()) {
-            return "index-daily";
+            return kosdaq ? "kosdaq-index-daily" : "index-daily";
         }
-        if ("KOSDAQ".equals(instrument.market())) {
-            return "kosdaq-daily";
-        }
-        return "stock-daily";
+        return kosdaq ? "kosdaq-daily" : "stock-daily";
     }
 
     public String specUrl(String apiId) {

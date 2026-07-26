@@ -28,7 +28,8 @@ public class SmokeRunner {
             samsungQuotes.forEach(System.out::println);
 
             System.out.println("=== 2) 코스피 지수(jcode=1) 일별 시세 (/stock/m002/hist_info) ===");
-            var kospi = new StockInfo("1", "코스피", "KOSPI", "INDEX");
+            // 종목 마스터와 같은 식별자를 쓴다 — 업종코드 1로의 변환은 RestCheckApiClient가 담당한다
+            var kospi = new StockInfo("KOSPI", "코스피", "KOSPI", "INDEX");
             List<DailyQuote> kospiQuotes = client.dailyQuotes(kospi, from, to);
             kospiQuotes.forEach(System.out::println);
 

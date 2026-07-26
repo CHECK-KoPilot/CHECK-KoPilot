@@ -9,6 +9,7 @@ import org.springframework.web.client.RestClient;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +27,27 @@ class RestCheckApiClientTest {
     private final LocalDate from = LocalDate.parse("2026-07-20");
     private final LocalDate to = LocalDate.parse("2026-07-22");
 
+    private static final String EMPTY_OK = """
+            {"success":true,"results":[]}
+            """;
+
     private CheckApiProperties props() {
         return new CheckApiProperties("https://checkapi.koscom.co.kr", "cust", "key",
-                Map.of("stock-daily", "/stock/m001/hist_info"));
+                Map.of("stock-daily", "/stock/m001/hist_info",
+                        "kosdaq-daily", "/stock/m003/hist_info",
+                        "index-daily", "/stock/m002/hist_info",
+                        "kosdaq-index-daily", "/stock/m004/hist_info"));
     }
 
     private RestCheckApiClient clientReturning(String json) {
+        return clientReturning(json, new ArrayList<>());
+    }
+
+    /** 응답은 고정 JSON으로 주고, 나간 요청(URI·body)은 captured에 담아 검증한다. */
+    private RestCheckApiClient clientReturning(String json, List<String> captured) {
         ClientHttpRequestInterceptor stub = (request, body, execution) -> {
+            captured.add(request.getURI().getPath());
+            captured.add(new String(body, StandardCharsets.UTF_8));
             MockClientHttpResponse response = new MockClientHttpResponse(
                     json.getBytes(StandardCharsets.UTF_8), HttpStatus.OK);
             response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
@@ -92,10 +107,49 @@ class RestCheckApiClientTest {
 
     @Test
     void successTrueWithEmptyResults_returnsEmptyList() {
-        String json = """
-                {"success":true,"results":[]}
-                """;
+        assertThat(clientReturning(EMPTY_OK).dailyQuotes(samsung, from, to)).isEmpty();
+    }
 
-        assertThat(clientReturning(json).dailyQuotes(samsung, from, to)).isEmpty();
+    @Test
+    void stock_sendsShortCodeAsJcode() {
+        List<String> captured = new ArrayList<>();
+
+        clientReturning(EMPTY_OK, captured).dailyQuotes(samsung, from, to);
+
+        assertThat(captured.get(0)).isEqualTo("/stock/m001/hist_info");
+        assertThat(captured.get(1)).contains("\"jcode\":\"005930\"");
+    }
+
+    // 지수의 jcode는 마스터 식별자(KOSPI)가 아니라 업종코드 1이다. 이 변환이 빠지면
+    // "삼성전자 vs 코스피" 같은 질문에서 지수 쪽만 조용히 빈 결과가 돌아온다.
+    @Test
+    void kospiIndex_sendsSectorCodeOneToM002() {
+        StockInfo kospi = new StockInfo("KOSPI", "코스피", "KOSPI", "INDEX");
+        List<String> captured = new ArrayList<>();
+
+        clientReturning(EMPTY_OK, captured).dailyQuotes(kospi, from, to);
+
+        assertThat(captured.get(0)).isEqualTo("/stock/m002/hist_info");
+        assertThat(captured.get(1)).contains("\"jcode\":\"1\"");
+    }
+
+    @Test
+    void kosdaqIndex_sendsSectorCodeOneToM004() {
+        StockInfo kosdaq = new StockInfo("KOSDAQ", "코스닥", "KOSDAQ", "INDEX");
+        List<String> captured = new ArrayList<>();
+
+        clientReturning(EMPTY_OK, captured).dailyQuotes(kosdaq, from, to);
+
+        assertThat(captured.get(0)).isEqualTo("/stock/m004/hist_info");
+        assertThat(captured.get(1)).contains("\"jcode\":\"1\"");
+    }
+
+    @Test
+    void unmappedIndex_throwsCheckApiException() {
+        StockInfo unknown = new StockInfo("KRX300", "KRX 300", "KOSPI", "INDEX");
+
+        assertThatThrownBy(() -> clientReturning(EMPTY_OK).dailyQuotes(unknown, from, to))
+                .isInstanceOf(CheckApiException.class)
+                .hasMessageContaining("KRX300");
     }
 }
