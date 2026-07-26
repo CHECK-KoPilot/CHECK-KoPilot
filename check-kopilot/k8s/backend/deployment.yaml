@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kopilot-backend
+  labels:
+    app: kopilot-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kopilot-backend
+  template:
+    metadata:
+      labels:
+        app: kopilot-backend
+    spec:
+      containers:
+      - name: backend
+        image: NCR_REGISTRY_URL/kopilot-backend:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
