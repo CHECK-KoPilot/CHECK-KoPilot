@@ -1,5 +1,6 @@
 import { AlertCircle } from "lucide-react";
 import UserMessage from "./UserMessage";
+import AssistantText from "./AssistantText";
 import KopilotIcon from "../common/KopilotIcon";
 import IndicatorAnswerCard from "./cards/IndicatorAnswerCard";
 import ClarificationCard from "./cards/ClarificationCard";
@@ -51,10 +52,8 @@ export default function ChatMessageList({ messages, onSelectCandidate, onAskFoll
         }
         if (message.type === "assistant") {
           return (
-            <div key={message.id} id={message.id} className="flex justify-start">
-              <div className="max-w-lg rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-2.5 text-sm text-slate-800 lg:max-w-xl lg:px-5 lg:py-3 lg:text-base">
-                {message.text}
-              </div>
+            <div key={message.id} id={message.id}>
+              <AssistantText text={message.text} />
             </div>
           );
         }
