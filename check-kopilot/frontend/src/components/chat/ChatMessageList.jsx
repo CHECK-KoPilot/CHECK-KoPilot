@@ -1,6 +1,7 @@
 import { AlertCircle } from "lucide-react";
 import UserMessage from "./UserMessage";
 import KopilotIcon from "../common/KopilotIcon";
+import IndicatorAnswerCard from "./cards/IndicatorAnswerCard";
 
 function EmptyState() {
   return (
@@ -18,8 +19,8 @@ function EmptyState() {
   );
 }
 
-// card/clarify/guide 전용 카드 컴포넌트는 각 Task(17/18)에서 별도로 붙인다.
-// 이 태스크(스캐폴딩+채팅UI+SSE) 시점에는 원문 JSON으로 표시한다.
+// clarify/guide 전용 카드 컴포넌트는 Task18에서 별도로 붙인다.
+// 그 전까지는 원문 JSON으로 표시한다.
 function RawEventCard({ message }) {
   return (
     <div className="w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 text-xs">
@@ -64,7 +65,14 @@ export default function ChatMessageList({ messages }) {
             </div>
           );
         }
-        if (message.type === "indicator" || message.type === "clarification" || message.type === "guide") {
+        if (message.type === "indicator") {
+          return (
+            <div key={message.id} id={message.id}>
+              <IndicatorAnswerCard message={message} />
+            </div>
+          );
+        }
+        if (message.type === "clarification" || message.type === "guide") {
           return (
             <div key={message.id} id={message.id}>
               <RawEventCard message={message} />
