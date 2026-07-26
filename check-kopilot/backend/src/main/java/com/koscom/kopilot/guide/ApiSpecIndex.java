@@ -26,10 +26,54 @@ public class ApiSpecIndex {
         return path.replaceFirst("^/", "").replace('/', '-');
     }
 
-    /** 문서 페이지 URL. 개별 페이지 매핑이 없으므로 카테고리 목록 페이지로 보낸다(스펙 13절 "명세 링크 부재" 대응). */
+    private static final String DOC_BASE = "https://checkapi.koscom.co.kr/";
+
+    /** 개별 문서 페이지를 갖지 않는 경로(776건 중 62건)는 카테고리 목록으로 보낸다 */
+    private static final Set<String> RPATHS = loadRpaths();
+
+    /**
+     * 근거 패널에 노출하는 CHECK API 명세 페이지 URL.
+     * 형식은 {@code <base>/<카테고리>/<rpath>}이며, rpath는 호출 경로에서 파생된다 —
+     * 호출 경로 {@code /stock/m001/hist_info}의 문서는 {@code /stock/m001hist}로
+     * 모듈과 오퍼레이션이 붙고 {@code _info}와 밑줄이 빠진다(실측 확인, 776건 중 714건 적중).
+     * 파생 rpath가 실제 문서에 없으면 카테고리 목록 페이지로 폴백한다(스펙 13절 "명세 링크 부재" 대응).
+     */
     public static String docUrlOf(String path) {
-        String category = path.replaceFirst("^/", "").split("/")[0];
-        return "https://checkapi.koscom.co.kr/#/" + category;
+        String[] parts = path.replaceFirst("^/", "").split("/");
+        String category = parts[0];
+        if (parts.length >= 3) {
+            String operation = String.join("", Arrays.copyOfRange(parts, 2, parts.length));
+            String rpath = parts[1] + operation.replace("_info", "").replace("_", "");
+            if (RPATHS.contains(rpath)) {
+                return DOC_BASE + category + "/" + rpath;
+            }
+        }
+        return DOC_BASE + "#/" + category;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static Set<String> loadRpaths() {
+        try (var in = new ClassPathResource("check-api/menu.json").getInputStream()) {
+            List<Map<String, Object>> menu = new ObjectMapper()
+                    .readValue(in, new TypeReference<List<Map<String, Object>>>() {});
+            Set<String> rpaths = new HashSet<>();
+            Deque<Map<String, Object>> queue = new ArrayDeque<>(menu);
+            while (!queue.isEmpty()) {
+                Map<String, Object> node = queue.pop();
+                Object rpath = node.get("rpath");
+                if (rpath instanceof String s) {
+                    rpaths.add(s);
+                }
+                for (String child : List.of("d1", "d2", "d3")) {
+                    if (node.get(child) instanceof List<?> children) {
+                        children.forEach(c -> queue.push((Map<String, Object>) c));
+                    }
+                }
+            }
+            return Set.copyOf(rpaths);
+        } catch (Exception e) {
+            throw new IllegalStateException("check-api/menu.json 로드 실패", e);
+        }
     }
 
     @SuppressWarnings("unchecked")

@@ -1,6 +1,7 @@
 package com.koscom.kopilot.catalog;
 
 import com.koscom.kopilot.checkapi.FixtureCheckApiClient;
+import com.koscom.kopilot.guide.ApiSpecIndex;
 import com.koscom.kopilot.checkapi.StockInfo;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ExecutorSupportTest {
 
     private final ExecutorSupport support =
-            new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver());
+            new ExecutorSupport(new FixtureCheckApiClient(), TestStocks.resolver(), ApiSpecIndex.loadFromClasspath());
 
     /** 근거 패널의 API 링크는 실제 호출 엔드포인트를 따라간다 — 지수는 소속 시장으로 갈린다. */
     @Test
