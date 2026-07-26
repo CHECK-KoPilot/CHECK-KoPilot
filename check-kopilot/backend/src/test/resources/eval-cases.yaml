@@ -1,0 +1,121 @@
+# tool 선택 평가셋 — "의도 인식 정확도 %"의 원천 (스펙 11절)
+#
+# expect : 기대 tool 이름, 또는 no_tool(되묻기·거절이 정답)
+# params : 선택. tool 인자 JSON에 포함돼야 하는 부분 문자열
+# history: 선택. 앞선 대화 [user, assistant, ...] — 후속 질문의 맥락 이어받기를 측정한다
+cases:
+  # ── 수익률 갭
+  - q: "삼성전자랑 코스피, 최근 한 달 수익률 갭 알려줘"
+    expect: return_gap
+    params: { target_a: "삼성전자", target_b: "코스피" }
+  - q: "현대차와 코스피 올해 수익률 차이 얼마나 나?"
+    expect: return_gap
+  - q: "에코프로비엠이 코스닥보다 최근 두 달 동안 얼마나 더 올랐어?"
+    expect: return_gap
+  - q: "카카오는 코스피 대비 최근 일주일 수익률이 어때?"
+    expect: return_gap
+
+  # ── 변동성
+  - q: "에코프로랑 에코프로비엠 변동성 비교해줘"
+    expect: volatility
+  - q: "삼성전자 최근 3개월 변동성 알려줘"
+    expect: volatility
+  - q: "현대차랑 카카오 중에 어느 쪽이 더 출렁여? 최근 한 달 기준"
+    expect: volatility
+
+  # ── ETF 괴리율
+  - q: "TIGER 미국S&P500 괴리율 알려줘"
+    expect: nav_disparity
+    params: { target: "TIGER" }
+  - q: "KODEX 200 시장가가 NAV 대비 얼마나 벌어져 있어?"
+    expect: nav_disparity
+  # tool description이 "ETF 전용 — 일반 주식/지수 불가"라고 못 박고 있으므로
+  # 호출 전에 걸러내는 편이 낫다(불필요한 API 호출 없이 즉시 올바른 안내).
+  - q: "삼성전자 괴리율 알려줘"
+    expect: no_tool
+
+  # ── 이동평균 이격도
+  - q: "카카오 20일선 이격도 알려줘"
+    expect: ma_disparity
+    params: { target: "카카오" }
+  - q: "현대차가 60일 이동평균선보다 얼마나 위에 있어?"
+    expect: ma_disparity
+  - q: "삼성전자 이격도 봐줘"
+    expect: ma_disparity
+
+  # ── 상대수익률 랭킹
+  - q: "에코프로, 엘앤에프, 포스코퓨처엠 3개월 수익률 순위 매겨줘"
+    expect: return_ranking
+  - q: "삼성전자 현대차 카카오 중에 올해 누가 제일 많이 올랐어?"
+    expect: return_ranking
+  - q: "LG에너지솔루션이랑 포스코퓨처엠, 에코프로비엠 최근 한 달 수익률 줄 세워봐"
+    expect: return_ranking
+
+  # ── 기간 시세 요약
+  - q: "현대차 올해 최고가 최저가 수익률 알려줘"
+    expect: period_summary
+    params: { target: "현대차" }
+  - q: "삼성전자 최근 6개월 시세 요약해줘"
+    expect: period_summary
+  - q: "카카오 이번 분기 최고가가 언제 얼마였어?"
+    expect: period_summary
+
+  # ── 가이드 (카탈로그 밖 → explain_recipe)
+  - q: "삼성전자 외국인 순매수 동향 알려줘"
+    expect: explain_recipe
+  - q: "PER 밴드 차트를 그리려면 CHECK API를 어떻게 조합해야 해?"
+    expect: explain_recipe
+  - q: "배당수익률은 어떤 API로 구할 수 있어?"
+    expect: explain_recipe
+  - q: "공매도 잔고 데이터도 뽑을 수 있어?"
+    expect: explain_recipe
+
+  # ── 기간 생략: 되묻지 말고 기본 기간(최근 90일)으로 호출해야 한다
+  # 기간을 필수로 두던 시절 같은 질문이 실행마다 되묻기/추측을 오갔다(평가셋에서 잡힌 비결정성).
+  - q: "에코프로랑 에코프로비엠 변동성 비교해줘"
+    expect: volatility
+  - q: "KODEX 200 괴리율 알려줘"
+    expect: nav_disparity
+
+  # ── 모호 → 되묻기 (no_tool). 빠진 것이 기간이 아니라 "대상"이면 여전히 되묻는다
+  - q: "수익률 갭 알려줘"
+    expect: no_tool
+  - q: "2차전지 종목들 수익률 순위 알려줘"
+    expect: no_tool               # 테마명 자동 확장은 로드맵 — 종목 나열을 되물어야 함
+  - q: "변동성 비교 좀"
+    expect: no_tool
+  - q: "괴리율 알려줘"
+    expect: no_tool
+
+  # ── 투자 판단 → 거절·정보성 전환 (no_tool)
+  - q: "삼성전자 지금 사야 돼?"
+    expect: no_tool
+  - q: "다음 달 코스피 어디까지 갈 것 같아?"
+    expect: no_tool
+  - q: "에코프로 목표주가 얼마로 보면 돼?"
+    expect: no_tool
+
+  # ── 후속 질문: 앞 대화에서 조건 이어받기
+  # 이 조항이 없던 시절 "현대차는?"에 매번 기간을 되물어 후속 질문이 전부 죽었다.
+  # 프롬프트를 만질 때 같은 사고가 재발하지 않게 측정한다.
+  - q: "현대차는?"
+    expect: period_summary
+    params: { target: "현대차", from: "2026-07-13", to: "2026-07-17" }
+    history:
+      - "삼성전자 2026-07-13부터 2026-07-17까지 시세 요약해줘"
+      - "삼성전자의 2026-07-13~17 기간 최고가는 106.0원, 최저가는 99.0원, 기간수익률은 5.0%입니다."
+  - q: "그럼 코스피랑 수익률 갭은?"
+    expect: return_gap
+    params: { from: "2026-07-13", to: "2026-07-17" }
+    history:
+      - "삼성전자 2026-07-13부터 2026-07-17까지 시세 요약해줘"
+      - "삼성전자의 2026-07-13~17 기간 최고가는 106.0원, 최저가는 99.0원, 기간수익률은 5.0%입니다."
+  - q: "변동성도 같이 봐줘"
+    expect: volatility
+    params: { from: "2026-07-13", to: "2026-07-17" }
+    history:
+      - "삼성전자 2026-07-13부터 2026-07-17까지 시세 요약해줘"
+      - "삼성전자의 2026-07-13~17 기간 최고가는 106.0원, 최저가는 99.0원, 기간수익률은 5.0%입니다."
+  # 이어받을 것이 없으면 여전히 되물어야 한다 — 이어가기가 추측으로 번지지 않는지 확인
+  - q: "카카오는?"
+    expect: no_tool

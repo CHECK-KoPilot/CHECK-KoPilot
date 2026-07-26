@@ -64,3 +64,14 @@ tasks.named('bootRun') {
         if (System.getenv(key) == null) environment key, value
     }
 }
+
+// EvalRunner(RUN_EVAL=true)는 실 LLM을 호출한다. 평가를 돌릴 때만 키가 흘러들어가고,
+// 평소 테스트는 test/resources의 더미 키를 그대로 쓴다.
+tasks.named('test') {
+    if (System.getenv('RUN_EVAL') == 'true') {
+        environment 'RUN_EVAL', 'true'
+        loadDotenv().each { key, value ->
+            if (System.getenv(key) == null) environment key, value
+        }
+    }
+}

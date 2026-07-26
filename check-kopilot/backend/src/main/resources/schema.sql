@@ -8,6 +8,14 @@ CREATE TABLE IF NOT EXISTS stock_master (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- CHECK API 장애 대비 영속 폴백 스냅샷 (단기 캐시는 Redis가 담당)
+-- 구어체·약칭 → 종목코드. 공식 상장명("NAVER")과 사용자가 부르는 이름("네이버")이 다를 때를 메운다.
+CREATE TABLE IF NOT EXISTS stock_alias (
+    alias VARCHAR(80) NOT NULL,
+    code  VARCHAR(12) NOT NULL,
+    PRIMARY KEY (alias),
+    KEY idx_stock_alias_code (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS check_fallback (
     cache_key  VARCHAR(200) NOT NULL,
     payload    LONGTEXT     NOT NULL,

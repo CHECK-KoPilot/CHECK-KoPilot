@@ -32,14 +32,14 @@ public class VolatilityExecutor implements MetricExecutor {
             "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD"));
     }
 
-    @Override public List<String> requiredParams() { return List.of("targets", "from", "to"); }
+    @Override public List<String> requiredParams() { return List.of("targets"); }
 
     @Override public MetricResult execute(JsonNode args) {
         JsonNode targetsNode = args.path("targets");
         if (!targetsNode.isArray() || targetsNode.size() < 1 || targetsNode.size() > 5) {
             throw new MetricException("PARAM_INVALID", "targets는 1~5개 대상 배열이어야 합니다");
         }
-        ExecutorSupport.Period p = s.parsePeriod(args);
+        ExecutorSupport.Period p = s.parsePeriodOrRecent(args);
 
         List<MetricResult.Target> targets = new ArrayList<>();
         List<MetricResult.Headline> headline = new ArrayList<>();

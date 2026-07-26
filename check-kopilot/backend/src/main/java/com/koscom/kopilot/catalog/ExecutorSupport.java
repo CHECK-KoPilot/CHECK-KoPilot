@@ -34,6 +34,25 @@ public class ExecutorSupport {
         return stocks.resolve(nameOrCode);
     }
 
+    /** 기간을 생략했을 때 쓰는 기본 조회 구간 (캘린더 일수) */
+    public static final int DEFAULT_PERIOD_DAYS = 90;
+
+    /**
+     * 기간이 없으면 최근 {@value #DEFAULT_PERIOD_DAYS}일로 대신한다.
+     *
+     * <p>기간을 필수로 두면 "에코프로랑 에코프로비엠 변동성 비교해줘" 같은 자연스러운 질문마다
+     * 되묻게 되고, 실제로는 LLM이 되묻기와 임의 기간 추측 사이를 오갔다(평가셋에서 같은 질문이
+     * 실행마다 다른 결과를 냈다). 기본값을 명시하면 동작이 결정적이 되고, 적용된 기간은
+     * 카드 제목·근거 패널에 그대로 드러나므로 사용자가 무엇으로 계산됐는지 항상 확인할 수 있다.</p>
+     */
+    public Period parsePeriodOrRecent(JsonNode args) {
+        if (args.hasNonNull("from") && args.hasNonNull("to")) {
+            return parsePeriod(args);
+        }
+        LocalDate today = LocalDate.now();
+        return new Period(today.minusDays(DEFAULT_PERIOD_DAYS), today);
+    }
+
     public Period parsePeriod(JsonNode args) {
         String rawFrom = args.path("from").asText(null);
         String rawTo = args.path("to").asText(null);

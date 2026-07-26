@@ -34,12 +34,12 @@ public class PeriodSummaryExecutor implements MetricExecutor {
     }
 
     @Override 
-    public List<String> requiredParams() { return List.of("target", "from", "to"); }
+    public List<String> requiredParams() { return List.of("target"); }
 
     @Override 
     public MetricResult execute(JsonNode args) {
         StockInfo info = s.resolveTarget(s.requiredText(args, "target"));
-        ExecutorSupport.Period p = s.parsePeriod(args);
+        ExecutorSupport.Period p = s.parsePeriodOrRecent(args);
 
         List<DailyQuote> quotes = s.api().dailyQuotes(info, p.from(), p.to());
         DailyQuote maxHigh = quotes.stream().max(Comparator.comparingDouble(DailyQuote::high)).orElseThrow();
