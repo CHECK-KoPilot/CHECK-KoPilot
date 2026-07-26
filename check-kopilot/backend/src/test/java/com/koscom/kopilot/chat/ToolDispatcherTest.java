@@ -3,6 +3,7 @@ package com.koscom.kopilot.chat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.koscom.kopilot.catalog.*;
 import com.koscom.kopilot.checkapi.FixtureCheckApiClient;
+import com.koscom.kopilot.demand.DemandRecorder;
 import com.koscom.kopilot.domain.MetricResult;
 import com.koscom.kopilot.export.CardSink;
 import com.koscom.kopilot.guide.ApiSpecIndex;
@@ -19,6 +20,7 @@ class ToolDispatcherTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final List<MetricResult> savedCards = new ArrayList<>();
+    private final List<String> recordedDemand = new ArrayList<>();
 
     private ToolDispatcher dispatcher() {
         ApiSpecIndex index = ApiSpecIndex.loadFromClasspath();
@@ -28,8 +30,10 @@ class ToolDispatcherTest {
                 new NavDisparityExecutor(support), new MaDisparityExecutor(support),
                 new ReturnRankingExecutor(support), new PeriodSummaryExecutor(support)));
         CardSink sink = (sessionId, r) -> savedCards.add(r);
-        return new ToolDispatcher(catalog,
-                new GuideService(index, FieldDictionary.loadFromClasspath()), sink);
+        DemandRecorder demand = (sessionId, topic, apiIds, source) ->
+                recordedDemand.add(source + "|" + topic + "|" + apiIds);
+        return new ToolDispatcher(catalog, new GuideService(index, FieldDictionary.loadFromClasspath()),
+                sink, demand);
     }
 
     @Test
@@ -75,6 +79,10 @@ class ToolDispatcherTest {
         assertThat(r.isError()).isFalse();
         assertThat(r.push().event()).isEqualTo("guide");
         assertThat(r.toolResultJson()).contains("stock-investor").contains("catalog");
+
+        // 버튼 클릭 없이도 수요가 적재된다(AUTO)
+        assertThat(recordedDemand).hasSize(1);
+        assertThat(recordedDemand.get(0)).startsWith("AUTO|외국인 순매수 수급|").contains("stock-investor");
     }
 
     @Test

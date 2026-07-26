@@ -12,6 +12,7 @@ import com.koscom.kopilot.checkapi.StockInfo;
 import com.koscom.kopilot.checkapi.StockNotFoundException;
 import com.koscom.kopilot.domain.MetricException;
 import com.koscom.kopilot.domain.MetricResult;
+import com.koscom.kopilot.demand.DemandRecorder;
 import com.koscom.kopilot.export.CardSink;
 import com.koscom.kopilot.guide.GuideService;
 import org.springframework.stereotype.Service;
@@ -28,19 +29,21 @@ public class ToolDispatcher {
     private final CatalogService catalog;
     private final GuideService guide;
     private final CardSink cards;
+    private final DemandRecorder demand;
     private final ObjectMapper mapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())
             .disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-    public ToolDispatcher(CatalogService catalog, GuideService guide, CardSink cards) {
+    public ToolDispatcher(CatalogService catalog, GuideService guide, CardSink cards, DemandRecorder demand) {
         this.catalog = catalog;
         this.guide = guide;
         this.cards = cards;
+        this.demand = demand;
     }
 
     public DispatchResult dispatch(String sessionId, String toolName, JsonNode args) {
         try {
-            if (EXPLAIN_RECIPE.equals(toolName)) return explainRecipe(args);
+            if (EXPLAIN_RECIPE.equals(toolName)) return explainRecipe(sessionId, args);
             if (GET_API_SPEC.equals(toolName)) return getApiSpec(args);
             return metric(sessionId, toolName, args);
         } catch (AmbiguousStockException e) {
@@ -93,7 +96,7 @@ public class ToolDispatcher {
         }
     }
 
-    private DispatchResult explainRecipe(JsonNode args) {
+    private DispatchResult explainRecipe(String sessionId, JsonNode args) {
         String topic = args.path("topic").asText("");
         // LLM이 사용자 표현을 명세 용어로 확장해 넘긴 검색어 (예: "수급" → ["투자자별","순매수"])
         List<String> keywords = new ArrayList<>();
@@ -104,6 +107,13 @@ public class ToolDispatcher {
             for (String w : topic.trim().split("\\s+")) keywords.add(w);
         }
         GuideService.GuideResult r = guide.recipeContext(topic, keywords);
+
+        // 버튼 클릭 여부와 무관하게, 가이드 카드가 뜬 것 자체가 "카탈로그가 못 답한 수요"다
+        String matchedIds = r.matched().stream()
+                .map(com.koscom.kopilot.guide.ApiSpecEntry::apiId)
+                .collect(java.util.stream.Collectors.joining(","));
+        demand.record(sessionId, topic, matchedIds, DemandRecorder.AUTO);
+
         ObjectNode payload = mapper.createObjectNode().put("topic", topic);
         payload.set("matched", mapper.valueToTree(r.matched()));
         payload.set("catalog", mapper.valueToTree(r.catalog()));
