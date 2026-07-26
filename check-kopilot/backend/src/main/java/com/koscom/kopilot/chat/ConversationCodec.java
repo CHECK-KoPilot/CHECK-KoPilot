@@ -29,17 +29,37 @@ public class ConversationCodec {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * 최근 max개 메시지만 남기되 tool 호출 짝을 깨뜨리지 않는다.
+     * Anthropic은 대응하는 tool_use 없는 tool_result(또는 그 반대)를 400으로 거부하므로,
+     * "히스토리는 항상 UserMessage로 시작하고 tool_use로 끝나지 않는다"를 불변식으로 강제한다.
+     */
     public List<Message> trimToRecent(List<Message> messages, int max) {
-        if (messages == null || messages.isEmpty()) {
-            return List.of();
+        if (messages == null || messages.isEmpty() || max <= 0) {
+            return new ArrayList<>();
         }
-        if (max <= 0) {
-            return List.of();
+
+        List<Message> window = messages.size() <= max
+                ? new ArrayList<>(messages)
+                : new ArrayList<>(messages.subList(messages.size() - max, messages.size()));
+
+        // 앞: 첫 UserMessage 전까지 버린다 (고아 tool_result·assistant 제거)
+        int start = 0;
+        while (start < window.size() && !(window.get(start) instanceof UserMessage)) {
+            start++;
         }
-        if (messages.size() <= max) {
-            return messages;
+        List<Message> trimmed = new ArrayList<>(window.subList(start, window.size()));
+
+        // 뒤: 응답 없는 tool_use로 끝나면 그 assistant까지 버린다
+        while (!trimmed.isEmpty()) {
+            Message last = trimmed.get(trimmed.size() - 1);
+            if (last instanceof AssistantMessage assistant && assistant.hasToolCalls()) {
+                trimmed.remove(trimmed.size() - 1);
+                continue;
+            }
+            break;
         }
-        return new ArrayList<>(messages.subList(messages.size() - max, messages.size()));
+        return trimmed;
     }
 
     public String encode(List<Message> messages) {
@@ -71,7 +91,7 @@ public class ConversationCodec {
 
     public List<Message> decode(String json) {
         if (json == null || json.isBlank()) {
-            return List.of();
+            return new ArrayList<>();
         }
 
         List<Turn> turns;
@@ -79,7 +99,7 @@ public class ConversationCodec {
             turns = mapper.readValue(json, new TypeReference<List<Turn>>() {
             });
         } catch (Exception e) {
-            return List.of();
+            return new ArrayList<>();
         }
 
         List<Message> messages = new ArrayList<>();
