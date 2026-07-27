@@ -33,7 +33,7 @@ export default function ChatInputBar({ onSend, onSelectSuggestion, disabled = fa
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 pb-3 pt-4 shadow-[0_-12px_20px_-14px_rgba(15,23,42,0.12)] sm:px-6 sm:pb-4 lg:max-w-4xl xl:max-w-5xl">
-      <div className="mb-4 flex flex-wrap gap-2">
+      <div className="mb-4 flex flex-wrap gap-2" data-tour="suggested-prompts">
         {suggestedPrompts.map((p) => (
           <button
             key={p}
@@ -48,6 +48,7 @@ export default function ChatInputBar({ onSend, onSelectSuggestion, disabled = fa
 
       <form
         onSubmit={handleSubmit}
+        data-tour="chat-input"
         className="flex items-end gap-4 rounded-2xl border border-slate-300 p-2 focus-within:border-accent-400 lg:p-2.5"
       >
         <textarea

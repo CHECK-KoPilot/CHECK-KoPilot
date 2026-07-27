@@ -1,7 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import AppLayout from "../components/layout/AppLayout";
 import ChatMessageList from "../components/chat/ChatMessageList";
 import ChatInputBar from "../components/chat/ChatInputBar";
+import LoadingScreen from "../components/common/LoadingScreen";
+import ProductTour from "../components/tour/ProductTour";
+import { buildTourSteps } from "../data/tourSteps";
 import { streamChat, endSession } from "../lib/sse";
 import {
   getSessionId,
@@ -22,6 +25,8 @@ const CARD_EVENT_TYPES = {
   guide: "guide",
 };
 
+const LOADING_DURATION_MS = 1100;
+
 export default function ChatPage() {
   // 서버는 새로고침 후에도 세션 컨텍스트를 기억한다 — 화면도 같이 복원해야 맥락이 어긋나지 않는다
   const [sessionId, setSessionId] = useState(getSessionId);
@@ -29,10 +34,21 @@ export default function ChatPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const [conversations, setConversations] = useState(listConversations);
+  const [loading, setLoading] = useState(true);
+  const [tourOpen, setTourOpen] = useState(false);
+  const [tourCardId, setTourCardId] = useState(null);
   const scrollRef = useRef(null);
   const pinnedUserIdRef = useRef(null);
   const followingRef = useRef(false);
   const syncedRef = useRef(null);
+  const tourCardIdRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), LOADING_DURATION_MS);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const tourSteps = useMemo(() => buildTourSteps({ setSidebarOpen }), []);
 
   useEffect(() => {
     saveTranscript(sessionId, messages);
@@ -110,10 +126,12 @@ export default function ChatPage() {
 
         const cardType = CARD_EVENT_TYPES[event];
         if (cardType) {
-          setMessages((prev) => [
-            ...prev,
-            { id: `a-${Date.now()}`, type: cardType, ...data },
-          ]);
+          const id = `a-${Date.now()}`;
+          if (cardType === "indicator" && !tourCardIdRef.current) {
+            tourCardIdRef.current = id;
+            setTourCardId(id);
+          }
+          setMessages((prev) => [...prev, { id, type: cardType, ...data }]);
           return;
         }
 
@@ -142,11 +160,16 @@ export default function ChatPage() {
     ask(`${candidate.name}(${candidate.code}) 기준으로 진행해줘`);
   };
 
-  /** 대화를 옮길 때 진행 중이던 턴의 스크롤 추적을 놓아준다 */
+  /**
+   * 대화를 옮길 때 진행 중이던 턴의 스크롤 추적을 놓아준다.
+   * 투어가 가리키던 카드도 떠나는 대화의 것이므로 함께 놓는다.
+   */
   const openConversation = (id, restored) => {
     setMessages(restored);
     pinnedUserIdRef.current = null;
     followingRef.current = false;
+    tourCardIdRef.current = null;
+    setTourCardId(null);
     setSessionId(id);
   };
 
@@ -175,6 +198,10 @@ export default function ChatPage() {
     if (id === sessionId) handleNewChat();
   };
 
+  if (loading) {
+    return <LoadingScreen durationMs={LOADING_DURATION_MS} />;
+  }
+
   return (
     <AppLayout
       headerTitle="새 대화"
@@ -192,10 +219,15 @@ export default function ChatPage() {
             messages={messages}
             onSelectCandidate={handleSelectCandidate}
             onAskFollowUp={ask}
+            onStartTour={() => setTourOpen(true)}
+            tourCardId={tourCardId}
           />
         </div>
         <ChatInputBar onSend={ask} onSelectSuggestion={ask} disabled={sending} />
       </div>
+      {tourOpen && (
+        <ProductTour steps={tourSteps} onClose={() => setTourOpen(false)} />
+      )}
     </AppLayout>
   );
 }
