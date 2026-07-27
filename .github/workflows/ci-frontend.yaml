@@ -2,11 +2,11 @@ name: CI Frontend
 
 on:
   push:
-    branches: [ "prod" ]
+    branches: [ "prod", "dev" ]
     paths:
       - 'check-kopilot/frontend/**'
   pull_request:
-    branches: [ "prod" ]
+    branches: [ "prod", "dev" ]
     paths:
       - 'check-kopilot/frontend/**'
 

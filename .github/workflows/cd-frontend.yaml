@@ -2,7 +2,7 @@ name: CD Frontend (GitOps)
 
 on:
   push:
-    branches: [ "prod" ]
+    branches: [ "prod", "dev" ]
     paths:
       - 'check-kopilot/frontend/**'
   workflow_dispatch:
