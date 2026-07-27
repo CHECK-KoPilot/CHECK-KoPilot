@@ -6,6 +6,7 @@ import TutorialButton from "./TutorialButton";
 import IndicatorAnswerCard from "./cards/IndicatorAnswerCard";
 import ClarificationCard from "./cards/ClarificationCard";
 import GuideRecipeCard from "./cards/GuideRecipeCard";
+import { tourDemoCard } from "../../data/tourDemoCard";
 
 function EmptyState({ onStartTour }) {
   return (
@@ -43,9 +44,17 @@ export default function ChatMessageList({
   onAskFollowUp,
   onStartTour,
   tourCardId,
+  tourOpen,
 }) {
   if (messages.length === 0) {
-    return <EmptyState onStartTour={onStartTour} />;
+    if (!tourOpen) return <EmptyState onStartTour={onStartTour} />;
+    // 투어 4~6단계(핵심 수치·근거·xlsx 다운로드)는 지표 카드 위에서만 설명할 수 있는데,
+    // 빈 대화에는 보여줄 카드가 없다. 투어가 열려 있는 동안만 예시 카드를 띄운다.
+    return (
+      <div className="mx-auto flex max-w-3xl flex-col gap-4 px-4 pb-4 pt-14 sm:px-6 sm:pb-6 sm:pt-16 lg:max-w-4xl lg:gap-5 lg:pb-8 lg:pt-20 xl:max-w-5xl">
+        <IndicatorAnswerCard message={tourDemoCard} tourTarget />
+      </div>
+    );
   }
 
   return (
