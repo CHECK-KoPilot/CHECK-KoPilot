@@ -124,6 +124,7 @@ export default function GuideRecipeCard({ message, explanation, onAskFollowUp })
         <section className="mb-4 rounded-xl border border-slate-200">
           <button
             onClick={() => setCatalogOpen((v) => !v)}
+            aria-expanded={catalogOpen}
             className="flex w-full items-center justify-between px-3 py-2 text-left"
           >
             <span className="text-xs font-semibold text-slate-500">

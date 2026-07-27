@@ -18,21 +18,42 @@ export default function ChatPage() {
   const [messages, setMessages] = useState(() => loadTranscript(getSessionId()));
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sending, setSending] = useState(false);
-  const scrolledUserIdRef = useRef(null);
+  const scrollRef = useRef(null);
+  const pinnedUserIdRef = useRef(null);
+  const followingRef = useRef(false);
 
   useEffect(() => {
     saveTranscript(sessionId, messages);
   }, [sessionId, messages]);
 
-  // 새로 보낸 질문 말풍선이 화면 위쪽에 오도록 스크롤
+  // 사용자가 직접 스크롤하면 따라가기를 멈춘다. scroll 이벤트는 아래 프로그램 스크롤도
+  // 똑같이 발생시키므로, 사람이 움직였다는 게 확실한 입력 제스처만 본다.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const release = () => { followingRef.current = false; };
+    el.addEventListener("wheel", release, { passive: true });
+    el.addEventListener("touchmove", release, { passive: true });
+    return () => {
+      el.removeEventListener("wheel", release);
+      el.removeEventListener("touchmove", release);
+    };
+  }, []);
+
+  // 진행 중인 턴의 질문 말풍선을 화면 위쪽에 붙여 둔다.
+  // 질문이 붙는 순간엔 아래에 아무것도 없어 말풍선이 맨 아래에 걸치는데, 한 번만 스크롤하면
+  // 몇 초 뒤 도착한 카드가 화면 밖에 남는다. 답변이 쌓이는 동안 위치를 다시 잡아 준다.
   useEffect(() => {
     const lastUserMessage = [...messages].reverse().find((m) => m.type === "user");
-    if (!lastUserMessage || lastUserMessage.id === scrolledUserIdRef.current) return;
-    scrolledUserIdRef.current = lastUserMessage.id;
+    if (!lastUserMessage) return;
+    if (lastUserMessage.id !== pinnedUserIdRef.current) {
+      pinnedUserIdRef.current = lastUserMessage.id;
+      followingRef.current = true;
+    }
+    if (!followingRef.current) return;
+    // smooth로 걸면 레이아웃이 확정되기 전에 시작해 뒤늦게 화면이 튄다 — 즉시 이동한다.
     requestAnimationFrame(() => {
-      document
-        .getElementById(lastUserMessage.id)
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById(lastUserMessage.id)?.scrollIntoView({ block: "start" });
     });
   }, [messages]);
 
@@ -94,7 +115,8 @@ export default function ChatPage() {
     endSession(leaving);
     clearTranscript(leaving);
     setMessages([]);
-    scrolledUserIdRef.current = null;
+    pinnedUserIdRef.current = null;
+    followingRef.current = false;
     setSessionId(resetSessionId());
   };
 
@@ -106,7 +128,7 @@ export default function ChatPage() {
       onNewChat={handleNewChat}
     >
       <div className="flex h-full flex-col">
-        <div className="min-h-0 flex-1 overflow-y-auto">
+        <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto">
           <ChatMessageList
             messages={messages}
             onSelectCandidate={handleSelectCandidate}

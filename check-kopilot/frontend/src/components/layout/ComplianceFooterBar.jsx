@@ -1,4 +1,5 @@
 import { ShieldAlert } from "lucide-react";
+import { DISCLAIMER } from "../../lib/compliance";
 
 export default function ComplianceFooterBar() {
   return (
@@ -10,8 +11,7 @@ export default function ComplianceFooterBar() {
     >
       <ShieldAlert size={12} className="shrink-0 text-slate-400" />
       <p className="text-[11px] leading-snug text-slate-400 lg:text-xs">
-        본 자료는 AI가 시장 데이터와 CHECK API 기반으로 생성한 정보성
-        자료이며 투자권유가 아닙니다
+        {DISCLAIMER}
       </p>
     </div>
   );

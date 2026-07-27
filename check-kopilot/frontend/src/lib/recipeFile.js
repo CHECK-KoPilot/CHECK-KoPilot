@@ -6,8 +6,7 @@
  * 살아야 쓸모가 있으므로 표(xlsx)가 아니라 마크다운으로 만든다 — 새 엔드포인트도, 의존성도 필요 없다.
  */
 
-const DISCLAIMER =
-  "본 자료는 AI가 시장 데이터 기반으로 생성한 정보성 자료이며 투자권유가 아닙니다.";
+import { DISCLAIMER } from "./compliance";
 
 /** 파일명에 쓸 수 없는 문자를 걷어낸다 */
 export function safeFileName(topic) {
