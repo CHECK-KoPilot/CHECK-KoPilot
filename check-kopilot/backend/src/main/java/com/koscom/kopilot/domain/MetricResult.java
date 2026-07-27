@@ -40,7 +40,12 @@ public record MetricResult(
 
     public record Evidence(List<ApiCall> apiCalls, List<RawSeries> rawData,
                            String formula, List<Step> steps) {
-        public record ApiCall(String api, String request, String specUrl) {}
+        /**
+         * apiId는 명세 인덱스의 식별자(예: {@code stock-daily})다. 화면에는 안 보이지만,
+         * 카드에서 "구현 방법 자세히"를 눌렀을 때 이 지표가 실제로 호출한 API를 정확히 지목하는 데 쓴다.
+         * 이게 없으면 레시피가 키워드 검색으로 엉뚱한 API를 집어 근거 패널과 어긋난다(이슈 #62).
+         */
+        public record ApiCall(String apiId, String api, String request, String specUrl) {}
         public record RawSeries(String name, List<Row> rows) {}
         public record Row(LocalDate date, double value) {}
         public record Step(String label, String detail) {}

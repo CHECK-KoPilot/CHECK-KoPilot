@@ -10,6 +10,9 @@ export default function AppLayout({
   onSidebarOpenChange,
   onNewChat,
   conversations,
+  activeConversationId,
+  onSelectConversation,
+  onDeleteConversation,
 }) {
   const [internalOpen, setInternalOpen] = useState(false);
   const isControlled = controlledOpen !== undefined && !!onSidebarOpenChange;
@@ -23,6 +26,9 @@ export default function AppLayout({
         onClose={() => setSidebarOpen(false)}
         onNewChat={onNewChat}
         conversations={conversations}
+        activeConversationId={activeConversationId}
+        onSelectConversation={onSelectConversation}
+        onDeleteConversation={onDeleteConversation}
       />
       <div className="flex min-w-0 flex-1 flex-col">
         <GlobalHeader

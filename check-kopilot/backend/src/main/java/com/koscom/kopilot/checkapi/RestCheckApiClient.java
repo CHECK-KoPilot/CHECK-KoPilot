@@ -12,6 +12,10 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 실제 CHECK API 호출 구현. 외부 명세 의존부는 이 클래스에만 존재한다.
@@ -33,11 +37,13 @@ public class RestCheckApiClient implements CheckApiClient {
     private static final String NAV_DATA_LIST = "F12506,F15001,F15301";
 
     /**
-     * 지수의 업종코드. 종목 마스터는 지수를 KOSPI/KOSDAQ 문자열로 식별하지만 CHECK API가 받는 jcode는
+     * 대표지수의 업종코드. 종목 마스터는 지수를 KOSPI/KOSDAQ 문자열로 식별하지만 CHECK API가 받는 jcode는
      * 업종코드이며, 대표지수는 코스피·코스닥 모두 1이다(시장 구분은 m002/m004 경로가 담당).
-     * 업종지수(대형주 2, 중형주 3, …)를 마스터에 추가하면 여기 매핑도 함께 늘린다.
      */
     private static final Map<String, String> INDEX_JCODES = Map.of("KOSPI", "1", "KOSDAQ", "1");
+
+    /** 업종지수 식별자 {@code <시장>-<업종코드>} (예: {@code KOSPI-8} 화학, {@code KOSDAQ-65} 화학) */
+    private static final Pattern SECTOR_INDEX = Pattern.compile("^(?:KOSPI|KOSDAQ)-(\\d+)$");
 
     private final RestClient rest;
     private final CheckApiProperties props;
@@ -62,8 +68,8 @@ public class RestCheckApiClient implements CheckApiClient {
                     parseDecimal(r.get("F15011")), parseDecimal(r.get("F15001")),
                     parseLong(r.get("F15015"))));
         }
-        out.sort(Comparator.comparing(DailyQuote::date));
-        return out;
+        return usableRows(out, DailyQuote::date,
+                q -> q.close() > 0 && q.high() > 0 && q.low() > 0);
     }
 
     @Override
@@ -74,8 +80,26 @@ public class RestCheckApiClient implements CheckApiClient {
             out.add(new NavQuote(parseYmd(r.get("F12506")),
                     parseDecimal(r.get("F15001")), parseDecimal(r.get("F15301"))));
         }
-        out.sort(Comparator.comparing(NavQuote::date));
-        return out;
+        return usableRows(out, NavQuote::date, n -> n.marketPrice() > 0 && n.nav() > 0);
+    }
+
+    /**
+     * 응답 행을 계산에 쓸 수 있는 것만 남기고 날짜 오름차순으로 돌려준다.
+     *
+     * <p>CHECK API는 같은 날짜를 두 번 내려주거나 필드를 비워 보낼 때가 있다. 실제로 2026-07-24
+     * KODEX 200 응답에 NAV가 빈 중복 행이 섞여 왔다(이슈 #58). 결측을 {@code parseDecimal}이 0으로
+     * 바꾸고, 그 0이 계산에 닿으면 나눗셈이 Infinity가 되어 카드에 그럴듯한 가짜 숫자가 찍힌다.
+     * 벤더 응답의 흠은 이 클래스 밖으로 내보내지 않는다 — 지표 실행기는 성한 행만 본다.
+     *
+     * <p>중복 날짜는 먼저 온 성한 행을 남긴다. 응답이 최신→과거 순이라 같은 날짜끼리는
+     * 벤더가 앞세운 행이 대표값이라고 본다.
+     */
+    private <T> List<T> usableRows(List<T> rows, Function<T, LocalDate> date, Predicate<T> usable) {
+        Map<LocalDate, T> byDate = new LinkedHashMap<>();
+        for (T row : rows) {
+            if (usable.test(row)) byDate.putIfAbsent(date.apply(row), row);
+        }
+        return byDate.values().stream().sorted(Comparator.comparing(date)).toList();
     }
 
     /**
@@ -94,12 +118,17 @@ public class RestCheckApiClient implements CheckApiClient {
         return path;
     }
 
-    /** 종목·ETF는 단축코드가 곧 jcode지만, 지수는 마스터 식별자를 업종코드로 바꿔 보낸다. */
+    /** 종목·ETF·ETN은 단축코드가 곧 jcode지만, 지수는 마스터 식별자를 업종코드로 바꿔 보낸다. */
     private String jcode(StockInfo instrument) {
         if (!instrument.isIndex()) {
             return instrument.code();
         }
-        String indexCode = INDEX_JCODES.get(instrument.code().toUpperCase());
+        String code = instrument.code().toUpperCase();
+        Matcher sector = SECTOR_INDEX.matcher(code);
+        if (sector.matches()) {
+            return sector.group(1);
+        }
+        String indexCode = INDEX_JCODES.get(code);
         if (indexCode == null) {
             throw new CheckApiException("지수 업종코드 매핑이 없습니다: " + instrument.code());
         }
@@ -148,13 +177,25 @@ public class RestCheckApiClient implements CheckApiClient {
         return LocalDate.parse(node.asText(), YMD);
     }
 
+    /**
+     * 결측은 0으로 읽는다. 빈 문자열도 결측으로 본다 — {@code new BigDecimal("")}은
+     * 0이 아니라 NumberFormatException이라 응답 한 칸이 비었다고 호출 전체가 죽는다.
+     * 0으로 읽은 값은 {@link #usableRows}가 걸러 계산에 닿지 않는다.
+     */
     private double parseDecimal(JsonNode node) {
-        if (node == null || node.isMissingNode() || node.isNull()) return 0.0;
-        return new BigDecimal(node.asText()).doubleValue();
+        String text = text(node);
+        return text == null ? 0.0 : new BigDecimal(text).doubleValue();
     }
 
     private long parseLong(JsonNode node) {
-        if (node == null || node.isMissingNode() || node.isNull()) return 0L;
-        return new BigDecimal(node.asText()).longValue();
+        String text = text(node);
+        return text == null ? 0L : new BigDecimal(text).longValue();
+    }
+
+    /** 값이 없거나 공백뿐이면 null */
+    private String text(JsonNode node) {
+        if (node == null || node.isMissingNode() || node.isNull()) return null;
+        String text = node.asText().trim();
+        return text.isEmpty() ? null : text;
     }
 }

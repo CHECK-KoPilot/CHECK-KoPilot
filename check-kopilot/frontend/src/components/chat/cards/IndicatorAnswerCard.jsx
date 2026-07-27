@@ -1,10 +1,11 @@
-import { Download, Sparkles } from "lucide-react";
+import { Code2, Download, Sparkles } from "lucide-react";
 import Button from "../../common/Button";
 import KeyMetricsPanel from "./KeyMetricsPanel";
 import ChartPanel from "./ChartPanel";
 import EvidencePanel from "./EvidencePanel";
+import { indicatorImplementationPrompt } from "../../../lib/implementationPrompt";
 
-export default function IndicatorAnswerCard({ message, tourTarget = false }) {
+export default function IndicatorAnswerCard({ message, tourTarget = false, onAskFollowUp }) {
   const { cardId, title, from, to, targets, headline, chart, commentary, evidence } = message;
 
   return (
@@ -50,7 +51,18 @@ export default function IndicatorAnswerCard({ message, tourTarget = false }) {
         <EvidencePanel evidence={evidence} tourTarget={tourTarget} />
       </div>
 
-      <div className="flex justify-end gap-2">
+      <div className="flex flex-wrap justify-end gap-2">
+        {/* 카탈로그에 있는 지표라도 "직접 만들려면?"은 남는 질문이다. 카드가 호출한 API를
+            그대로 물려주므로 레시피가 위 근거 패널과 같은 API를 가리킨다. */}
+        <Button
+          variant="secondary"
+          size="sm"
+          disabled={!onAskFollowUp}
+          onClick={() => onAskFollowUp?.(indicatorImplementationPrompt(message))}
+        >
+          <Code2 size={14} />
+          구현 방법 자세히
+        </Button>
         <Button
           as="a"
           href={`/api/cards/${cardId}/xlsx`}

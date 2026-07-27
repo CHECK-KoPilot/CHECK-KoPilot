@@ -1,5 +1,6 @@
 import { AlertCircle } from "lucide-react";
 import UserMessage from "./UserMessage";
+import AssistantText from "./AssistantText";
 import KopilotIcon from "../common/KopilotIcon";
 import TutorialButton from "./TutorialButton";
 import IndicatorAnswerCard from "./cards/IndicatorAnswerCard";
@@ -23,9 +24,23 @@ function EmptyState({ onStartTour }) {
   );
 }
 
+
+/**
+ * 가이드 카드 뒤에 붙는 해설을 찾는다. 카드(guide 이벤트)와 해설(text 이벤트)이
+ * 별도 메시지로 흐르기 때문에, 레시피를 파일로 저장할 때 둘을 다시 묶어야 한다.
+ */
+function followingAssistantText(messages, index) {
+  for (let i = index + 1; i < messages.length; i++) {
+    if (messages[i].type === "assistant") return messages[i].text;
+    if (messages[i].type === "user") break;   // 다음 질문까지 가면 이 카드의 해설이 아니다
+  }
+  return undefined;
+}
+
 export default function ChatMessageList({
   messages,
   onSelectCandidate,
+  onAskFollowUp,
   onStartTour,
   tourCardId,
 }) {
@@ -35,7 +50,7 @@ export default function ChatMessageList({
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-4 px-4 pb-4 pt-14 sm:px-6 sm:pb-6 sm:pt-16 lg:max-w-4xl lg:gap-5 lg:pb-8 lg:pt-20 xl:max-w-5xl">
-      {messages.map((message) => {
+      {messages.map((message, index) => {
         if (message.type === "user") {
           return (
             <div key={message.id} id={message.id}>
@@ -45,10 +60,8 @@ export default function ChatMessageList({
         }
         if (message.type === "assistant") {
           return (
-            <div key={message.id} id={message.id} className="flex justify-start">
-              <div className="max-w-lg rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-2.5 text-sm text-slate-800 lg:max-w-xl lg:px-5 lg:py-3 lg:text-base">
-                {message.text}
-              </div>
+            <div key={message.id} id={message.id}>
+              <AssistantText text={message.text} />
             </div>
           );
         }
@@ -69,6 +82,7 @@ export default function ChatMessageList({
             <div key={message.id} id={message.id}>
               <IndicatorAnswerCard
                 message={message}
+                onAskFollowUp={onAskFollowUp}
                 tourTarget={message.id === tourCardId}
               />
             </div>
@@ -87,7 +101,11 @@ export default function ChatMessageList({
         if (message.type === "guide") {
           return (
             <div key={message.id} id={message.id}>
-              <GuideRecipeCard message={message} />
+              <GuideRecipeCard
+                message={message}
+                explanation={followingAssistantText(messages, index)}
+                onAskFollowUp={onAskFollowUp}
+              />
             </div>
           );
         }

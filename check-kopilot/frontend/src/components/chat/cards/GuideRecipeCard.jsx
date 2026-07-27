@@ -1,14 +1,18 @@
 import { useState } from "react";
-import { ChevronDown, Compass, ExternalLink, Check } from "lucide-react";
+import { ChevronDown, Compass, ExternalLink, Check, Download, Code2 } from "lucide-react";
 import Button from "../../common/Button";
 import { cn } from "../../../lib/utils";
 import { getSessionId } from "../../../lib/session";
+import { downloadRecipeMarkdown } from "../../../lib/recipeFile";
+import { guideImplementationPrompt } from "../../../lib/implementationPrompt";
 
-export default function GuideRecipeCard({ message }) {
+export default function GuideRecipeCard({ message, explanation, onAskFollowUp }) {
   const [requested, setRequested] = useState(false);
   const [pending, setPending] = useState(false);
   const [catalogOpen, setCatalogOpen] = useState(false);
-  const { topic, matched = [], catalog = [] } = message;
+  // knownMetric = 카탈로그에 있는 지표의 구현 방법을 물은 경우.
+  // 같은 카드를 쓰되 "없는 지표입니다"라고 말하면 안 되고, 카탈로그 추가 요청도 의미가 없다.
+  const { topic, matched = [], catalog = [], knownMetric = false } = message;
 
   const requestCatalog = async () => {
     setPending(true);
@@ -36,10 +40,14 @@ export default function GuideRecipeCard({ message }) {
         <Compass size={16} className="mt-0.5 shrink-0 text-accent-500" />
         <div>
           <h3 className="text-sm font-semibold text-slate-900 lg:text-base">
-            '{topic}'은 현재 카탈로그에 없는 지표입니다
+            {knownMetric
+              ? `'${topic}' 직접 구현하기`
+              : `'${topic}'은 현재 카탈로그에 없는 지표입니다`}
           </h3>
           <p className="mt-0.5 text-sm text-slate-500 lg:text-[15px]">
-            대신 아래 CHECK API를 조합하면 동일한 데이터를 직접 산출할 수 있습니다.
+            {knownMetric
+              ? "이 카드가 실제로 호출한 CHECK API입니다. 같은 값을 직접 산출할 수 있습니다."
+              : "대신 아래 CHECK API를 조합하면 동일한 데이터를 직접 산출할 수 있습니다."}
           </p>
         </div>
       </div>
@@ -107,6 +115,7 @@ export default function GuideRecipeCard({ message }) {
         <section className="mb-4 rounded-xl border border-slate-200">
           <button
             onClick={() => setCatalogOpen((v) => !v)}
+            aria-expanded={catalogOpen}
             className="flex w-full items-center justify-between px-3 py-2 text-left"
           >
             <span className="text-xs font-semibold text-slate-500">
@@ -134,16 +143,35 @@ export default function GuideRecipeCard({ message }) {
         </section>
       )}
 
-      <div className="flex justify-end">
+      <div className="flex flex-wrap justify-end gap-2">
         <Button
-          variant={requested ? "secondary" : "primary"}
+          variant="secondary"
           size="sm"
-          disabled={requested || pending}
-          onClick={requestCatalog}
+          onClick={() => downloadRecipeMarkdown(message, explanation)}
         >
-          {requested ? <Check size={14} /> : null}
-          {requested ? "요청 완료" : "카탈로그 추가 요청"}
+          <Download size={14} />
+          레시피 저장
         </Button>
+        <Button
+          variant="secondary"
+          size="sm"
+          disabled={!onAskFollowUp}
+          onClick={() => onAskFollowUp?.(guideImplementationPrompt(topic, matched))}
+        >
+          <Code2 size={14} />
+          구현 방법 자세히
+        </Button>
+        {!knownMetric && (
+          <Button
+            variant={requested ? "secondary" : "primary"}
+            size="sm"
+            disabled={requested || pending}
+            onClick={requestCatalog}
+          >
+            {requested ? <Check size={14} /> : null}
+            {requested ? "요청 완료" : "카탈로그 추가 요청"}
+          </Button>
+        )}
       </div>
     </div>
   );

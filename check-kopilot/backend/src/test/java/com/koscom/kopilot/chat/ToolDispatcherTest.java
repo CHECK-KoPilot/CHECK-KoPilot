@@ -85,6 +85,32 @@ class ToolDispatcherTest {
         assertThat(recordedDemand.get(0)).startsWith("AUTO|외국인 순매수 수급|").contains("stock-investor");
     }
 
+    /**
+     * 이슈 #62. 카탈로그가 답한 지표의 구현 방법을 explain_recipe로 보내면 두 가지가 깨진다 —
+     * 키워드 검색이 엉뚱한 API를 집고("수익률"이 배당수익률 필드에 매칭), 그 클릭이 "카탈로그가
+     * 못 답한 수요"로 집계돼 Admin의 카탈로그 응답률이 떨어진다.
+     */
+    @Test
+    void explainMetricRecipe_resolvesByApiId_andDoesNotRecordDemand() throws Exception {
+        var r = dispatcher().dispatch("sess-1", "explain_metric_recipe", mapper.readTree("""
+            {"metric":"삼성전자 vs 코스피 수익률 갭","apiIds":["stock-daily","index-daily"]}"""));
+
+        assertThat(r.isError()).isFalse();
+        assertThat(r.push().event()).isEqualTo("guide");
+        // 키워드 검색이 아니라 apiId로 명세를 직접 꺼낸다 — 카드 근거와 같은 API가 나와야 한다
+        assertThat(r.toolResultJson()).contains("stock-daily").contains("index-daily");
+        // 카탈로그가 답한 지표이므로 "못 답한 수요"가 아니다
+        assertThat(recordedDemand).isEmpty();
+    }
+
+    @Test
+    void explainMetricRecipe_marksKnownMetric_soCardDoesNotClaimItIsMissing() throws Exception {
+        var r = dispatcher().dispatch("sess-1", "explain_metric_recipe", mapper.readTree("""
+            {"metric":"삼성전자 vs 코스피 수익률 갭","apiIds":["stock-daily"]}"""));
+
+        assertThat(r.push().dataJson()).contains("\"knownMetric\":true");
+    }
+
     @Test
     void getApiSpec_returnsFullEntries_noEvent() throws Exception {
         // 주의: apiIds는 api-aliases.yaml에 정의된 별칭이어야 한다 (미정의 id는 결과에서 누락됨)

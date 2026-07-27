@@ -24,6 +24,7 @@ export default function EvidencePanel({ evidence, tourTarget = false }) {
       <button
         data-tour={tourTarget ? "evidence-toggle" : undefined}
         onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
         className="flex w-full items-center justify-between px-4 py-2.5 text-left lg:py-3"
       >
         <span className="flex items-center gap-1.5 text-sm font-medium text-accent-700 lg:text-[15px]">

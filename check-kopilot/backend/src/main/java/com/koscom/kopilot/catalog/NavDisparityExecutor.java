@@ -25,11 +25,18 @@ public class NavDisparityExecutor implements MetricExecutor {
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "target", Map.of("type", "string", "description", "ETF의 한글 상품명 (예: TIGER 미국S&P500)"),
-            "from", Map.of("type", "string", "description", "조회 시작일 YYYY-MM-DD"),
-            "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD"));
+            "from", Map.of("type", "string",
+                "description", "조회 시작일 YYYY-MM-DD (생략 시 최근 "
+                    + ExecutorSupport.DEFAULT_PERIOD_DAYS + "일)"),
+            "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD (생략 시 오늘)"));
     }
 
-    @Override public List<String> requiredParams() { return List.of("target", "from", "to"); }
+    /**
+     * 기간은 필수가 아니다. 괴리율은 본질적으로 "지금 얼마나 벌어져 있나"를 묻는 지표라
+     * 기간을 요구하면 "KODEX 200 괴리율 알려줘"에 매번 되묻게 된다(평가셋에서 실제로 잡힌 오인식).
+     * 이동평균 이격도(ma_disparity)가 기준일만 받는 것과 같은 결로 맞춘다.
+     */
+    @Override public List<String> requiredParams() { return List.of("target"); }
 
     @Override public MetricResult execute(JsonNode args) {
         StockInfo info = s.resolveTarget(s.requiredText(args, "target"));
@@ -37,9 +44,12 @@ public class NavDisparityExecutor implements MetricExecutor {
             throw new MetricException("NOT_ETF",
                     info.name() + "은(는) ETF가 아닙니다. 괴리율은 ETF 전용 지표입니다.");
         }
-        ExecutorSupport.Period p = s.parsePeriod(args);
+        ExecutorSupport.Period p = s.parsePeriodOrRecent(args);
 
-        List<NavQuote> navs = s.api().etfNav(info, p.from(), p.to());
+        // NAV가 0이면 괴리율 계산이 0으로 나누기가 된다. 클라이언트가 이미 그런 행을 걷어내지만,
+        // 나눗셈 바로 앞에서도 한 번 더 막는다 — 다른 CheckApiClient 구현이 들어와도 계약은 같다.
+        List<NavQuote> navs = s.api().etfNav(info, p.from(), p.to()).stream()
+                .filter(n -> n.nav() > 0).toList();
         if (navs.isEmpty()) throw new MetricException("DATA_INSUFFICIENT", "NAV 데이터가 없습니다");
 
         List<MetricResult.ChartSpec.Point> series = navs.stream()
@@ -65,9 +75,13 @@ public class NavDisparityExecutor implements MetricExecutor {
                             navs.stream().map(n -> new MetricResult.Evidence.Row(n.date(), n.nav())).toList())),
                 "괴리율(%) = (시장가 − NAV) / NAV × 100",
                 List.of(new MetricResult.Evidence.Step("최신 괴리율 (" + latest.date() + ")",
-                        "(%s − %s) / %s × 100 = %s%%".formatted(
+                            "(%s − %s) / %s × 100 = %s%%".formatted(
                                 ExecutorSupport.fmt(latest.marketPrice()), ExecutorSupport.fmt(latest.nav()),
-                                ExecutorSupport.fmt(latest.nav()), ExecutorSupport.fmt(latestDisp))))));
+                                ExecutorSupport.fmt(latest.nav()), ExecutorSupport.fmt(latestDisp))),
+                        // 평균의 모집단을 밝힌다 — NAV가 비어 온 날은 제외되므로 기간 일수와 다를 수 있다
+                        new MetricResult.Evidence.Step("기간 평균 괴리율",
+                            "유효 데이터 %d일 평균 = %s%%".formatted(
+                                navs.size(), ExecutorSupport.fmt(avgDisp))))));
     }
 
     static double disparityPct(NavQuote n) { return (n.marketPrice() - n.nav()) / n.nav() * 100; }

@@ -17,3 +17,9 @@ export function resetSessionId() {
   localStorage.setItem(KEY, fresh);
   return fresh;
 }
+
+/** 사이드바에서 지난 대화를 골랐을 때 — 그 대화의 세션으로 되돌아간다 */
+export function setSessionId(sessionId) {
+  localStorage.setItem(KEY, sessionId);
+  return sessionId;
+}
