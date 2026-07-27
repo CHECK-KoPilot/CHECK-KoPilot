@@ -17,5 +17,5 @@ resource "ncloud_nks_node_pool" "node_pool" {
   node_pool_name   = "team3-np"
   node_count       = 2
   software_code    = "SW.VSVR.OS.LNX64.UBNTU.SVR2004.B050"
-  server_spec_code = "SVR.VSVR.STAND.C004.M016.NET.SSD.B050.G002" 
+  server_spec_code = "SVR.VSVR.STAND.C004.M016.NET.SSD.B050.G002"
 }
