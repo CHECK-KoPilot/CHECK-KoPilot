@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: team3-registry.ncr.fin-ntruss.com/kopilot-frontend:84ab28e
+        image: team3-registry.ncr.fin-ntruss.com/kopilot-frontend:b92c8bf
         ports:
         - containerPort: 80
         resources:
