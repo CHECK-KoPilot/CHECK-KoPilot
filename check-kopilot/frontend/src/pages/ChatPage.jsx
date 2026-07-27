@@ -221,6 +221,7 @@ export default function ChatPage() {
             onAskFollowUp={ask}
             onStartTour={() => setTourOpen(true)}
             tourCardId={tourCardId}
+            tourOpen={tourOpen}
           />
         </div>
         <ChatInputBar onSend={ask} onSelectSuggestion={ask} disabled={sending} />

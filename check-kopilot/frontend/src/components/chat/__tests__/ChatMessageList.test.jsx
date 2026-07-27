@@ -12,4 +12,12 @@ describe("ChatMessageList", () => {
     fireEvent.click(screen.getByRole("button", { name: /튜토리얼/ }));
     expect(onStartTour).toHaveBeenCalledTimes(1);
   });
+
+  it("메시지가 없어도 투어가 열려 있으면 4~6단계 앵커가 있는 예시 카드를 보여준다", () => {
+    const { container } = render(<ChatMessageList messages={[]} tourOpen />);
+
+    expect(container.querySelector('[data-tour="key-metrics"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-tour="evidence-toggle"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-tour="excel-download"]')).toBeInTheDocument();
+  });
 });

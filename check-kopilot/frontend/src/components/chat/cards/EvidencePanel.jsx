@@ -49,7 +49,7 @@ export default function EvidencePanel({ evidence, tourTarget = false }) {
             <ul className="space-y-1.5">
               {evidence.apiCalls.map((call) => (
                 <li
-                  key={call.api}
+                  key={`${call.api}-${call.request}`}
                   className="flex items-center justify-between rounded-lg bg-slate-50 px-3 py-2"
                 >
                   <div>

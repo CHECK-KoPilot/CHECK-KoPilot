@@ -19,6 +19,20 @@ spec:
         image: NCR_REGISTRY_URL/kopilot-backend:latest
         ports:
         - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:mysql://192.168.152.6:3306/kopilot?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "kopilot"
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: mysql-password
+        - name: SPRING_DATA_REDIS_HOST
+          value: "cache-48sg4s-fkr.cdb.fin-ntruss.com"
+        - name: SPRING_DATA_REDIS_PORT
+          value: "6379"
         resources:
           requests:
             cpu: "500m"
