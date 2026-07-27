@@ -14,6 +14,8 @@ spec:
       labels:
         app: kopilot-backend
     spec:
+      imagePullSecrets:
+      - name: ncr-secret
       containers:
       - name: backend
         image: NCR_REGISTRY_URL/kopilot-backend:latest
