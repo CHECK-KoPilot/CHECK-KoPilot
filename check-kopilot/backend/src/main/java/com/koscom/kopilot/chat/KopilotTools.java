@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 지표 실행기 6종 + 가이드 tool 2종을 Spring AI ToolCallback(스키마 전용)으로 변환한다.
+ * 지표 실행기 7종 + 가이드 tool 2종을 Spring AI ToolCallback(스키마 전용)으로 변환한다.
  * 실제 실행은 ChatService의 수동 루프가 ToolDispatcher로 수행한다.
  */
 public class KopilotTools {

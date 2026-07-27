@@ -60,4 +60,9 @@ public class CatalogConfig {
     public ReturnRankingExecutor returnRankingExecutor(ExecutorSupport s) {
         return new ReturnRankingExecutor(s);
     }
+
+    @Bean
+    public CumulativeReturnExecutor cumulativeReturnExecutor(ExecutorSupport s) {
+        return new CumulativeReturnExecutor(s);
+    }
 }
