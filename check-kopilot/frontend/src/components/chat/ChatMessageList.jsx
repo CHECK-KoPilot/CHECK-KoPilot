@@ -72,7 +72,7 @@ export default function ChatMessageList({ messages, onSelectCandidate, onAskFoll
         if (message.type === "indicator") {
           return (
             <div key={message.id} id={message.id}>
-              <IndicatorAnswerCard message={message} />
+              <IndicatorAnswerCard message={message} onAskFollowUp={onAskFollowUp} />
             </div>
           );
         }

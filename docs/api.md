@@ -79,7 +79,7 @@ LLM은 도구 선택·해설 텍스트만 담당하고, **모든 수치 계산�
 | chart.chartType | string | `line`(추이) / `bar`(비교) |
 | chart.series[] | object[] | 계열 `{ name, points[] }` |
 | chart.series[].points[] | object[] | 점 `{ label(X축), value(Y축) }` |
-| evidence.apiCalls[] | object[] | 근거① 호출 API `{ api, request, specUrl }` |
+| evidence.apiCalls[] | object[] | 근거① 호출 API `{ apiId, api, request, specUrl }`. `apiId`는 명세 인덱스 식별자(예: `stock-daily`)로 화면에는 안 보이지만, 카드의 "구현 방법 자세히"가 이 지표가 실제로 호출한 API를 정확히 지목하는 데 쓴다 |
 | evidence.rawData[] | object[] | 근거② 원본 수치 `{ name, rows[{date,value}] }` |
 | evidence.formula | string | 근거③ 적용 공식 |
 | evidence.steps[] | object[] | 근거④ 중간 계산 `{ label, detail }` |
@@ -93,11 +93,12 @@ LLM은 도구 선택·해설 텍스트만 담당하고, **모든 수치 계산�
 #### SSE 이벤트 3. event: `guide` = 가이드(레시피) 카드
 | **필드** | **타입** | **의미** |
 | --- | --- | --- |
-| topic | string | 사용자가 물은 주제(카탈로그 밖) |
-| matched[] | object[] | 필요 CHECK API 상세 `{ apiId, name, path, summary, params[], docUrl, fields[] }` |
+| topic | string | 사용자가 물은 주제 |
+| knownMetric | boolean | `true`면 **카탈로그에 있는 지표의 구현 방법**을 물은 경우(`explain_metric_recipe`). 카드가 "카탈로그에 없는 지표입니다"라고 말하지 않고 "카탈로그 추가 요청" 버튼도 감춘다. 생략되면 `false` |
+| matched[] | object[] | 필요 CHECK API 상세 `{ apiId, name, path, summary, params[], docUrl, fields[] }`. `knownMetric`이면 키워드 검색 결과가 아니라 **그 지표가 실제로 호출한 API**다 |
 | matched[].params[] | object[] | 파라미터 `{ name, required }` |
 | matched[].fields[] | object[] | 응답 필드 `{ code, label }` |
-| catalog[] | object[] | 참고 후보 API `{ apiId, name, summary }` |
+| catalog[] | object[] | 참고 후보 API `{ apiId, name, summary }`. `knownMetric`이면 빈 배열 |
 
 #### SSE 이벤트 4. event: `text` / `done` / `error`
 | **event** | **data** | **의미** |
@@ -165,6 +166,7 @@ data: {}
   "evidence": {
     "apiCalls": [
       {
+        "apiId": "stock-daily",
         "api": "주식 일별 시세",
         "request": "005930 / 2026-06-19~2026-07-19",
         "specUrl": "https://checkapi.koscom.co.kr/spec/stock-daily"

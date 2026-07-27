@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import GuideRecipeCard, { implementationPrompt } from "../GuideRecipeCard";
+import GuideRecipeCard from "../GuideRecipeCard";
 
 const message = {
   topic: "외국인 순매수 동향",
@@ -72,17 +72,32 @@ describe("GuideRecipeCard", () => {
   });
 });
 
-describe("구현 방법 자세히 버튼", () => {
-  it("이미 찾은 API를 지목한 후속 질문을 다음 턴으로 보낸다", async () => {
-    // 같은 검색을 반복하지 않고 곧바로 상세로 들어가게 한다
-    const prompt = implementationPrompt("외국인 순매수", [{ name: "[일별정보] 투자자" }]);
+describe("카탈로그에 있는 지표의 구현 방법(knownMetric)", () => {
+  const knownMessage = {
+    topic: "삼성전자 vs 코스피 수익률 갭",
+    knownMetric: true,
+    matched: [{ apiId: "stock-daily", name: "[일별정보]", path: "/stock/m001/hist_info" }],
+    catalog: [],
+  };
 
-    expect(prompt).toContain("외국인 순매수");
-    expect(prompt).toContain("[일별정보] 투자자");
-    expect(prompt).toContain("F코드");
+  it("'카탈로그에 없는 지표'라고 말하지 않는다", () => {
+    render(<GuideRecipeCard message={knownMessage} />);
+
+    expect(screen.queryByText(/카탈로그에 없는 지표/)).not.toBeInTheDocument();
+    expect(screen.getByText(/직접 구현하기/)).toBeInTheDocument();
   });
 
-  it("매칭된 API가 없으면 종목 언급 없이도 질문을 만든다", () => {
-    expect(implementationPrompt("공매도 잔고", [])).toContain("공매도 잔고");
+  it("이미 카탈로그에 있으므로 '카탈로그 추가 요청' 버튼을 숨긴다", () => {
+    render(<GuideRecipeCard message={knownMessage} />);
+
+    expect(screen.queryByRole("button", { name: /카탈로그 추가 요청/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /레시피 저장/ })).toBeInTheDocument();
+  });
+
+  it("카탈로그 밖 지표는 기존 문구와 버튼을 그대로 쓴다", () => {
+    render(<GuideRecipeCard message={{ topic: "공매도 잔고", matched: [], catalog: [] }} />);
+
+    expect(screen.getByText(/카탈로그에 없는 지표/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /카탈로그 추가 요청/ })).toBeInTheDocument();
   });
 });

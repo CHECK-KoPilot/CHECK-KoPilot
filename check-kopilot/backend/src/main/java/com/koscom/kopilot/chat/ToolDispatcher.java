@@ -24,6 +24,7 @@ import java.util.List;
 public class ToolDispatcher {
 
     public static final String EXPLAIN_RECIPE = "explain_recipe";
+    public static final String EXPLAIN_METRIC_RECIPE = "explain_metric_recipe";
     public static final String GET_API_SPEC = "get_api_spec";
 
     private final CatalogService catalog;
@@ -44,6 +45,7 @@ public class ToolDispatcher {
     public DispatchResult dispatch(String sessionId, String toolName, JsonNode args) {
         try {
             if (EXPLAIN_RECIPE.equals(toolName)) return explainRecipe(sessionId, args);
+            if (EXPLAIN_METRIC_RECIPE.equals(toolName)) return explainMetricRecipe(args);
             if (GET_API_SPEC.equals(toolName)) return getApiSpec(args);
             return metric(sessionId, toolName, args);
         } catch (AmbiguousStockException e) {
@@ -118,6 +120,28 @@ public class ToolDispatcher {
         payload.set("matched", mapper.valueToTree(r.matched()));
         payload.set("catalog", mapper.valueToTree(r.catalog()));
         payload.set("usedKeywords", mapper.valueToTree(r.usedKeywords()));
+        String json = payload.toString();
+        return new DispatchResult(json, false, new DispatchResult.SsePush("guide", json));
+    }
+
+    /**
+     * 이미 카드로 답한 지표를 "직접 구현하려면?"에 답한다. explain_recipe와 셋이 다르다.
+     *
+     * <p>① 키워드로 명세를 검색하지 않는다. 카드가 실제로 호출한 apiId를 그대로 받아 명세를 꺼내므로
+     * 레시피가 근거 패널과 같은 API를 가리킨다 — "수익률 갭"의 '수익률'이 배당수익률 필드에 걸려
+     * 기본정보 API를 추천하던 문제(이슈 #62).
+     * <p>② 수요로 기록하지 않는다. 카탈로그가 답한 지표이므로 "못 답한 수요"가 아니고,
+     * 기록하면 Admin의 카탈로그 응답률이 버튼 누를 때마다 떨어진다.
+     * <p>③ 카드에 knownMetric을 실어, 프론트가 "카탈로그에 없는 지표입니다"라고 잘못 말하지 않게 한다.
+     */
+    private DispatchResult explainMetricRecipe(JsonNode args) {
+        String metric = args.path("metric").asText("");
+        List<String> apiIds = new ArrayList<>();
+        args.path("apiIds").forEach(n -> apiIds.add(n.asText()));
+
+        ObjectNode payload = mapper.createObjectNode().put("topic", metric).put("knownMetric", true);
+        payload.set("matched", mapper.valueToTree(guide.specs(apiIds)));
+        payload.set("catalog", mapper.createArrayNode());
         String json = payload.toString();
         return new DispatchResult(json, false, new DispatchResult.SsePush("guide", json));
     }

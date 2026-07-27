@@ -42,6 +42,17 @@ public class KopilotTools {
                             + "변환해 2~4개 넣을 것. 예: \"수급 어때?\" → [\"투자자별\",\"순매수\"], "
                             + "\"외인 물량\" → [\"외국인\",\"순매수\"], \"공매 얼마나 쌓였어\" → [\"공매도\",\"잔고\"]")),
                 List.of("topic", "keywords")));
+        tools.add(tool(ToolDispatcher.EXPLAIN_METRIC_RECIPE,
+                "**이미 지표 카드로 답한** 지표를 사용자가 직접 구현하는 방법을 물을 때 사용. "
+              + "카탈로그 밖 지표에는 explain_recipe를 쓸 것 — 이 tool은 카탈로그 안 지표 전용이다. "
+              + "질문에 적힌 apiId를 그대로 넘기면 해당 API의 실제 경로·파라미터·필드를 돌려준다. "
+              + "반환된 path와 F코드만 인용하고 지어내지 말 것.",
+                Map.of(
+                    "metric", Map.of("type", "string", "description", "지표 이름 (카드 제목)"),
+                    "apiIds", Map.of("type", "array", "items", Map.of("type", "string"),
+                        "description", "그 카드가 실제로 호출한 apiId 목록. 질문에 괄호로 적혀 있다 "
+                            + "(예: \"일별 시세 조회(stock-daily)\" → \"stock-daily\")")),
+                List.of("metric", "apiIds")));
         tools.add(tool(ToolDispatcher.GET_API_SPEC,
                 "explain_recipe 결과의 catalog 목록에서 상세 명세가 더 필요한 API가 있을 때, apiId 배열로 상세를 조회한다.",
                 Map.of("apiIds", Map.of("type", "array", "items", Map.of("type", "string"),
