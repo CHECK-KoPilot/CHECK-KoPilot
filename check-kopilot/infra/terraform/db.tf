@@ -1,7 +1,6 @@
 resource "ncloud_mysql" "mysql" {
   service_name       = "team3-mysql"
   server_name_prefix = "team3-db"
-  vpc_no             = data.ncloud_vpc.vpc.id
   subnet_no          = ncloud_subnet.private_db.id
   host_ip            = "192.168.152.10"
 
@@ -18,7 +17,7 @@ resource "ncloud_mysql" "mysql" {
 }
 
 resource "ncloud_redis_config_group" "redis_config" {
-  name          = "team3-redis-config"
+  name          = "team3-redis-cfg"
   redis_version = "7.0.15-simple"
 }
 
