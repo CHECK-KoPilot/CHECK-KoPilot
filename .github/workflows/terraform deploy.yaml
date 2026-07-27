@@ -43,6 +43,8 @@ jobs:
       env:
         TF_VAR_access_key: ${{ secrets.NCP_ACCESS_KEY }}
         TF_VAR_secret_key: ${{ secrets.NCP_SECRET_KEY }}
+        TF_VAR_nks_login_key_name: ${{ secrets.NKS_LOGIN_KEY_NAME }}
+        TF_VAR_mysql_password: ${{ secrets.MYSQL_PASSWORD }}
       run: terraform plan -out=tfplan
 
   terraform-apply:
@@ -68,4 +70,6 @@ jobs:
       env:
         TF_VAR_access_key: ${{ secrets.NCP_ACCESS_KEY }}
         TF_VAR_secret_key: ${{ secrets.NCP_SECRET_KEY }}
+        TF_VAR_nks_login_key_name: ${{ secrets.NKS_LOGIN_KEY_NAME }}
+        TF_VAR_mysql_password: ${{ secrets.MYSQL_PASSWORD }}
       run: terraform apply -auto-approve

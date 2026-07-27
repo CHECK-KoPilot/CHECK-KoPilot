@@ -32,7 +32,6 @@ resource "ncloud_subnet" "private_db" {
   usage_type     = "GEN"
 }
 
-# 5. 외부 통신용 NAT Gateway 및 Route
 resource "ncloud_nat_gateway" "nat_gw" {
   vpc_no = data.ncloud_vpc.vpc.id
   zone   = "FKR-1"
