@@ -18,7 +18,7 @@ export function buildTourSteps({ setSidebarOpen }) {
       selector: '[data-tour="suggested-prompts"]',
       title: "예시 질문으로 빠르게 시작",
       description:
-        "자주 찾는 질문 템플릿을 눌러 바로 입력창에 채워 넣을 수 있어요.",
+        "자주 찾는 질문 템플릿을 누르면 바로 질문이 전송돼요.",
     },
     {
       selector: '[data-tour="chat-input"]',
