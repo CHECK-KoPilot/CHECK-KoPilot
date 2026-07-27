@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: NCR_REGISTRY_URL/kopilot-backend:latest
+        image: team3-registry.ncr.fin-ntruss.com/kopilot-backend:65057d1
         ports:
         - containerPort: 8080
         resources:

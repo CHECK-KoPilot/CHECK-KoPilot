@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import GuideRecipeCard from "../GuideRecipeCard";
+import GuideRecipeCard, { implementationPrompt } from "../GuideRecipeCard";
 
 const message = {
   topic: "외국인 순매수 동향",
