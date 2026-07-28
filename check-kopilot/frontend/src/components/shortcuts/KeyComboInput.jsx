@@ -37,6 +37,7 @@ export default function KeyComboInput({ value, onChange, conflictLabel }) {
       <button
         type="button"
         aria-label="키 조합"
+        aria-describedby={hint ? hintId : undefined}
         onKeyDown={capture}
         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-left text-base text-slate-800 focus:border-accent-400 focus:outline-none"
       >
