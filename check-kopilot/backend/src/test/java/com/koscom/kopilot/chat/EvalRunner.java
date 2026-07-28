@@ -127,6 +127,8 @@ class EvalRunner {
         String expect = (String) c.get("expect");
         Map<String, Object> expectedParams =
                 (Map<String, Object>) c.getOrDefault("params", Map.of());
+        Map<String, Object> exactParams =
+                (Map<String, Object>) c.getOrDefault("paramsExact", Map.of());
         List<String> history = (List<String>) c.getOrDefault("history", List.of());
 
         List<Message> messages = new ArrayList<>();
@@ -163,6 +165,17 @@ class EvalRunner {
             if (!got.contains(wanted)) {
                 return new Result(false, expect, actual,
                         "인자 %s = '%s' (기대 '%s') — %s".formatted(e.getKey(), got, wanted, arguments), question);
+            }
+        }
+        // 부분 문자열 비교로는 "모델이 값을 부풀렸는지"를 볼 수 없다 — "삼성전자"는 "삼성"을 포함하므로
+        // params로는 종목명 보정 회귀가 영원히 PASS한다. 원문 보존을 봐야 하는 케이스는 정확일치로 비교한다.
+        for (Map.Entry<String, Object> e : exactParams.entrySet()) {
+            String wanted = String.valueOf(e.getValue());
+            String got = parsed.path(e.getKey()).asText("");
+            if (!got.equals(wanted)) {
+                return new Result(false, expect, actual,
+                        "인자 %s = '%s' (정확히 '%s'이어야 함) — %s"
+                                .formatted(e.getKey(), got, wanted, arguments), question);
             }
         }
         return new Result(true, expect, actual, "", question);

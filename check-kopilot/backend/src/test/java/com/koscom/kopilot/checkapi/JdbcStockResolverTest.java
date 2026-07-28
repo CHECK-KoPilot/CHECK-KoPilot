@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -71,5 +74,55 @@ class JdbcStockResolverTest {
     @Test
     void aliasAppearsInPartialSearchCandidates() {
         assertThat(resolver.search("네이버")).extracting(StockInfo::code).contains("035420");
+    }
+
+    // --- 되묻기 후보 랭킹 (#91) ---
+    // 마스터가 13종목 데모 풀에서 전 상장 4,392행으로 늘면서 후보 품질이 무너졌다.
+    // 정렬이 이름 길이순이라 "삼성"의 첫 후보가 삼성공조였고, 사용자가 고를 수 없는 목록이 나갔다.
+
+    @Test
+    void candidatesLeadWithFlagshipStock() {
+        // "삼성" 부분매칭 97건. 대표종목이 목록 맨 앞에 와야 칩 한 번으로 끝난다.
+        assertThat(resolver.search("삼성")).first()
+                .extracting(StockInfo::code).isEqualTo("005930");
+    }
+
+    @Test
+    void candidatesRankStocksAboveDerivatives() {
+        // "하이닉스"는 STOCK 1건 + 레버리지 ETF 4건이라, 정렬을 안 하면 후보 5칸이 ETF로 찬다.
+        assertThat(resolver.search("하이닉스")).first()
+                .extracting(StockInfo::code).isEqualTo("000660");
+    }
+
+    @Test
+    void preferredSharesRankBelowCommonShares() {
+        // 우선주는 종목코드 끝자리로 판정한다. 이름 정규식 '우$'는 성우·에코글로우를 오탐한다.
+        List<StockInfo> candidates = resolver.search("두산");
+        List<String> codes = candidates.stream().map(StockInfo::code).toList();
+        assertThat(codes).contains("000150");
+        if (codes.contains("000155")) {                       // 두산우
+            assertThat(codes.indexOf("000150")).isLessThan(codes.indexOf("000155"));
+        }
+    }
+
+    @Test
+    void commonSharesEndingInWooAreNotTreatedAsPreferred() {
+        // 성우(458650)는 이름이 '우'로 끝나지만 보통주다 — 코드 끝자리가 0이다.
+        assertThat(resolver.resolve("성우").code()).isEqualTo("458650");
+    }
+
+    @Test
+    void resolvesNameWithCodeInParentheses() {
+        // 되묻기 칩을 누르면 프론트가 "삼성전자(005930) 기준으로 진행해줘"를 보낸다.
+        // LLM이 문자열을 그대로 넘겨도 코드로 맞춰야 한다 — LIKE '%삼성전자(005930)%'는 0건이다.
+        assertThat(resolver.resolve("삼성전자(005930)").code()).isEqualTo("005930");
+    }
+
+    @Test
+    void notFoundSuggestsFromLongestMatchingSubstring() {
+        // "이차전지"는 앞 2글자 "이차"로는 0건이라 제안이 비어 나갔다. "차전지"는 걸린다.
+        assertThatThrownBy(() -> resolver.resolve("이차전지"))
+                .isInstanceOfSatisfying(StockNotFoundException.class,
+                        e -> assertThat(e.suggestions()).isNotEmpty());
     }
 }

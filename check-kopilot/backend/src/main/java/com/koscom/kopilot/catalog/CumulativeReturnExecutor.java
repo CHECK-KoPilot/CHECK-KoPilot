@@ -36,11 +36,10 @@ public class CumulativeReturnExecutor implements MetricExecutor {
 
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
-            "target", Map.of("type", "string", "description", "대상의 한글 종목명/지수명"),
-            "from", Map.of("type", "string",
-                "description", "조회 시작일 YYYY-MM-DD (생략 시 최근 "
-                    + ExecutorSupport.DEFAULT_PERIOD_DAYS + "일)"),
-            "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD (생략 시 오늘)"));
+            "target", Map.of("type", "string", "description",
+                "조회할 대상 — 한글 종목명·지수명·약칭." + ExecutorSupport.VERBATIM_TARGET),
+            "from", Map.of("type", "string", "description", ExecutorSupport.FROM_DESC),
+            "to", Map.of("type", "string", "description", ExecutorSupport.TO_DESC));
     }
 
     @Override public List<String> requiredParams() { return List.of("target"); }

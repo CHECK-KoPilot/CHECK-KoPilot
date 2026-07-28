@@ -46,6 +46,12 @@ public class StockMasterLoader implements CommandLineRunner {
             SELECT ?, m.code FROM stock_master m WHERE m.code = ? AND m.name <> ?
             ON DUPLICATE KEY UPDATE code=VALUES(code)""";
 
+    /** 별칭과 같은 이유로 마스터에 실재하는 코드만 넣는다 — 상장폐지된 코드의 가중치는 죽은 값이다 */
+    private static final String PRIORITY_UPSERT = """
+            INSERT INTO stock_priority(code, priority)
+            SELECT m.code, ? FROM stock_master m WHERE m.code = ?
+            ON DUPLICATE KEY UPDATE priority=VALUES(priority)""";
+
     /**
      * csv가 종목 마스터의 원천이다. 기동할 때마다 upsert 해서 csv 수정이 기존 DB에도 반영되게 한다
      * (예전 seed가 남아 코드·시장 값이 어긋나는 사고를 막는다 — 실제로 엘앤에프의 시장이 이렇게 바로잡혔다).
@@ -59,7 +65,8 @@ public class StockMasterLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         int master = loadMaster();
         int aliases = loadAliases();
-        log.info("종목 마스터 {}건, 별칭 {}건 적재", master, aliases);
+        int priorities = loadPriorities();
+        log.info("종목 마스터 {}건, 별칭 {}건, 대표종목 가중치 {}건 적재", master, aliases, priorities);
     }
 
     private int loadMaster() throws Exception {
@@ -89,6 +96,36 @@ public class StockMasterLoader implements CommandLineRunner {
                 throw new IllegalStateException("별칭 적재 실패", e);
             }
         });
+    }
+
+    /**
+     * 되묻기 후보 정렬용 대표종목 가중치. 별칭과 같은 이유로 DELETE 후 재적재를 한 트랜잭션으로 묶는다 —
+     * csv에서 뺀 종목의 가중치가 DB에 남으면 후보 순서가 csv와 어긋나고, 그건 화면을 봐야만 드러난다.
+     */
+    private int loadPriorities() {
+        return new TransactionTemplate(transactions).execute(status -> {
+            jdbc.update("DELETE FROM stock_priority");   // csv가 원천
+            try {
+                LoadResult result = load("stock-priority.csv", PRIORITY_UPSERT, this::priorityRow);
+                if (result.inserted() < result.read()) {
+                    log.warn("대표종목 {}줄 중 {}건만 적재됐다 — 마스터에 없는 코드가 걸러졌다",
+                            result.read(), result.inserted());
+                }
+                return result.inserted();
+            } catch (Exception e) {
+                throw new IllegalStateException("대표종목 가중치 적재 실패", e);
+            }
+        });
+    }
+
+    /** {@code code,priority,종목명} — 3번째 필드는 사람이 읽기 위한 주석이라 읽지 않는다. */
+    private Object[] priorityRow(String[] f) {
+        if (f.length < 2) return null;
+        try {
+            return new Object[] {Integer.parseInt(f[1].trim()), f[0].trim()};   // UPSERT의 ?,? 순서
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
     private Object[] masterRow(String[] f) {

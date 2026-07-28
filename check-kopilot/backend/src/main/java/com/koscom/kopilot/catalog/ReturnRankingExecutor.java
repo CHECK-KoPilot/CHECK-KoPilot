@@ -29,9 +29,10 @@ public class ReturnRankingExecutor implements MetricExecutor {
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "targets", Map.of("type", "array", "items", Map.of("type", "string"),
-                    "description", "순위를 매길 종목들의 한글 종목명 (2~10개, 사용자가 직접 나열한 것)"),
-            "from", Map.of("type", "string", "description", "조회 시작일 YYYY-MM-DD"),
-            "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD"));
+                    "description", "순위를 매길 대상들 — 한글 종목명·약칭 (2~10개, 사용자가 직접 나열한 것)."
+                            + ExecutorSupport.VERBATIM_TARGET),
+            "from", Map.of("type", "string", "description", ExecutorSupport.FROM_DESC),
+            "to", Map.of("type", "string", "description", ExecutorSupport.TO_DESC));
     }
 
     @Override public List<String> requiredParams() { return List.of("targets"); }
