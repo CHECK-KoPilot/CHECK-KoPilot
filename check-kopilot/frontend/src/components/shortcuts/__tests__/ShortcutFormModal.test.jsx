@@ -183,9 +183,32 @@ describe("ShortcutFormModal", () => {
     render(<ShortcutFormModal editing={editing} existing={[]} onSaved={vi.fn()} onClose={vi.fn()} />);
     await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
 
-    expect(screen.getByLabelText("분석할 카탈로그")).toHaveValue("return_gap");
     expect(screen.getByRole("button", { name: /키 조합/ })).toHaveTextContent("Ctrl + Shift + 1");
     expect(screen.getByDisplayValue("기존 질문")).toBeInTheDocument();
+    // 종목과 기간도 실제로 채워져야 한다 — 저장 버튼 활성화로만 간접 확인하면 period는 검증되지 않는다
+    expect(screen.getByRole("button", { name: "삼성전자(005930) 제거" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "SK하이닉스(000660) 제거" })).toBeInTheDocument();
+    expect(screen.getByLabelText("기간")).toHaveValue("6M");
+  });
+
+  /**
+   * 카탈로그 첫 항목이 아닌 지표로 확인한다. return_gap은 CATALOG[0]이라
+   * editing.toolName을 아예 안 읽어도 목록 첫 항목 폴백이 같은 값을 만들어 단언이 가려진다.
+   */
+  it("편집 모드에서 카탈로그 첫 항목이 아닌 지표도 그대로 채운다", async () => {
+    const editing = {
+      id: "s2",
+      toolName: "nav_disparity",
+      targets: ["KODEX 200(069500)"],
+      period: null,
+      keyCombo: "ctrl+shift+2",
+      prompt: "KODEX 200의 괴리율을 알려줘",
+    };
+    render(<ShortcutFormModal editing={editing} existing={[]} onSaved={vi.fn()} onClose={vi.fn()} />);
+    await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
+
+    expect(screen.getByLabelText("분석할 카탈로그")).toHaveValue("nav_disparity");
+    expect(screen.getByRole("button", { name: "KODEX 200(069500) 제거" })).toBeInTheDocument();
   });
 
   it("편집 모드에서는 기존 프롬프트를 자동 갱신하지 않는다", async () => {
