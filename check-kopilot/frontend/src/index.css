@@ -21,6 +21,10 @@
   --color-accent-600: #f97706;
   --color-accent-700: #db6906;
   --color-accent-800: #bd5b05;
+
+  --animate-welcome-pop: welcome-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-welcome-fade-in: welcome-fade-in 0.5s ease-out both;
+  --animate-twinkle: twinkle 1.8s ease-in-out infinite;
 }
 
 html,
@@ -41,11 +45,56 @@ body {
   box-sizing: border-box;
 }
 
+/* Tailwind의 preflight가 button 커서를 default로 리셋한다 — 클릭 가능한 요소는 다시 pointer로 되돌린다 */
+button:not(:disabled),
+[role="button"],
+a {
+  cursor: pointer;
+}
+
 @keyframes loading-fill {
   from {
     width: 0%;
   }
   to {
     width: 100%;
+  }
+}
+
+@keyframes welcome-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(-8deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08) rotate(2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes welcome-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(15deg);
   }
 }
