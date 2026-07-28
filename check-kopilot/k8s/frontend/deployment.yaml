@@ -18,7 +18,7 @@ spec:
       - name: ncr-secret
       containers:
       - name: frontend
-        image: team3-registry.ncr.fin-ntruss.com/kopilot-frontend:b92c8bf
+        image: team3-registry.ncr.fin-ntruss.com/kopilot-frontend:d6f300e
         ports:
         - containerPort: 80
         readinessProbe:
