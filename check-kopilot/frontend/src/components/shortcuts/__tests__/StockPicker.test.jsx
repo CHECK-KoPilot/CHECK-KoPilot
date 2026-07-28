@@ -62,11 +62,10 @@ describe("StockPicker", () => {
 
     await user.type(screen.getByRole("combobox", { name: "종목 검색" }), "존재없음");
 
-    // 빈 결과는 자동완성 리스트를 띄우지 않는다 — 검색어 입력 후 일정 시간 대기 (debounce)
-    await new Promise((r) => setTimeout(r, 300)); // debounce + margin
-
-    // 리스트가 없어야 한다
-    expect(screen.queryByRole("list")).not.toBeInTheDocument();
+    // 빈 결과는 자동완성 리스트를 띄우지 않는다 — debounce 후 리스트가 없을 때까지 대기
+    await waitFor(() => {
+      expect(screen.queryByRole("list")).not.toBeInTheDocument();
+    });
     expect(onChange).not.toHaveBeenCalled();
   });
 
@@ -85,11 +84,10 @@ describe("StockPicker", () => {
     // 입력은 그대로 남아있다
     expect(screen.getByRole("combobox", { name: "종목 검색" })).toHaveValue("테스트");
 
-    // 자동완성은 띄워지지 않는다 — 검색 실패 후 일정 시간 대기 (debounce)
-    await new Promise((r) => setTimeout(r, 300)); // debounce + margin
-
-    // 리스트가 없어야 한다
-    expect(screen.queryByRole("list")).not.toBeInTheDocument();
+    // 자동완성은 띄워지지 않는다 — 검색 실패 후 리스트가 없을 때까지 대기
+    await waitFor(() => {
+      expect(screen.queryByRole("list")).not.toBeInTheDocument();
+    });
     expect(onChange).not.toHaveBeenCalled();
   });
 

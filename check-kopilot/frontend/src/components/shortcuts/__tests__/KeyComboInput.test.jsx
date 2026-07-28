@@ -8,12 +8,12 @@ describe("KeyComboInput", () => {
     render(<KeyComboInput value={null} onChange={onChange} conflictLabel={null} />);
 
     const button = screen.getByRole("button", { name: /키 조합/ });
-    const defaultPrevented = fireEvent.keyDown(button, {
+    const notPrevented = fireEvent.keyDown(button, {
       code: "Digit1", ctrlKey: true, shiftKey: true,
     });
 
     expect(onChange).toHaveBeenCalledWith("ctrl+shift+1");
-    expect(defaultPrevented).toBe(false); // fireEvent.keyDown returns !defaultPrevented
+    expect(notPrevented).toBe(false); // fireEvent.keyDown returns !defaultPrevented
   });
 
   it("Tab 키는 기본 동작을 막지 않아 키보드 네비게이션이 작동한다", () => {
@@ -23,17 +23,17 @@ describe("KeyComboInput", () => {
     const button = screen.getByRole("button", { name: /키 조합/ });
 
     // Tab은 Ctrl/⌘이 없으므로 default를 막지 않는다
-    const tabPrevented = fireEvent.keyDown(button, {
+    const tabNotPrevented = fireEvent.keyDown(button, {
       code: "Tab", key: "Tab",
     });
-    expect(tabPrevented).toBe(true); // fireEvent returns true when NOT prevented
+    expect(tabNotPrevented).toBe(true); // fireEvent returns true when NOT prevented
     expect(onChange).not.toHaveBeenCalled();
 
     // Ctrl+Shift+1은 default를 막는다
-    const comboPrevented = fireEvent.keyDown(button, {
+    const comboNotPrevented = fireEvent.keyDown(button, {
       code: "Digit1", ctrlKey: true, shiftKey: true,
     });
-    expect(comboPrevented).toBe(false); // fireEvent returns false when prevented
+    expect(comboNotPrevented).toBe(false); // fireEvent returns false when prevented
     expect(onChange).toHaveBeenCalledWith("ctrl+shift+1");
   });
 
