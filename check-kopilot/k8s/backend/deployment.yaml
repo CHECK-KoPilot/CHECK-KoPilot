@@ -31,6 +31,11 @@ spec:
             secretKeyRef:
               name: backend-secret
               key: mysql-password
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: openai-api-key
         - name: SPRING_DATA_REDIS_HOST
           value: "cache-48sg4s-fkr.cdb.fin-ntruss.com"
         - name: SPRING_DATA_REDIS_PORT
