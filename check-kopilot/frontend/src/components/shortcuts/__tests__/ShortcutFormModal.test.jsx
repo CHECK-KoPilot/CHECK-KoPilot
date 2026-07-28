@@ -153,4 +153,123 @@ describe("ShortcutFormModal", () => {
       expect(screen.getByText(/이미 사용 중인 키 조합/)).toBeInTheDocument()
     );
   });
+
+  it("Escape 키를 누르면 모달이 닫힌다", async () => {
+    const onClose = vi.fn();
+    render(<ShortcutFormModal editing={null} existing={[]} onSaved={vi.fn()} onClose={onClose} />);
+    await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
+
+    fireEvent.keyDown(window, { key: "Escape" });
+
+    await waitFor(() => expect(onClose).toHaveBeenCalled());
+  });
+
+  it("모달이 dialog 역할을 가진다", async () => {
+    render(<ShortcutFormModal editing={null} existing={[]} onSaved={vi.fn()} onClose={vi.fn()} />);
+    await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
+
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("편집 모드에서 기존 값들을 미리 채운다", async () => {
+    const editing = {
+      id: "s1",
+      toolName: "return_gap",
+      targets: ["삼성전자(005930)", "SK하이닉스(000660)"],
+      period: "6M",
+      keyCombo: "ctrl+shift+1",
+      prompt: "기존 질문",
+    };
+    render(<ShortcutFormModal editing={editing} existing={[]} onSaved={vi.fn()} onClose={vi.fn()} />);
+    await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
+
+    expect(screen.getByLabelText("분석할 카탈로그")).toHaveValue("return_gap");
+    expect(screen.getByRole("button", { name: /키 조합/ })).toHaveTextContent("Ctrl + Shift + 1");
+    expect(screen.getByDisplayValue("기존 질문")).toBeInTheDocument();
+  });
+
+  it("편집 모드에서는 기존 프롬프트를 자동 갱신하지 않는다", async () => {
+    const user = userEvent.setup();
+    const editing = {
+      id: "s1",
+      toolName: "return_gap",
+      targets: ["삼성전자(005930)", "SK하이닉스(000660)"],
+      period: "3M",
+      keyCombo: "ctrl+shift+1",
+      prompt: "사용자가 작성한 기존 질문",
+    };
+    render(<ShortcutFormModal editing={editing} existing={[]} onSaved={vi.fn()} onClose={vi.fn()} />);
+    await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
+
+    const promptField = screen.getByDisplayValue("사용자가 작성한 기존 질문");
+
+    // 기간을 변경해도 프롬프트는 변하지 않아야 함
+    await user.selectOptions(screen.getByLabelText("기간"), "6M");
+
+    // 프롬프트가 여전히 사용자가 작성한 내용이어야 함
+    expect(promptField).toHaveValue("사용자가 작성한 기존 질문");
+  });
+
+  it("편집 모드에서 저장하면 updateShortcut을 호출한다", async () => {
+    const saved = {
+      id: "s1",
+      keyCombo: "ctrl+shift+1",
+      toolName: "return_gap",
+      targets: ["삼성전자(005930)", "SK하이닉스(000660)"],
+      period: "3M",
+      prompt: "수정된 질문",
+    };
+    const fetchMock = vi.fn((url, options = {}) => {
+      const href = String(url);
+      if (href.startsWith("/api/catalog")) {
+        return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve(CATALOG) });
+      }
+      if (href.startsWith("/api/shortcuts/s1") && options.method === "PUT") {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => Promise.resolve(saved),
+        });
+      }
+      if (href.startsWith("/api/stocks")) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: () => Promise.resolve([
+            { code: "005930", name: "삼성전자", market: "KOSPI", type: "STOCK" },
+            { code: "000660", name: "SK하이닉스", market: "KOSPI", type: "STOCK" },
+          ]),
+        });
+      }
+      return Promise.reject(new Error(`unexpected fetch: ${href}`));
+    });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const editing = {
+      id: "s1",
+      toolName: "return_gap",
+      targets: ["삼성전자(005930)", "SK하이닉스(000660)"],
+      period: "3M",
+      keyCombo: "ctrl+shift+1",
+      prompt: "기존 질문",
+    };
+    const onSaved = vi.fn();
+    const user = userEvent.setup();
+    render(<ShortcutFormModal editing={editing} existing={[]} onSaved={onSaved} onClose={vi.fn()} />);
+    await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
+
+    const promptField = screen.getByDisplayValue("기존 질문");
+    await user.clear(promptField);
+    await user.type(promptField, "수정된 질문");
+
+    await user.click(screen.getByRole("button", { name: "저장" }));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith(
+        "/api/shortcuts/s1",
+        expect.objectContaining({ method: "PUT" })
+      );
+      expect(onSaved).toHaveBeenCalledWith(saved);
+    });
+  });
 });

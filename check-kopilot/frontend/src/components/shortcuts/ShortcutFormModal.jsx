@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { X } from "lucide-react";
 import Button from "../common/Button";
 import StockPicker from "./StockPicker";
@@ -8,7 +8,18 @@ import { createShortcut, fetchCatalog, updateShortcut } from "../../lib/shortcut
 
 const DEFAULT_PERIOD = "3M";
 
+function buildPromptFrom(selected, targets, periodUsed, period) {
+  if (!selected) return "";
+  return buildPrompt({
+    template: selected.promptTemplate,
+    targetLabels: targets,
+    periodCode: periodUsed ? period : null,
+  });
+}
+
 export default function ShortcutFormModal({ editing, existing, onSaved, onClose }) {
+  const dialogRef = useRef(null);
+  const toolSelectRef = useRef(null);
   const [catalog, setCatalog] = useState([]);
   const [toolName, setToolName] = useState(editing?.toolName ?? "");
   const [targets, setTargets] = useState(editing?.targets ?? []);
@@ -27,7 +38,21 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
         setToolName((current) => current || items?.[0]?.toolName || "");
       })
       .catch(() => setError("지표 목록을 불러오지 못했습니다"));
+
+    // 포커스를 셀렉트 또는 첫 입력 필드로 이동
+    if (toolSelectRef.current) {
+      toolSelectRef.current.focus();
+    }
   }, []);
+
+  // Escape 키로 모달 닫기
+  useEffect(() => {
+    function handleKey(e) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
 
   const selected = useMemo(
     () => catalog.find((item) => item.toolName === toolName) ?? null,
@@ -39,11 +64,7 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
   // 선택이 바뀌면 문구를 다시 만든다. 단, 사람이 손댄 뒤로는 건드리지 않는다.
   useEffect(() => {
     if (!selected || promptEdited) return;
-    setPrompt(buildPrompt({
-      template: selected.promptTemplate,
-      targetLabels: targets,
-      periodCode: periodUsed ? period : null,
-    }));
+    setPrompt(buildPromptFrom(selected, targets, periodUsed, period));
   }, [selected, targets, period, periodUsed, promptEdited]);
 
   const conflict = existing.find((s) => s.keyCombo === keyCombo && s.id !== editing?.id) ?? null;
@@ -78,18 +99,20 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
   const regenerate = () => {
     if (!selected) return;
     setPromptEdited(false);
-    setPrompt(buildPrompt({
-      template: selected.promptTemplate,
-      targetLabels: targets,
-      periodCode: periodUsed ? period : null,
-    }));
+    setPrompt(buildPromptFrom(selected, targets, periodUsed, period));
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4">
-      <div className="max-h-full w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-5 shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4" role="presentation">
+      <div
+        ref={dialogRef}
+        className="max-h-full w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-5 shadow-xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="shortcut-modal-title"
+      >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-slate-900">
+          <h2 id="shortcut-modal-title" className="text-lg font-semibold text-slate-900">
             {editing ? "단축키 수정" : "단축키 추가"}
           </h2>
           <button
@@ -108,6 +131,7 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
               분석할 카탈로그
             </label>
             <select
+              ref={toolSelectRef}
               id="shortcut-tool"
               aria-label="분석할 카탈로그"
               value={toolName}
@@ -167,7 +191,7 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
           <div>
             <div className="mb-1 flex items-center justify-between">
               <label htmlFor="shortcut-prompt" className="text-sm font-medium text-slate-700">
-                프롬프트 예시
+                프롬프트
               </label>
               <button
                 type="button"
