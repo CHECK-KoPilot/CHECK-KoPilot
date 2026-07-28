@@ -117,6 +117,10 @@ public class ToolDispatcher {
         demand.record(sessionId, topic, matchedIds, DemandRecorder.AUTO);
 
         ObjectNode payload = mapper.createObjectNode().put("topic", topic);
+        // 매칭 0건을 빈 배열로만 알리면 LLM이 그 공백을 자기 지식으로 채운다(범위 밖 질문에
+        // 일반 상식 답을 붙이던 문제). status를 명시해 "지어내지 말라"는 지시가 걸릴 곳을 만든다.
+        boolean noMatch = r.matched().isEmpty() && r.catalog().isEmpty();
+        payload.put("status", noMatch ? "no_match" : "ok");
         payload.set("matched", mapper.valueToTree(r.matched()));
         payload.set("catalog", mapper.valueToTree(r.catalog()));
         payload.set("usedKeywords", mapper.valueToTree(r.usedKeywords()));

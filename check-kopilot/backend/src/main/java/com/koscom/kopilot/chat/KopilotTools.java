@@ -30,10 +30,13 @@ public class KopilotTools {
             tools.add(tool(e.toolName(), e.description(), e.inputSchemaProperties(), e.requiredParams()));
         }
         tools.add(tool(ToolDispatcher.EXPLAIN_RECIPE,
-                "카탈로그 6개 지표로 답할 수 없는 데이터/지표 질문이거나, 사용자가 구현 방법·API 조합을 물을 때 사용. "
-              + "관련 CHECK API 후보와 각 API가 반환하는 관련 필드를 찾아 반환한다. 이를 바탕으로 어떤 API를 어떤 "
-              + "파라미터로 호출해 어떤 필드를 어떻게 조합·계산하면 되는지 레시피를 설명할 것. "
-              + "거절 대신 항상 이 tool로 가이드를 제공한다.",
+                "카탈로그 6개 지표로 답할 수 없는 **주식·ETF·지수 시장 데이터** 질문이거나, 사용자가 그 데이터의 "
+              + "구현 방법·API 조합을 물을 때 사용. 관련 CHECK API 후보와 각 API가 반환하는 관련 필드를 찾아 "
+              + "반환한다. 이를 바탕으로 어떤 API를 어떤 파라미터로 호출해 어떤 필드를 어떻게 조합·계산하면 "
+              + "되는지 레시피를 설명할 것. 시장 데이터 질문이면 거절 대신 이 tool로 가이드를 제공한다. "
+              + "단 **금융·증권과 무관한 주제(일반 상식, IT 용어, 번역, 코딩, 잡담)에는 이 tool을 호출하지 "
+              + "말고** 다루지 않는 주제라고 답할 것 — 이 tool은 CHECK API 명세만 검색하므로 그런 질문에는 "
+              + "빈 결과를 돌려주고, 그 호출 자체가 카탈로그 수요 통계를 오염시킨다.",
                 Map.of(
                     "topic", Map.of("type", "string",
                         "description", "사용자가 원하는 데이터/지표에 대한 한국어 설명"),

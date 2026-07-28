@@ -44,6 +44,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * cat build/eval-report.txt
  * </pre>
  * CHECK API는 {@code fixture} 프로파일로 우회한다 — 이 평가는 tool 선택만 보고 실행 결과는 보지 않는다.
+ *
+ * <p>케이스 필드: {@code q}(질문) / {@code expect}(tool 이름 또는 {@code no_tool}) /
+ * {@code params}(인자 부분일치) / {@code paramsExact}(인자 정확일치) / {@code history}(대화 이력) /
+ * {@code answerMustNotContain}·{@code answerMustContain}(응답 문구 보조 판정, #99).
  */
 @SpringBootTest
 @ActiveProfiles("fixture")
@@ -129,6 +133,8 @@ class EvalRunner {
                 (Map<String, Object>) c.getOrDefault("params", Map.of());
         Map<String, Object> exactParams =
                 (Map<String, Object>) c.getOrDefault("paramsExact", Map.of());
+        List<String> banned = (List<String>) c.getOrDefault("answerMustNotContain", List.of());
+        List<String> required = (List<String>) c.getOrDefault("answerMustContain", List.of());
         List<String> history = (List<String>) c.getOrDefault("history", List.of());
 
         List<Message> messages = new ArrayList<>();
@@ -178,7 +184,29 @@ class EvalRunner {
                                 .formatted(e.getKey(), got, wanted, arguments), question);
             }
         }
+        // tool 판정만으로는 "범위 밖 질문에 tool 없이 일반 지식으로 답하기"를 잡지 못한다 —
+        // no_tool 하나가 되묻기·거절·잡답을 한 덩어리로 PASS 처리하기 때문이다(#99).
+        // 문구 판정은 본질적으로 취약하므로 expect를 대체하지 않고 보조한다: tool이 1차, 문구가 2차다.
+        String answer = out.getText() == null ? "" : out.getText();
+        for (String token : banned) {
+            if (answer.contains(token)) {
+                return new Result(false, expect, actual,
+                        "응답에 '%s'가 있다 — %s".formatted(token, snippet(answer)), question);
+            }
+        }
+        for (String token : required) {
+            if (!answer.contains(token)) {
+                return new Result(false, expect, actual,
+                        "응답에 '%s'가 없다 — %s".formatted(token, snippet(answer)), question);
+            }
+        }
         return new Result(true, expect, actual, "", question);
+    }
+
+    /** 리포트 한 줄이 터미널을 덮지 않게 자른다. */
+    private String snippet(String text) {
+        String flat = text.replace('\n', ' ');
+        return flat.length() > 100 ? flat.substring(0, 100) + "…" : flat;
     }
 
     private JsonNode parseArguments(String arguments) {
