@@ -25,6 +25,12 @@ function baseKey(event) {
   return null;
 }
 
+/** 눌린 키가 브라우저 예약 글자인지. 안내 문구를 갈라 쓰려고 노출한다. */
+export function isReservedLetter(event) {
+  const letter = LETTER.exec(event.code ?? "");
+  return Boolean(letter) && RESERVED_LETTERS.has(letter[1].toLowerCase());
+}
+
 /** 폼 안내 문구용 — 왜 어떤 글자는 안 잡히는지 알려준다. */
 export const RESERVED_HINT = "T·W·N·Q·I·J·P는 브라우저가 먼저 가져가 쓸 수 없어요";
 
