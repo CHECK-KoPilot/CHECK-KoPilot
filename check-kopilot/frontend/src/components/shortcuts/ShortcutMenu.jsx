@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Keyboard, Plus, Trash2, Pencil } from "lucide-react";
 import ShortcutFormModal from "./ShortcutFormModal";
 import { formatCombo, isMacPlatform } from "../../lib/keyCombo";
@@ -8,7 +8,26 @@ export default function ShortcutMenu({ shortcuts, loadError, onReload, onFormOpe
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState(null);
   const [formOpen, setFormOpen] = useState(false);
+  const rootRef = useRef(null);
   const mac = isMacPlatform();
+
+  // 열린 드롭다운은 Escape와 바깥 클릭으로 닫는다 — 토글 버튼을 다시 찾아 눌러야만
+  // 닫히면 채팅으로 넘어간 뒤에도 패널이 화면에 남는다. ProductTour와 같은 방식.
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    const onPointerDown = (e) => {
+      if (!rootRef.current?.contains(e.target)) setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("pointerdown", onPointerDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("pointerdown", onPointerDown);
+    };
+  }, [open]);
 
   const openForm = (shortcut) => {
     setEditing(shortcut);
@@ -33,10 +52,11 @@ export default function ShortcutMenu({ shortcuts, loadError, onReload, onFormOpe
   };
 
   return (
-    <div className="relative">
+    <div className="relative" ref={rootRef}>
       <button
         type="button"
         aria-label="단축키"
+        aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className="flex h-9 items-center gap-1.5 rounded-lg px-2 text-slate-600 hover:bg-slate-100"
       >
@@ -70,7 +90,7 @@ export default function ShortcutMenu({ shortcuts, loadError, onReload, onFormOpe
                   </div>
                   <button
                     type="button"
-                    aria-label={`${s.keyCombo} 수정`}
+                    aria-label={`${formatCombo(s.keyCombo, mac)} 수정`}
                     onClick={() => openForm(s)}
                     className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-200 hover:text-slate-600"
                   >
@@ -78,7 +98,7 @@ export default function ShortcutMenu({ shortcuts, loadError, onReload, onFormOpe
                   </button>
                   <button
                     type="button"
-                    aria-label={`${s.keyCombo} 삭제`}
+                    aria-label={`${formatCombo(s.keyCombo, mac)} 삭제`}
                     onClick={() => remove(s.id)}
                     className="flex h-7 w-7 items-center justify-center rounded-lg text-slate-400 hover:bg-red-50 hover:text-red-600"
                   >

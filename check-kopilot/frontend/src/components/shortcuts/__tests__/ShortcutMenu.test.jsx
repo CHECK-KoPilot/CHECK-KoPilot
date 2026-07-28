@@ -76,4 +76,52 @@ describe("ShortcutMenu", () => {
 
     expect(onReload).toHaveBeenCalled();
   });
+
+  it("Escape를 누르면 드롭다운이 닫힌다", async () => {
+    const user = userEvent.setup();
+    render(
+      <ShortcutMenu shortcuts={[SHORTCUT]} loadError={false} onReload={vi.fn()}
+                    onFormOpenChange={vi.fn()} />
+    );
+
+    await user.click(screen.getByRole("button", { name: "단축키" }));
+    expect(screen.getByText(SHORTCUT.prompt)).toBeInTheDocument();
+
+    await user.keyboard("{Escape}");
+
+    expect(screen.queryByText(SHORTCUT.prompt)).not.toBeInTheDocument();
+  });
+
+  it("바깥을 클릭하면 드롭다운이 닫힌다", async () => {
+    const user = userEvent.setup();
+    render(
+      <div>
+        <button type="button">채팅 입력</button>
+        <ShortcutMenu shortcuts={[SHORTCUT]} loadError={false} onReload={vi.fn()}
+                      onFormOpenChange={vi.fn()} />
+      </div>
+    );
+
+    await user.click(screen.getByRole("button", { name: "단축키" }));
+    expect(screen.getByText(SHORTCUT.prompt)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "채팅 입력" }));
+
+    expect(screen.queryByText(SHORTCUT.prompt)).not.toBeInTheDocument();
+  });
+
+  it("열림 상태를 aria-expanded로 알린다", async () => {
+    const user = userEvent.setup();
+    render(
+      <ShortcutMenu shortcuts={[SHORTCUT]} loadError={false} onReload={vi.fn()}
+                    onFormOpenChange={vi.fn()} />
+    );
+
+    const toggle = screen.getByRole("button", { name: "단축키" });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+
+    await user.click(toggle);
+
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+  });
 });
