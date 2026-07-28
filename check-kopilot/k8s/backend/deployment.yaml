@@ -40,6 +40,39 @@ spec:
           value: "cache-48sg4s-fkr.cdb.fin-ntruss.com"
         - name: SPRING_DATA_REDIS_PORT
           value: "6379"
+        # 아래 4개는 backend-secret에 키 추가 필요(openai-api-key, check-cust-id, check-api-key, admin-token)
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: openai-api-key
+        - name: CHECK_CUST_ID
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: check-cust-id
+        - name: CHECK_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: check-api-key
+        - name: ADMIN_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: admin-token
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 15
         resources:
           requests:
             cpu: "500m"

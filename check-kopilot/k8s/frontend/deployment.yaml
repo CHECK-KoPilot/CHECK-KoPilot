@@ -21,6 +21,18 @@ spec:
         image: team3-registry.ncr.fin-ntruss.com/kopilot-frontend:84ab28e
         ports:
         - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 15
         resources:
           requests:
             cpu: "500m"
