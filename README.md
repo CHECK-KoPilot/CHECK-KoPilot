@@ -122,11 +122,8 @@ API 구조나 파라미터를 몰라도 평소 쓰는 말로 물어보면 됩니
 <img width="1085" height="702" alt="image" src="https://github.com/user-attachments/assets/42fdc70f-2480-4e31-afe5-1e675ed22e0e" />
 
 
-<details>
-<summary><b>요청 처리 흐름 (시퀀스 다이어그램)</b></summary>
 
-<br/>
-
+## 요청 처리 흐름 (시퀀스 다이어그램)
 사용자 질문은 **① 지표 답변 카드 / ② 종목 되묻기 / ③ 가이드 레시피** 세 갈래로 분기하며, 어떤 흐름에서도 수치 계산은 백엔드가 수행합니다.
 
 ```mermaid
@@ -183,15 +180,14 @@ sequenceDiagram
 
 | 분류 | 기술 스택 |
 |------|----------|
-| 공통 | ![](https://img.shields.io/badge/Java%2021-007396?logo=openjdk&logoColor=white) ![](https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white) ![](https://img.shields.io/badge/Node.js%2020-5FA04E?logo=nodedotjs&logoColor=white) ![](https://img.shields.io/badge/NPM-%23CB3837.svg?logo=npm&logoColor=white) |
-| FE | ![](https://img.shields.io/badge/React%2019-61DAFB?logo=react&logoColor=black) ![](https://img.shields.io/badge/Vite%208-646CFF?logo=vite&logoColor=white) ![](https://img.shields.io/badge/Tailwind%20CSS%204-06B6D4?logo=tailwindcss&logoColor=white) ![](https://img.shields.io/badge/Recharts%203-FF6384?logo=chartdotjs&logoColor=white) ![](https://img.shields.io/badge/React%20Router%207-CA4245?logo=reactrouter&logoColor=white) ![](https://img.shields.io/badge/PWA-5A0FC8?logo=pwa&logoColor=white) |
-| BE | ![](https://img.shields.io/badge/Spring%20Boot%203.5-6DB33F?logo=springboot&logoColor=white) ![](https://img.shields.io/badge/Spring%20Web%20%C2%B7%20JDBC%20%C2%B7%20Data%20Redis-6DB33F?logo=spring&logoColor=white) ![](https://img.shields.io/badge/Spring%20Actuator-6DB33F?logo=spring&logoColor=white) ![](https://img.shields.io/badge/Apache%20POI%205.3-D22128?logo=apache&logoColor=white) ![](https://img.shields.io/badge/Jackson-4B8BBE?logo=json&logoColor=white) |
-| AI | ![](https://img.shields.io/badge/OpenAI%20gpt--4o-412991?logo=openai&logoColor=white) ![](https://img.shields.io/badge/Spring%20AI%201.0.0-6DB33F?logo=spring&logoColor=white) ![](https://img.shields.io/badge/Tool%20Calling-1A7F64?logo=openai&logoColor=white) |
+| FE | ![](https://img.shields.io/badge/React%2019-61DAFB?logo=react&logoColor=black) ![](https://img.shields.io/badge/Vite%208-646CFF?logo=vite&logoColor=white) ![](https://img.shields.io/badge/Tailwind%20CSS%204-06B6D4?logo=tailwindcss&logoColor=white) ![](https://img.shields.io/badge/Recharts%203-FF6384?logo=chartdotjs&logoColor=white) ![](https://img.shields.io/badge/PWA-5A0FC8?logo=pwa&logoColor=white) |
+| BE | ![](https://img.shields.io/badge/Spring%20Boot%203.5-6DB33F?logo=springboot&logoColor=white) ![](https://img.shields.io/badge/Spring%20Web%20%C2%B7%20JDBC%20%C2%B7%20Data%20Redis-6DB33F?logo=spring&logoColor=white) ![](https://img.shields.io/badge/Spring%20Actuator-6DB33F?logo=spring&logoColor=white) ![](https://img.shields.io/badge/Jackson-4B8BBE?logo=json&logoColor=white) |
+| AI | ![](https://img.shields.io/badge/OpenAI%20gpt--4o-412991?logo=openai&logoColor=white) ![](https://img.shields.io/badge/Spring%20AI%201.0.0-6DB33F?logo=spring&logoColor=white)|
 | Database | ![](https://img.shields.io/badge/MySQL%208.4-4479A1?logo=mysql&logoColor=white) ![](https://img.shields.io/badge/Redis%207-%23DD0031.svg?logo=redis&logoColor=white) |
-| External API | ![](https://img.shields.io/badge/KOSCOM%20CHECK%20API-0B4DA2?logoColor=white) ![](https://img.shields.io/badge/F%EC%BD%94%EB%93%9C%201%2C841-4A5568?logoColor=white) ![](https://img.shields.io/badge/Endpoint%20776-4A5568?logoColor=white) |
-| Test | ![](https://img.shields.io/badge/-JUnit%205-%2325A162?logo=junit5&logoColor=white) ![](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white) ![](https://img.shields.io/badge/Testing%20Library-E33332?logo=testinglibrary&logoColor=white) ![](https://img.shields.io/badge/oxlint-2E2E2E?logoColor=white) |
+| External API | ![](https://img.shields.io/badge/KOSCOM%20CHECK%20API-0B4DA2?logoColor=white)  |
+| Test | ![](https://img.shields.io/badge/-JUnit%205-%2325A162?logo=junit5&logoColor=white) |
 | Infrastructure | ![](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) ![](https://img.shields.io/badge/Kubernetes%20(NKS)-326CE5?logo=kubernetes&logoColor=white) ![](https://img.shields.io/badge/Terraform-7B42BC?logo=terraform&logoColor=white) ![](https://img.shields.io/badge/GitHub%20Actions-%232671E5.svg?logo=githubactions&logoColor=white) ![](https://img.shields.io/badge/Naver%20Cloud%20Platform-03C75A?logo=naver&logoColor=ffffff) |
-| Collaboration Tools | ![](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white) ![](https://img.shields.io/badge/-Notion-000000?logo=notion&logoColor=white) ![](https://img.shields.io/badge/Figma-%23F24E1E.svg?logo=figma&logoColor=white) ![](https://img.shields.io/badge/-Slack-4A154B?logo=slack&logoColor=white) |
+| Collaboration Tools | ![](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white) ![](https://img.shields.io/badge/-Notion-000000?logo=notion&logoColor=white)|
 </br>
 
 ## 프로젝트 구조
