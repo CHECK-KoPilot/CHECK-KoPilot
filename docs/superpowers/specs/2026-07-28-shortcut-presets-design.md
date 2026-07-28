@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS shortcut (
 - `ShortcutController` — REST 4개
 - `JdbcShortcutStore` — CRUD
 - `Shortcut` — 레코드
-- 검증: 키 패턴 `^ctrl\+shift\+[a-z0-9]$`, `targets` 1~5개, `prompt` 1~300자, `toolName`이 카탈로그에 있는지
+- 검증: 키 패턴 `^ctrl\+shift\+[a-z0-9]$`, `prompt` 1~300자, `toolName`이 카탈로그에 있는지, `targets` 개수가 **그 지표의 `minTargets`~`maxTargets`** 안인지(고정 상한을 두면 `return_ranking`의 2~10개와 어긋난다)
 
 계산 로직이 없으므로 `catalog`·`chat`·`checkapi`의 기존 흐름은 건드리지 않는다. `MetricExecutor`에 default 메서드가 하나 붙는 것이 유일한 기존 코드 변경이다.
 
