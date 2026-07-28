@@ -191,7 +191,7 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
           <div>
             <div className="mb-1 flex items-center justify-between">
               <label htmlFor="shortcut-prompt" className="text-sm font-medium text-slate-700">
-                프롬프트
+                프롬프트 예시
               </label>
               <button
                 type="button"
@@ -203,7 +203,6 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
             </div>
             <textarea
               id="shortcut-prompt"
-              aria-label="프롬프트"
               rows={3}
               value={prompt}
               onChange={(e) => { setPromptEdited(true); setPrompt(e.target.value); }}

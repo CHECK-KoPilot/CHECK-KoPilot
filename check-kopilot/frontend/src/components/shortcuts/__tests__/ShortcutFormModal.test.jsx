@@ -69,7 +69,7 @@ describe("ShortcutFormModal", () => {
     await pickStock(user, "삼성전자");
     await pickStock(user, "SK하이닉스");
 
-    expect(screen.getByLabelText("프롬프트")).toHaveValue(
+    expect(screen.getByLabelText("프롬프트 예시")).toHaveValue(
       "삼성전자와 SK하이닉스의 최근 3개월 수익률 갭을 비교해줘"
     );
   });
@@ -90,7 +90,7 @@ describe("ShortcutFormModal", () => {
     await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
     await pickStock(user, "삼성전자");
 
-    const prompt = screen.getByLabelText("프롬프트");
+    const prompt = screen.getByLabelText("프롬프트 예시");
     await user.clear(prompt);
     await user.type(prompt, "내가 직접 쓴 질문");
     await pickStock(user, "SK하이닉스");
