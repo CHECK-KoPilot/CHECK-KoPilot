@@ -39,12 +39,12 @@ export default function GuideRecipeCard({ message, explanation, onAskFollowUp })
       <div className="mb-3 flex items-start gap-2">
         <Compass size={16} className="mt-0.5 shrink-0 text-accent-500" />
         <div>
-          <h3 className="text-sm font-semibold text-slate-900 lg:text-base">
+          <h3 className="text-lg font-semibold text-slate-900 lg:text-xl">
             {knownMetric
               ? `'${topic}' 직접 구현하기`
               : `'${topic}'은 현재 카탈로그에 없는 지표입니다`}
           </h3>
-          <p className="mt-0.5 text-sm text-slate-500 lg:text-[15px]">
+          <p className="mt-0.5 text-lg text-slate-500 lg:text-[19px]">
             {knownMetric
               ? "이 카드가 실제로 호출한 CHECK API입니다. 같은 값을 직접 산출할 수 있습니다."
               : "대신 아래 CHECK API를 조합하면 동일한 데이터를 직접 산출할 수 있습니다."}
@@ -54,7 +54,7 @@ export default function GuideRecipeCard({ message, explanation, onAskFollowUp })
 
       {matched.length > 0 && (
         <section className="mb-3">
-          <p className="mb-1.5 text-xs font-semibold text-slate-500">
+          <p className="mb-1.5 text-base font-semibold text-slate-500">
             필요한 CHECK API
           </p>
           <div className="space-y-2">
@@ -64,28 +64,28 @@ export default function GuideRecipeCard({ message, explanation, onAskFollowUp })
                 className="rounded-lg border border-slate-100 bg-slate-50 px-3 py-2"
               >
                 <div className="flex items-center justify-between">
-                  <p className="text-sm text-slate-700">{api.name}</p>
+                  <p className="text-lg text-slate-700">{api.name}</p>
                   {api.docUrl && (
                     <a
                       href={api.docUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-1 text-xs text-accent-600 hover:underline"
+                      className="flex items-center gap-1 text-base text-accent-600 hover:underline"
                     >
                       명세 보기 <ExternalLink size={11} />
                     </a>
                   )}
                 </div>
                 {api.summary && (
-                  <p className="text-xs text-slate-400">{api.summary}</p>
+                  <p className="text-base text-slate-400">{api.summary}</p>
                 )}
-                <code className="text-xs text-slate-400">{api.path}</code>
+                <code className="text-base text-slate-400">{api.path}</code>
                 {(api.params ?? []).length > 0 && (
                   <div className="mt-1.5 flex flex-wrap gap-1">
                     {api.params.map((p) => (
                       <span
                         key={p.name}
-                        className="rounded bg-white px-1.5 py-0.5 text-[11px] text-slate-500 border border-slate-200"
+                        className="rounded bg-white px-1.5 py-0.5 text-[15px] text-slate-500 border border-slate-200"
                       >
                         {p.name}
                         {p.required ? "*" : ""}
@@ -98,7 +98,7 @@ export default function GuideRecipeCard({ message, explanation, onAskFollowUp })
                     {api.fields.map((f) => (
                       <span
                         key={f.code}
-                        className="rounded-full bg-accent-50 px-2 py-0.5 text-[11px] text-accent-700"
+                        className="rounded-full bg-accent-50 px-2 py-0.5 text-[15px] text-accent-700"
                       >
                         {f.label}
                       </span>
@@ -118,7 +118,7 @@ export default function GuideRecipeCard({ message, explanation, onAskFollowUp })
             aria-expanded={catalogOpen}
             className="flex w-full items-center justify-between px-3 py-2 text-left"
           >
-            <span className="text-xs font-semibold text-slate-500">
+            <span className="text-base font-semibold text-slate-500">
               다른 후보 API ({catalog.length}건)
             </span>
             <ChevronDown
@@ -133,7 +133,7 @@ export default function GuideRecipeCard({ message, explanation, onAskFollowUp })
                 <span
                   key={c.apiId}
                   title={c.summary}
-                  className="rounded-full border border-slate-200 px-2.5 py-1 text-xs text-slate-600"
+                  className="rounded-full border border-slate-200 px-2.5 py-1 text-base text-slate-600"
                 >
                   {c.name}
                 </span>

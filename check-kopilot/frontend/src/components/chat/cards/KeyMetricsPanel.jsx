@@ -13,18 +13,18 @@ export default function KeyMetricsPanel({ headline }) {
             key={m.label}
             className="rounded-xl border border-slate-200 bg-slate-50 p-3 lg:p-4"
           >
-            <p className="text-xs text-slate-500 lg:text-sm">{m.label}</p>
+            <p className="text-base text-slate-500 lg:text-lg">{m.label}</p>
             <p
               className={cn(
-                "mt-1 text-xl font-semibold tabular-nums lg:text-2xl",
+                "mt-1 text-2xl font-semibold tabular-nums lg:text-[28px]",
                 isPercent ? (isPositive ? "text-up-600" : "text-down-600") : "text-slate-900"
               )}
             >
               {isPercent ? formatPercent(m.value) : m.value}
               {!isPercent && (
-                <span className="ml-0.5 text-sm font-normal text-slate-400">{m.unit}</span>
+                <span className="ml-0.5 text-lg font-normal text-slate-400">{m.unit}</span>
               )}
-              {m.unit === "%p" && <span className="ml-0.5 text-sm font-normal">p</span>}
+              {m.unit === "%p" && <span className="ml-0.5 text-lg font-normal">p</span>}
             </p>
           </div>
         );

@@ -25,7 +25,7 @@ const CARD_EVENT_TYPES = {
   guide: "guide",
 };
 
-const LOADING_DURATION_MS = 1100;
+const LOADING_DURATION_MS = 2000;
 
 export default function ChatPage() {
   // 서버는 새로고침 후에도 세션 컨텍스트를 기억한다 — 화면도 같이 복원해야 맥락이 어긋나지 않는다
