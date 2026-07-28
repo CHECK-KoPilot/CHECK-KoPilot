@@ -18,7 +18,7 @@ spec:
       - name: ncr-secret
       containers:
       - name: backend
-        image: NCR_REGISTRY_URL/kopilot-backend:latest
+        image: team3-registry.ncr.fin-ntruss.com/kopilot-backend:4ac9375
         ports:
         - containerPort: 8080
         env:
