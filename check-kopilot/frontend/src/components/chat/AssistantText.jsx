@@ -91,12 +91,12 @@ export default function AssistantText({ text }) {
 
   return (
     <div className="flex justify-start">
-      <div className="max-w-lg space-y-2 rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-2.5 text-sm text-slate-800 lg:max-w-xl lg:px-5 lg:py-3 lg:text-base">
+      <div className="max-w-lg space-y-2 rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-2.5 text-lg text-slate-800 lg:max-w-xl lg:px-5 lg:py-3 lg:text-xl">
         {blocks.map((block, i) =>
           block.type === "code" ? (
             <pre
               key={i}
-              className="overflow-x-auto rounded-lg bg-slate-800 px-3 py-2 text-xs text-slate-100"
+              className="overflow-x-auto rounded-lg bg-slate-800 px-3 py-2 text-base text-slate-100"
             >
               <code>{block.value}</code>
             </pre>

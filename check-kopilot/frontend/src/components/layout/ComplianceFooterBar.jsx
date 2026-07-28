@@ -10,7 +10,7 @@ export default function ComplianceFooterBar() {
       }}
     >
       <ShieldAlert size={12} className="shrink-0 text-slate-400" />
-      <p className="text-[11px] leading-snug text-slate-400 lg:text-xs">
+      <p className="text-[17px] leading-snug text-slate-400 lg:text-lg">
         {DISCLAIMER}
       </p>
     </div>

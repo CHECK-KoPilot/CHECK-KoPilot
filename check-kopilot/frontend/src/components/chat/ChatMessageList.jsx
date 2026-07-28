@@ -16,7 +16,7 @@ function EmptyState({ onStartTour }) {
         <p className="text-base font-semibold text-slate-800 lg:text-lg">
           무엇을 도와드릴까요?
         </p>
-        <p className="mt-1 text-sm text-slate-400 lg:text-base">
+        <p className="mt-1 text-lg text-slate-400 lg:text-xl">
           궁금한 금융 데이터를 자연어로 물어보세요
         </p>
       </div>
@@ -79,7 +79,7 @@ export default function ChatMessageList({
             <div
               key={message.id}
               id={message.id}
-              className="flex items-start gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-2.5 text-sm text-red-700"
+              className="flex items-start gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-2.5 text-lg text-red-700"
             >
               <AlertCircle size={16} className="mt-0.5 shrink-0" />
               <p>{message.text}</p>

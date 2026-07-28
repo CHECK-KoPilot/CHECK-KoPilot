@@ -3,6 +3,7 @@ import AppLayout from "../components/layout/AppLayout";
 import ChatMessageList from "../components/chat/ChatMessageList";
 import ChatInputBar from "../components/chat/ChatInputBar";
 import LoadingScreen from "../components/common/LoadingScreen";
+import WelcomeOverlay from "../components/chat/WelcomeOverlay";
 import ProductTour from "../components/tour/ProductTour";
 import { buildTourSteps } from "../data/tourSteps";
 import { streamChat, endSession } from "../lib/sse";
@@ -25,7 +26,7 @@ const CARD_EVENT_TYPES = {
   guide: "guide",
 };
 
-const LOADING_DURATION_MS = 1100;
+const LOADING_DURATION_MS = 2000;
 
 export default function ChatPage() {
   // 서버는 새로고침 후에도 세션 컨텍스트를 기억한다 — 화면도 같이 복원해야 맥락이 어긋나지 않는다
@@ -35,6 +36,9 @@ export default function ChatPage() {
   const [sending, setSending] = useState(false);
   const [conversations, setConversations] = useState(listConversations);
   const [loading, setLoading] = useState(true);
+  // 로딩 화면 직후, 처음 시작하는 대화에서만 환영 오버레이를 띄운다 —
+  // 대화가 이미 있으면(새로고침·이전 세션 복원) 방해될 뿐이다.
+  const [showWelcome, setShowWelcome] = useState(messages.length === 0);
   const [tourOpen, setTourOpen] = useState(false);
   const [tourCardId, setTourCardId] = useState(null);
   const scrollRef = useRef(null);
@@ -226,6 +230,15 @@ export default function ChatPage() {
         </div>
         <ChatInputBar onSend={ask} onSelectSuggestion={ask} disabled={sending} />
       </div>
+      {showWelcome && (
+        <WelcomeOverlay
+          onStartTour={() => {
+            setShowWelcome(false);
+            setTourOpen(true);
+          }}
+          onDismiss={() => setShowWelcome(false)}
+        />
+      )}
       {tourOpen && (
         <ProductTour steps={tourSteps} onClose={() => setTourOpen(false)} />
       )}

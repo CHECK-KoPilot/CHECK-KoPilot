@@ -39,7 +39,7 @@ export default function ChatInputBar({ onSend, onSelectSuggestion, disabled = fa
             key={p}
             disabled={disabled}
             onClick={() => onSelectSuggestion?.(p)}
-            className="rounded-full border border-slate-300 px-3 py-1 text-xs text-slate-600 hover:border-accent-300 hover:text-accent-600 disabled:opacity-40 lg:text-sm"
+            className="rounded-full border border-slate-300 px-3 py-1 text-base text-slate-600 hover:border-accent-300 hover:text-accent-600 disabled:opacity-40 lg:text-lg"
           >
             {p}
           </button>
@@ -62,7 +62,7 @@ export default function ChatInputBar({ onSend, onSelectSuggestion, disabled = fa
           rows={1}
           disabled={disabled}
           placeholder={isMobile ? SHORT_PLACEHOLDER : FULL_PLACEHOLDER}
-          className="max-h-32 flex-1 resize-none bg-transparent px-2 py-1.5 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none disabled:opacity-60 lg:text-base"
+          className="max-h-32 flex-1 resize-none bg-transparent px-2 py-1.5 text-lg text-slate-800 placeholder:text-slate-400 focus:outline-none disabled:opacity-60 lg:text-xl"
         />
         <button
           type="submit"

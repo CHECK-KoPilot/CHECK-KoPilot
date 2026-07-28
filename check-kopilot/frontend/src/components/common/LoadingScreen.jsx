@@ -1,6 +1,6 @@
 import KopilotIcon from "./KopilotIcon";
 
-export default function LoadingScreen({ durationMs = 1100 }) {
+export default function LoadingScreen({ durationMs = 2000 }) {
   return (
     <div className="flex h-[100dvh] w-full flex-col items-center justify-center gap-5 bg-white">
       <div className="relative flex items-center justify-center">
@@ -9,10 +9,10 @@ export default function LoadingScreen({ durationMs = 1100 }) {
       </div>
 
       <div className="flex flex-col items-center gap-1">
-        <p className="text-base font-semibold text-slate-900 lg:text-lg">
+        <p className="text-xl font-semibold text-slate-900 lg:text-[22px]">
           Kopilot
         </p>
-        <p className="text-xs text-slate-400 lg:text-sm">
+        <p className="text-base text-slate-400 lg:text-lg">
           금융 데이터를 준비하고 있어요
         </p>
       </div>
