@@ -16,6 +16,15 @@ CREATE TABLE IF NOT EXISTS stock_alias (
     KEY idx_stock_alias_code (code)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- 되묻기 후보를 대표성 순으로 세우기 위한 가중치. 값이 클수록 앞에 온다.
+-- 마스터 4천 행에는 시가총액 같은 대표성 신호가 없고 CHECK API에도 시총 상위 조회가 없어,
+-- 큐레이션한 대표종목만 여기에 둔다(없는 종목은 0으로 취급).
+CREATE TABLE IF NOT EXISTS stock_priority (
+    code     VARCHAR(12) NOT NULL,
+    priority INT         NOT NULL,
+    PRIMARY KEY (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE IF NOT EXISTS check_fallback (
     cache_key  VARCHAR(200) NOT NULL,
     payload    LONGTEXT     NOT NULL,
