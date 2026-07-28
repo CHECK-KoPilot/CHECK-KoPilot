@@ -90,6 +90,19 @@ cases:
   - q: "괴리율 알려줘"
     expect: no_tool
 
+  # ── 도메인 밖 → tool 없이 거절 (no_tool)
+  # "거절하지 말고 explain_recipe로 가라"는 지시에 도메인 한정이 없던 시절, 금융과 무관한
+  # 질문까지 explain_recipe로 새서 빈 가이드 카드가 뜨고 catalog_request에 수요로 적재됐다.
+  # 여기서 보는 것은 "tool을 안 부르는지"다 — 답변 문구까지는 이 하네스가 판정하지 못한다.
+  - q: "온톨로지 그래프가 뭐야?"
+    expect: no_tool
+  - q: "파이썬으로 퀵소트 구현해줘"
+    expect: no_tool
+  - q: "오늘 서울 날씨 어때?"
+    expect: no_tool
+  - q: "이 문장을 영어로 번역해줘: 반갑습니다"
+    expect: no_tool
+
   # ── 투자 판단 → 거절·정보성 전환 (no_tool)
   - q: "삼성전자 지금 사야 돼?"
     expect: no_tool
