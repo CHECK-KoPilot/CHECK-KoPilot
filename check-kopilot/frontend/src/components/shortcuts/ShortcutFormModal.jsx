@@ -1,0 +1,243 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { X } from "lucide-react";
+import Button from "../common/Button";
+import StockPicker from "./StockPicker";
+import KeyComboInput from "./KeyComboInput";
+import { PERIODS, buildPrompt, needsPeriod } from "../../lib/promptTemplate";
+import { createShortcut, fetchCatalog, updateShortcut } from "../../lib/shortcutsApi";
+
+const DEFAULT_PERIOD = "3M";
+
+function buildPromptFrom(selected, targets, periodUsed, period) {
+  if (!selected) return "";
+  return buildPrompt({
+    template: selected.promptTemplate,
+    targetLabels: targets,
+    periodCode: periodUsed ? period : null,
+  });
+}
+
+export default function ShortcutFormModal({ editing, existing, onSaved, onClose }) {
+  const dialogRef = useRef(null);
+  const toolSelectRef = useRef(null);
+  const [catalog, setCatalog] = useState([]);
+  const [toolName, setToolName] = useState(editing?.toolName ?? "");
+  const [targets, setTargets] = useState(editing?.targets ?? []);
+  const [period, setPeriod] = useState(editing?.period ?? DEFAULT_PERIOD);
+  const [keyCombo, setKeyCombo] = useState(editing?.keyCombo ?? null);
+  const [prompt, setPrompt] = useState(editing?.prompt ?? "");
+  // 편집 모드는 일단 잠가둔다. 카탈로그가 와야 저장된 문구가 자동생성물인지 가릴 수 있고,
+  // 가리기 전에 덮어쓰면 사람이 쓴 문구가 날아간다.
+  const [promptEdited, setPromptEdited] = useState(Boolean(editing));
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchCatalog()
+      .then((items) => {
+        setCatalog(items ?? []);
+        setToolName((current) => current || items?.[0]?.toolName || "");
+        // 저장된 문구가 그 프리셋의 템플릿 결과 그대로면 사람이 손댄 적 없는 자동생성물이다.
+        // 그런 문구는 편집 중 선택을 따라 다시 만들어져야 한다 — 안 그러면 종목만 바꿔도
+        // 옛 종목을 묻는 문구가 그대로 저장돼 키를 눌렀을 때 엉뚱한 질문이 나간다.
+        // prompt가 실제 전송의 단일 진실이라 이 어긋남은 화면에 드러나지도 않는다.
+        if (editing) {
+          const spec = (items ?? []).find((i) => i.toolName === editing.toolName);
+          if (spec) {
+            const generated = buildPromptFrom(
+              spec,
+              editing.targets ?? [],
+              needsPeriod(spec.promptTemplate),
+              editing.period ?? DEFAULT_PERIOD
+            );
+            if (generated === (editing.prompt ?? "")) setPromptEdited(false);
+          }
+        }
+      })
+      .catch(() => setError("지표 목록을 불러오지 못했습니다"));
+
+    // 포커스를 셀렉트 또는 첫 입력 필드로 이동
+    if (toolSelectRef.current) {
+      toolSelectRef.current.focus();
+    }
+    // 마운트 1회만 — editing은 모달이 열려 있는 동안 바뀌지 않는다(수정 대상이 바뀌면 모달이 다시 마운트된다)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Escape 키로 모달 닫기
+  useEffect(() => {
+    function handleKey(e) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  const selected = useMemo(
+    () => catalog.find((item) => item.toolName === toolName) ?? null,
+    [catalog, toolName]
+  );
+
+  const periodUsed = selected ? needsPeriod(selected.promptTemplate) : false;
+
+  // 선택이 바뀌면 문구를 다시 만든다. 단, 사람이 손댄 뒤로는 건드리지 않는다.
+  useEffect(() => {
+    if (!selected || promptEdited) return;
+    setPrompt(buildPromptFrom(selected, targets, periodUsed, period));
+  }, [selected, targets, period, periodUsed, promptEdited]);
+
+  const conflict = existing.find((s) => s.keyCombo === keyCombo && s.id !== editing?.id) ?? null;
+  const targetsOk = selected
+    && targets.length >= selected.minTargets
+    && targets.length <= selected.maxTargets;
+  const canSave = Boolean(selected) && targetsOk && Boolean(keyCombo) && !conflict
+    && prompt.trim().length > 0 && !saving;
+
+  const save = async () => {
+    setSaving(true);
+    setError(null);
+    const body = {
+      keyCombo,
+      toolName,
+      targets,
+      period: periodUsed ? period : null,
+      prompt: prompt.trim(),
+    };
+    try {
+      const saved = editing
+        ? await updateShortcut(editing.id, body)
+        : await createShortcut(body);
+      onSaved(saved);
+    } catch (e) {
+      setError(e.message ?? "저장에 실패했습니다");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const regenerate = () => {
+    if (!selected) return;
+    setPromptEdited(false);
+    setPrompt(buildPromptFrom(selected, targets, periodUsed, period));
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4" role="presentation">
+      <div
+        ref={dialogRef}
+        className="max-h-full w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-5 shadow-xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="shortcut-modal-title"
+      >
+        <div className="mb-4 flex items-center justify-between">
+          <h2 id="shortcut-modal-title" className="text-lg font-semibold text-slate-900">
+            {editing ? "단축키 수정" : "단축키 추가"}
+          </h2>
+          <button
+            type="button"
+            aria-label="닫기"
+            onClick={onClose}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="shortcut-tool" className="mb-1 block text-sm font-medium text-slate-700">
+              분석할 카탈로그
+            </label>
+            <select
+              ref={toolSelectRef}
+              id="shortcut-tool"
+              aria-label="분석할 카탈로그"
+              value={toolName}
+              onChange={(e) => setToolName(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-base text-slate-800 focus:border-accent-400 focus:outline-none"
+            >
+              {catalog.map((item) => (
+                <option key={item.toolName} value={item.toolName}>{item.label}</option>
+              ))}
+            </select>
+            {selected && (
+              <p className="mt-1 text-sm text-slate-500">
+                종목 {selected.minTargets === selected.maxTargets
+                  ? `${selected.minTargets}개`
+                  : `${selected.minTargets}~${selected.maxTargets}개`}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <span className="mb-1 block text-sm font-medium text-slate-700">종목</span>
+            <StockPicker
+              value={targets}
+              onChange={setTargets}
+              max={selected?.maxTargets ?? 1}
+            />
+          </div>
+
+          {periodUsed && (
+            <div>
+              <label htmlFor="shortcut-period" className="mb-1 block text-sm font-medium text-slate-700">
+                기간
+              </label>
+              <select
+                id="shortcut-period"
+                aria-label="기간"
+                value={period}
+                onChange={(e) => setPeriod(e.target.value)}
+                className="w-full rounded-lg border border-slate-300 px-3 py-2 text-base text-slate-800 focus:border-accent-400 focus:outline-none"
+              >
+                {PERIODS.map((p) => (
+                  <option key={p.code} value={p.code}>{p.label}</option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          <div>
+            <span className="mb-1 block text-sm font-medium text-slate-700">단축키 조합</span>
+            <KeyComboInput
+              value={keyCombo}
+              onChange={setKeyCombo}
+              conflictLabel={conflict ? conflict.prompt : null}
+            />
+          </div>
+
+          <div>
+            <div className="mb-1 flex items-center justify-between">
+              <label htmlFor="shortcut-prompt" className="text-sm font-medium text-slate-700">
+                프롬프트 예시
+              </label>
+              <button
+                type="button"
+                onClick={regenerate}
+                className="text-sm text-slate-500 hover:text-accent-600"
+              >
+                다시 생성
+              </button>
+            </div>
+            <textarea
+              id="shortcut-prompt"
+              rows={3}
+              value={prompt}
+              onChange={(e) => { setPromptEdited(true); setPrompt(e.target.value); }}
+              maxLength={300}
+              className="w-full resize-none rounded-lg border border-slate-300 px-3 py-2 text-base text-slate-800 focus:border-accent-400 focus:outline-none"
+            />
+          </div>
+
+          {error && <p className="text-sm text-red-600">{error}</p>}
+        </div>
+
+        <div className="mt-5 flex justify-end gap-2">
+          <Button variant="secondary" onClick={onClose}>취소</Button>
+          <Button variant="primary" onClick={save} disabled={!canSave}>저장</Button>
+        </div>
+      </div>
+    </div>
+  );
+}

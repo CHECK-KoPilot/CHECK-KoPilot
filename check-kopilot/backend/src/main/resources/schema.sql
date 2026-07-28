@@ -65,3 +65,18 @@ CREATE TABLE IF NOT EXISTS catalog_request (
     KEY idx_catalog_request_topic (topic),
     KEY idx_catalog_request_created (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 단축키 프리셋. prompt가 전송의 단일 진실이고, 나머지 컬럼은 폼 재편집용 메타다.
+CREATE TABLE IF NOT EXISTS shortcut (
+    id         CHAR(36)     NOT NULL,
+    device_id  VARCHAR(64)  NOT NULL,
+    key_combo  VARCHAR(40)  NOT NULL,   -- 정규화 문자열 "ctrl+shift+1"
+    tool_name  VARCHAR(60)  NOT NULL,
+    targets    VARCHAR(255) NOT NULL,   -- "삼성전자(005930),SK하이닉스(000660)"
+    period     VARCHAR(20)  NULL,       -- 1M | 3M | 6M | 1Y (기간 없는 지표는 NULL)
+    prompt     VARCHAR(300) NOT NULL,
+    created_at DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_shortcut_device_key (device_id, key_combo),
+    KEY idx_shortcut_device (device_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

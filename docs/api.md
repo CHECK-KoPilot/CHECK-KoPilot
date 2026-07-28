@@ -21,6 +21,9 @@
 | 4 | POST | `/api/catalog-requests` | **REST** (JSON) | 카탈로그 추가요청 적재 |
 | 5 | GET | `/api/admin/demand/summary` | **REST** (JSON) | 관리자 수요 요약 |
 | 6 | GET | `/api/admin/stats` | **REST** (JSON) | 관리자 통계 |
+| 7 | GET | `/api/catalog` | **REST** (JSON) | 지표 카탈로그 조회 |
+| 8 | GET | `/api/stocks` | **REST** (JSON) | 종목 자동완성 |
+| 9 | GET/POST/PUT/DELETE | `/api/shortcuts*` | **REST** (JSON) | 단축키 프리셋 CRUD |
 
 > 왜 채팅만 SSE인가: 질문 하나가 카드(계산 완료 즉시) → 해설(LLM 재호출 후)처럼 **시간차 나는 조각들**을 만들어, 준비되는 대로 밀어내기 위해서. 나머지 엔드포인트는 요청-응답 한 번으로 끝나므로 REST.
 
@@ -400,4 +403,292 @@ header X-Admin-Token: kopilot-demo
 
 200 OK
 { "questionCount": 20, "cardCount": 14, "guideCount": 6, "catalogCoverageRate": 70 }
+```
+
+---
+
+## 7. 지표 카탈로그 조회 — REST
+
+### Description
+단축키 프리셋 폼이 지표 목록과 프롬프트 템플릿을 받아 간다. 카탈로그의 단일 출처는 백엔드 실행기다.
+
+### Endpoint
+`GET /api/catalog`
+
+### Status Code
+- `200 OK` CatalogItem 배열
+
+### Response — `CatalogItem[]`
+```json
+[
+  {
+    "toolName": "return_gap",
+    "label": "수익률 갭 비교",
+    "description": "두 대상(종목/지수/ETF)의 기간수익률 차이(수익률 갭)를 계산한다. …",
+    "promptTemplate": "{targets}의 {period} 수익률 갭을 비교해줘",
+    "minTargets": 2,
+    "maxTargets": 2
+  }
+]
+```
+
+| **필드** | **타입** | **의미** |
+| --- | --- | --- |
+| toolName | string | 지표 코드 (`GET /api/catalog`가 주는 값). 예: `return_gap`, `return_ranking` |
+| label | string | 지표 한글명 |
+| description | string | 지표 설명 |
+| promptTemplate | string | 프롬프트 템플릿 (치환 토큰: `{targets}`·`{period}`) |
+| minTargets | number | 최소 종목 개수 |
+| maxTargets | number | 최대 종목 개수 |
+
+**참고**: `promptTemplate`의 치환 토큰은 `{targets}`·`{period}` 둘뿐이다. `{period}`가 없으면 그 지표는 기간을 받지 않는다.
+
+### Example
+```json
+GET /api/catalog
+
+200 OK
+[
+  {
+    "toolName": "return_gap",
+    "label": "수익률 갭 비교",
+    "description": "두 대상의 기간수익률 차이를 계산한다.",
+    "promptTemplate": "{targets}의 {period} 수익률 갭을 비교해줘",
+    "minTargets": 2,
+    "maxTargets": 2
+  }
+]
+```
+
+---
+
+## 8. 종목 자동완성 — REST
+
+### Description
+단축키 폼의 종목 검색. 되묻기와 같은 검색기(`StockResolver`)를 쓴다.
+
+### Endpoint
+`GET /api/stocks?q=<query>&limit=<limit>`
+
+### Request
+| Parameter | Type | Description |
+| --- | --- | --- |
+| q | string (query) | 검색어 (2자 이상, 이하면 빈 배열) |
+| limit | number (query, default 8) | 요청 상한 (기본 8, 최대 20). 다만 검색기가 5건에서 끊으므로 실제 반환은 최대 5건 |
+
+### Status Code
+- `200 OK` StockInfo 배열
+
+### Response — `StockInfo[]`
+```json
+[
+  {
+    "code": "005930",
+    "name": "삼성전자",
+    "market": "KOSPI",
+    "type": "STOCK"
+  }
+]
+```
+
+| **필드** | **타입** | **의미** |
+| --- | --- | --- |
+| code | string | 종목 코드 (6자리) 또는 지수 식별자(`KOSPI`, `KOSDAQ`) |
+| name | string | 종목명 또는 지수명 |
+| market | string | 소속 시장: `KOSPI` / `KOSDAQ` (지수 행도 소속 시장을 적는다) |
+| type | string | 종류: `STOCK` / `ETF` / `ETN` / `INDEX` |
+
+### Example
+```json
+GET /api/stocks?q=삼성&limit=8
+
+200 OK
+[
+  { "code": "005930", "name": "삼성전자", "market": "KOSPI", "type": "STOCK" },
+  { "code": "009150", "name": "삼성전기", "market": "KOSPI", "type": "STOCK" }
+]
+```
+
+---
+
+## 9. 단축키 프리셋 — REST
+
+### Description
+종목·지표·기간을 묶어 키 조합에 걸어 두는 프리셋. 로그인이 없으므로 소유자는 브라우저가 발급한 `X-Device-Id`다.
+
+### Endpoint
+| 메서드 | 경로 | 응답 코드 |
+|---|---|---|
+| GET | `/api/shortcuts` | 200 |
+| POST | `/api/shortcuts` | 201 |
+| PUT | `/api/shortcuts/{id}` | 200 |
+| DELETE | `/api/shortcuts/{id}` | 204 |
+
+### Common Request
+헤더 `X-Device-Id: <UUID>` 필수 (최대 64자).
+
+### Request Body (POST / PUT)
+```json
+{
+  "keyCombo": "ctrl+shift+1",
+  "toolName": "return_gap",
+  "targets": ["삼성전자(005930)", "SK하이닉스(000660)"],
+  "period": "3M",
+  "prompt": "삼성전자와 SK하이닉스의 최근 3개월 수익률 갭을 비교해줘"
+}
+```
+
+| **필드** | **타입** | **검증 규칙** |
+| --- | --- | --- |
+| keyCombo | string | `ctrl+shift+<숫자\|영문>` 형식 (소문자 a-z·0-9 만) |
+| toolName | string | 카탈로그에 있는 지표명 |
+| targets | string[] | 개수는 해당 지표의 `minTargets`~`maxTargets` 안 |
+| period | string \| null | `1M` \| `3M` \| `6M` \| `1Y` \| null |
+| prompt | string | 1~300자 (실제로 전송될 문구) |
+
+### Response — `ShortcutView`
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "keyCombo": "ctrl+shift+1",
+  "toolName": "return_gap",
+  "targets": ["삼성전자(005930)", "SK하이닉스(000660)"],
+  "period": "3M",
+  "prompt": "삼성전자와 SK하이닉스의 최근 3개월 수익률 갭을 비교해줘"
+}
+```
+
+| **필드** | **타입** |
+| --- | --- |
+| id | string (UUID) |
+| keyCombo | string |
+| toolName | string |
+| targets | string[] |
+| period | string \| null |
+| prompt | string |
+
+### Status Code & Errors
+
+| 코드 | 상황 | 바디 `code` | 바디 `message` |
+|---|---|---|---|
+| 200 | GET/PUT 성공 | — | — |
+| 201 | POST 성공 | — | — |
+| 204 | DELETE 성공 | — | — |
+| 400 | 검증 실패 | 아래 참고 | 상세 메시지 |
+| 404 | 프리셋 없음 또는 다른 기기 | `NOT_FOUND` | 단축키를 찾을 수 없습니다 |
+| 409 | 같은 기기에서 이미 쓰는 키 | `KEY_TAKEN` | 이미 사용 중인 키 조합입니다: ... |
+
+**400 Bad Request 에러 코드**:
+| `code` | 의미 |
+|---|---|
+| `KEY_COMBO_INVALID` | 키 조합 형식 위반 |
+| `TOOL_UNKNOWN` | 지표가 없거나 단축키 대상이 아님 |
+| `TARGET_COUNT_INVALID` | 종목 개수가 해당 지표 범위 밖 |
+| `PROMPT_INVALID` | 프롬프트 길이 위반 (1~300자 아님) |
+| `TARGETS_TOO_LONG` | 종목명을 이은 길이가 255자 초과 (긴 ETN을 여러 개 담은 경우) |
+| `PERIOD_INVALID` | 기간이 `1M`·`3M`·`6M`·`1Y` 밖의 값 |
+| `DEVICE_ID_INVALID` | X-Device-Id 헤더가 빈 값이거나 64자 초과 (헤더 자체가 없으면 Spring 기본 400이라 `code`가 없다) |
+
+에러 응답 형식:
+```json
+{
+  "code": "KEY_COMBO_INVALID",
+  "message": "키 조합은 ctrl+shift+<숫자·영문> 형식이어야 합니다"
+}
+```
+
+### Example
+
+**GET — 프리셋 목록 조회**
+```
+GET /api/shortcuts
+header X-Device-Id: 11111111-1111-4111-8111-111111111111
+
+200 OK
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "keyCombo": "ctrl+shift+1",
+    "toolName": "return_gap",
+    "targets": ["삼성전자(005930)", "SK하이닉스(000660)"],
+    "period": "3M",
+    "prompt": "삼성전자와 SK하이닉스의 최근 3개월 수익률 갭을 비교해줘"
+  }
+]
+```
+
+**POST — 프리셋 생성**
+```json
+POST /api/shortcuts
+header X-Device-Id: 11111111-1111-4111-8111-111111111111
+Content-Type: application/json
+
+{
+  "keyCombo": "ctrl+shift+1",
+  "toolName": "return_gap",
+  "targets": ["삼성전자(005930)", "SK하이닉스(000660)"],
+  "period": "3M",
+  "prompt": "삼성전자와 SK하이닉스의 최근 3개월 수익률 갭을 비교해줘"
+}
+
+201 Created
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "keyCombo": "ctrl+shift+1",
+  "toolName": "return_gap",
+  "targets": ["삼성전자(005930)", "SK하이닉스(000660)"],
+  "period": "3M",
+  "prompt": "삼성전자와 SK하이닉스의 최근 3개월 수익률 갭을 비교해줘"
+}
+```
+
+**PUT — 프리셋 수정**
+```json
+PUT /api/shortcuts/550e8400-e29b-41d4-a716-446655440000
+header X-Device-Id: 11111111-1111-4111-8111-111111111111
+Content-Type: application/json
+
+{
+  "keyCombo": "ctrl+shift+2",
+  "toolName": "return_ranking",
+  "targets": ["삼성전자(005930)"],
+  "period": "1M",
+  "prompt": "삼성전자 1개월 주가 변동"
+}
+
+200 OK
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "keyCombo": "ctrl+shift+2",
+  "toolName": "return_ranking",
+  "targets": ["삼성전자(005930)"],
+  "period": "1M",
+  "prompt": "삼성전자 1개월 주가 변동"
+}
+```
+
+**DELETE — 프리셋 삭제**
+```
+DELETE /api/shortcuts/550e8400-e29b-41d4-a716-446655440000
+header X-Device-Id: 11111111-1111-4111-8111-111111111111
+
+204 No Content
+```
+
+**Error Response Example — 키 조합 형식 위반**
+```json
+400 Bad Request
+{
+  "code": "KEY_COMBO_INVALID",
+  "message": "키 조합은 ctrl+shift+<숫자·영문> 형식이어야 합니다"
+}
+```
+
+**Error Response Example — 같은 키 이미 사용 중**
+```json
+409 Conflict
+{
+  "code": "KEY_TAKEN",
+  "message": "이미 사용 중인 키 조합입니다: ctrl+shift+1"
+}
 ```

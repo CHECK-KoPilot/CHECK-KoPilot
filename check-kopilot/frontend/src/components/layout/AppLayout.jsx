@@ -5,6 +5,7 @@ import ComplianceFooterBar from "./ComplianceFooterBar";
 
 export default function AppLayout({
   headerTitle,
+  headerActions,
   children,
   sidebarOpen: controlledOpen,
   onSidebarOpenChange,
@@ -33,6 +34,7 @@ export default function AppLayout({
       <div className="flex min-w-0 flex-1 flex-col">
         <GlobalHeader
           title={headerTitle}
+          actions={headerActions}
           onMenuClick={() => setSidebarOpen(true)}
         />
         <div className="min-h-0 flex-1">{children}</div>

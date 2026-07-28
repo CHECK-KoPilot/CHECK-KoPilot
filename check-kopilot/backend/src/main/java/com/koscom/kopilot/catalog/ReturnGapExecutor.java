@@ -28,6 +28,10 @@ public class ReturnGapExecutor implements MetricExecutor {
                 + "예: '삼성전자랑 코스피 최근 한 달 수익률 갭'. 두 대상의 수익률 비교 질문에 사용.";
     }
 
+    @Override public PresetSpec presetSpec() {
+        return new PresetSpec("수익률 갭 비교", "{targets}의 {period} 수익률 갭을 비교해줘", 2, 2);
+    }
+
     @Override
     public Map<String, Object> inputSchemaProperties() {
         return Map.of(

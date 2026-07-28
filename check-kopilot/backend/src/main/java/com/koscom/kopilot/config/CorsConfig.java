@@ -26,7 +26,7 @@ public class CorsConfig implements WebMvcConfigurer {
         if (allowedOrigins.length == 0) return;    // 미설정 시 CORS 규칙 자체를 추가하지 않는다
         registry.addMapping("/api/**")
                 .allowedOrigins(allowedOrigins)
-                .allowedMethods("GET", "POST", "DELETE")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*");
     }
 }
