@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { X } from "lucide-react";
 import { searchStocks } from "../../lib/shortcutsApi";
 import { stockLabel } from "../../lib/promptTemplate";
@@ -16,6 +16,7 @@ export default function StockPicker({ value, onChange, max }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const full = value.length >= max;
+  const resultsId = useId();
 
   useEffect(() => {
     if (full || query.trim().length < MIN_QUERY) {
@@ -69,7 +70,7 @@ export default function StockPicker({ value, onChange, max }) {
           role="combobox"
           aria-label="종목 검색"
           aria-expanded={results.length > 0}
-          aria-controls="stock-picker-results"
+          aria-controls={resultsId}
           value={query}
           disabled={full}
           onChange={(e) => setQuery(e.target.value)}
@@ -79,7 +80,7 @@ export default function StockPicker({ value, onChange, max }) {
 
         {results.length > 0 && (
           <ul
-            id="stock-picker-results"
+            id={resultsId}
             className="absolute z-10 mt-1 max-h-56 w-full overflow-y-auto rounded-lg border border-slate-200 bg-white py-1 shadow-lg"
           >
             {results.map((stock) => (

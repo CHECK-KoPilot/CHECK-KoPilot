@@ -45,4 +45,58 @@ describe("StockPicker", () => {
 
     expect(screen.getByRole("combobox", { name: "종목 검색" })).toBeDisabled();
   });
+
+  it("검색 결과가 없으면 후보를 띄우지 않는다", async () => {
+    vi.unstubAllGlobals();
+    vi.stubGlobal("fetch", vi.fn(() =>
+      Promise.resolve({
+        ok: true,
+        status: 200,
+        json: () => Promise.resolve([]),
+      })
+    ));
+
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<StockPicker value={[]} onChange={onChange} max={2} />);
+
+    await user.type(screen.getByRole("combobox", { name: "종목 검색" }), "존재없음");
+
+    // 빈 결과는 자동완성 리스트를 띄우지 않는다
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("검색 실패 시 입력은 계속되고 자동완성만 비워진다", async () => {
+    vi.unstubAllGlobals();
+    vi.stubGlobal("fetch", vi.fn(() =>
+      Promise.reject(new Error("Network error"))
+    ));
+
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<StockPicker value={[]} onChange={onChange} max={2} />);
+
+    await user.type(screen.getByRole("combobox", { name: "종목 검색" }), "테스트");
+
+    // 입력은 그대로 남아있고
+    expect(screen.getByRole("combobox", { name: "종목 검색" })).toHaveValue("테스트");
+    // 자동완성은 띄워지지 않는다
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("중복된 종목은 다시 담지 않는다", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<StockPicker value={["삼성전자(005930)"]} onChange={onChange} max={2} />);
+
+    await user.type(screen.getByRole("combobox", { name: "종목 검색" }), "삼성");
+
+    await waitFor(() => expect(screen.getByText("삼성전자")).toBeInTheDocument());
+    await user.click(screen.getByText("삼성전자"));
+
+    // onChange가 호출되지 않는다 (중복 방지)
+    expect(onChange).not.toHaveBeenCalled();
+  });
 });

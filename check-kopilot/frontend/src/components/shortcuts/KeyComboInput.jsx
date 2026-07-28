@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { comboFromEvent, formatCombo, isMacPlatform } from "../../lib/keyCombo";
 
 const RULE = "Ctrl(⌘)+Shift와 숫자·영문 한 글자 조합만 등록할 수 있어요";
@@ -12,11 +12,16 @@ const RULE = "Ctrl(⌘)+Shift와 숫자·영문 한 글자 조합만 등록할 �
 export default function KeyComboInput({ value, onChange, conflictLabel }) {
   const [hint, setHint] = useState(null);
   const mac = isMacPlatform();
+  const hintId = useId();
 
   const capture = (event) => {
-    // 캡처 중에는 모든 키를 먹는다 — Ctrl+S 같은 조합이 브라우저로 새어 나가면 안 된다
-    event.preventDefault();
+    // 모든 키를 먹는 게 아니라, Ctrl/⌘ 조합만 먹는다.
+    // 그래야 Tab/Escape 같은 네이티브 네비게이션이 작동한다.
     if (["Control", "Shift", "Alt", "Meta"].includes(event.key)) return;
+    if (!event.ctrlKey && !event.metaKey) return;
+
+    // Ctrl/⌘ 조합만 기본 동작을 막는다 — Ctrl+S 같은 조합이 브라우저로 새어 나가면 안 된다
+    event.preventDefault();
 
     const combo = comboFromEvent(event);
     if (!combo) {
@@ -39,11 +44,15 @@ export default function KeyComboInput({ value, onChange, conflictLabel }) {
       </button>
 
       {conflictLabel && (
-        <p className="mt-1 text-sm text-red-600">
+        <p className="mt-1 text-sm text-red-600" aria-live="polite">
           이미 &lsquo;{conflictLabel}&rsquo;이(가) 쓰는 조합이에요
         </p>
       )}
-      {hint && !conflictLabel && <p className="mt-1 text-sm text-slate-500">{hint}</p>}
+      {hint && !conflictLabel && (
+        <p className="mt-1 text-sm text-slate-500" id={hintId} aria-live="polite">
+          {hint}
+        </p>
+      )}
     </div>
   );
 }
