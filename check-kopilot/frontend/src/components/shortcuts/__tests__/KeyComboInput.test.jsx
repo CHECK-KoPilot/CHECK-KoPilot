@@ -56,4 +56,17 @@ describe("KeyComboInput", () => {
 
     expect(screen.getByText(/삼성전자 변동성/)).toBeInTheDocument();
   });
+
+  /** Ctrl+Shift+W는 창을 닫는다 — 등록을 막고, 왜 막혔는지 형식 안내와 갈라 말한다. */
+  it("예약 글자를 누르면 형식 안내가 아니라 예약 사유를 보여준다", () => {
+    const onChange = vi.fn();
+    render(<KeyComboInput value={null} onChange={onChange} conflictLabel={null} />);
+
+    fireEvent.keyDown(screen.getByRole("button", { name: /키 조합/ }), {
+      code: "KeyW", ctrlKey: true, shiftKey: true,
+    });
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(screen.getByText(/브라우저가 먼저 가져가/)).toBeInTheDocument();
+  });
 });

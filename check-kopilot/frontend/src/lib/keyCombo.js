@@ -25,8 +25,13 @@ function baseKey(event) {
   return null;
 }
 
-/** 눌린 키가 브라우저 예약 글자인지. 안내 문구를 갈라 쓰려고 노출한다. */
-export function isReservedLetter(event) {
+/**
+ * 예약 글자'라서만' 거부된 입력인지. 수식키까지 맞을 때만 참이다.
+ * Ctrl+T처럼 Shift가 빠진 입력은 예약 여부와 무관하게 형식 안내를 받아야 한다.
+ */
+export function isReservedOnly(event) {
+  if (!(event.ctrlKey || event.metaKey)) return false;
+  if (!event.shiftKey || event.altKey) return false;
   const letter = LETTER.exec(event.code ?? "");
   return Boolean(letter) && RESERVED_LETTERS.has(letter[1].toLowerCase());
 }

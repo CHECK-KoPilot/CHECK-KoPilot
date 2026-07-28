@@ -1,5 +1,5 @@
 import { useId, useState } from "react";
-import { RESERVED_HINT, comboFromEvent, formatCombo, isMacPlatform, isReservedLetter } from "../../lib/keyCombo";
+import { RESERVED_HINT, comboFromEvent, formatCombo, isMacPlatform, isReservedOnly } from "../../lib/keyCombo";
 
 const RULE = "Ctrl(⌘)+Shift와 숫자·영문 한 글자 조합만 등록할 수 있어요";
 
@@ -26,7 +26,7 @@ export default function KeyComboInput({ value, onChange, conflictLabel }) {
     const combo = comboFromEvent(event);
     if (!combo) {
       // 왜 안 잡히는지 갈라 알려준다 — 예약 글자는 아무리 눌러도 안 되는 것이지 오조작이 아니다
-      setHint(isReservedLetter(event) ? RESERVED_HINT : RULE);
+      setHint(isReservedOnly(event) ? RESERVED_HINT : RULE);
       return;
     }
     setHint(null);
