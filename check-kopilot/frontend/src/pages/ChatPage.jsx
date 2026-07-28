@@ -5,8 +5,10 @@ import ChatInputBar from "../components/chat/ChatInputBar";
 import LoadingScreen from "../components/common/LoadingScreen";
 import WelcomeOverlay from "../components/chat/WelcomeOverlay";
 import ProductTour from "../components/tour/ProductTour";
+import ShortcutMenu from "../components/shortcuts/ShortcutMenu";
 import { buildTourSteps } from "../data/tourSteps";
 import { streamChat, endSession } from "../lib/sse";
+import { useShortcuts } from "../hooks/useShortcuts";
 import {
   getSessionId,
   resetSessionId,
@@ -41,6 +43,8 @@ export default function ChatPage() {
   const [showWelcome, setShowWelcome] = useState(messages.length === 0);
   const [tourOpen, setTourOpen] = useState(false);
   const [tourCardId, setTourCardId] = useState(null);
+  // 폼이 열려 있는 동안 키 트리거를 끈다 — 키 캡처 중에 그 단축키가 발사되면 안 된다
+  const [shortcutFormOpen, setShortcutFormOpen] = useState(false);
   const scrollRef = useRef(null);
   const pinnedUserIdRef = useRef(null);
   const followingRef = useRef(false);
@@ -160,6 +164,11 @@ export default function ChatPage() {
     }
   };
 
+  const { shortcuts, loadError: shortcutsLoadError, reload: reloadShortcuts } = useShortcuts({
+    onTrigger: ask,
+    enabled: !sending && !shortcutFormOpen,
+  });
+
   const handleSelectCandidate = (candidate) => {
     ask(`${candidate.name}(${candidate.code}) 기준으로 진행해줘`);
   };
@@ -209,6 +218,14 @@ export default function ChatPage() {
   return (
     <AppLayout
       headerTitle="새 대화"
+      headerActions={
+        <ShortcutMenu
+          shortcuts={shortcuts}
+          loadError={shortcutsLoadError}
+          onReload={reloadShortcuts}
+          onFormOpenChange={setShortcutFormOpen}
+        />
+      }
       sidebarOpen={sidebarOpen}
       onSidebarOpenChange={setSidebarOpen}
       onNewChat={handleNewChat}

@@ -1,7 +1,7 @@
 import { ChevronDown, Menu } from "lucide-react";
 import KopilotIcon from "../common/KopilotIcon";
 
-export default function GlobalHeader({ title = "새 대화", onMenuClick }) {
+export default function GlobalHeader({ title = "새 대화", onMenuClick, actions }) {
   return (
     <header
       className="flex h-14 shrink-0 items-center justify-between border-b border-slate-200 bg-white px-3 lg:h-16 lg:px-6"
@@ -26,15 +26,18 @@ export default function GlobalHeader({ title = "새 대화", onMenuClick }) {
         </span>
       </div>
 
-      <button className="flex shrink-0 items-center gap-2 rounded-full py-1 pl-1 pr-2 hover:bg-slate-100 lg:pr-3">
-        <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-200 text-base font-medium text-slate-600 lg:h-8 lg:w-8 lg:text-lg">
-          김
-        </div>
-        <span className="hidden text-lg text-slate-600 sm:block lg:text-[19px]">
-          김트레이더
-        </span>
-        <ChevronDown size={14} className="hidden text-slate-400 sm:block" />
-      </button>
+      <div className="flex shrink-0 items-center gap-1">
+        {actions}
+        <button className="flex shrink-0 items-center gap-2 rounded-full py-1 pl-1 pr-2 hover:bg-slate-100 lg:pr-3">
+          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-200 text-base font-medium text-slate-600 lg:h-8 lg:w-8 lg:text-lg">
+            김
+          </div>
+          <span className="hidden text-lg text-slate-600 sm:block lg:text-[19px]">
+            김트레이더
+          </span>
+          <ChevronDown size={14} className="hidden text-slate-400 sm:block" />
+        </button>
+      </div>
     </header>
   );
 }
