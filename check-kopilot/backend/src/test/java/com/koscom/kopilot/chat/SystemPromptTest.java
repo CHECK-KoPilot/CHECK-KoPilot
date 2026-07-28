@@ -29,11 +29,20 @@ class SystemPromptTest {
     }
 
     @Test
-    void asksBackOnlyWhenTargetIsMissing() {
-        // 되묻는 조건은 "대상 없음" 하나여야 한다. 기간에도 되묻게 두면 이어가기 규칙과 정면으로 부딪혀
-        // 같은 질문이 실행마다 되묻기/호출을 오간다(실제로 그랬다).
-        assertThat(prompt).contains("대상(종목·ETF)이 질문에도 앞선 대화에도 없으면");
-        assertThat(prompt).contains("기간은 되묻지 않는다");
+    void asksBackOnlyWhenTargetIsMissingOrAmbiguous() {
+        // 되묻는 조건은 "대상 없음"과 "다건 매칭" 둘뿐이어야 한다. 기간에도 되묻게 두면 이어가기 규칙과
+        // 정면으로 부딪혀 같은 질문이 실행마다 되묻기/호출을 오간다(실제로 그랬다 — #90에서 재발).
+        assertThat(prompt).contains("대상(종목·ETF)이 질문에도 앞선 대화에도 아예 없을 때");
+        assertThat(prompt).contains("status=ambiguous");
+        assertThat(prompt).contains("기간이 없다고 되묻지 않는다");
+    }
+
+    @Test
+    void forbidsCompletingAmbiguousStockNames() {
+        // "삼성"을 "삼성전자"로 보정해 넘기면 백엔드가 모호성을 판정할 기회 자체가 사라져
+        // 되묻기가 영영 뜨지 않는다(#90 — chat_log id 279에서 실측).
+        assertThat(prompt).contains("회사명을 추측해 완성하지도 않는다");
+        assertThat(prompt).contains("\"삼성\"은 \"삼성\"으로");
     }
 
     @Test

@@ -31,10 +31,12 @@ public class ReturnGapExecutor implements MetricExecutor {
     @Override
     public Map<String, Object> inputSchemaProperties() {
         return Map.of(
-                "target_a", Map.of("type", "string", "description", "첫 번째 대상의 한글 종목명/지수명"),
-                "target_b", Map.of("type", "string", "description", "두 번째 대상의 한글 종목명/지수명"),
-                "from", Map.of("type", "string", "description", "조회 시작일 YYYY-MM-DD"),
-                "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD"));
+                "target_a", Map.of("type", "string", "description",
+                        "첫 번째 대상 — 한글 종목명·지수명·약칭." + ExecutorSupport.VERBATIM_TARGET),
+                "target_b", Map.of("type", "string", "description",
+                        "두 번째 대상 — 한글 종목명·지수명·약칭." + ExecutorSupport.VERBATIM_TARGET),
+                "from", Map.of("type", "string", "description", ExecutorSupport.FROM_DESC),
+                "to", Map.of("type", "string", "description", ExecutorSupport.TO_DESC));
     }
 
     @Override

@@ -27,9 +27,10 @@ public class VolatilityExecutor implements MetricExecutor {
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "targets", Map.of("type", "array", "items", Map.of("type", "string"),
-                    "description", "변동성을 계산할 대상들의 한글 종목명/지수명 (1~5개)"),
-            "from", Map.of("type", "string", "description", "조회 시작일 YYYY-MM-DD"),
-            "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD"));
+                    "description", "변동성을 계산할 대상들 — 한글 종목명·지수명·약칭 (1~5개)."
+                            + ExecutorSupport.VERBATIM_TARGET),
+            "from", Map.of("type", "string", "description", ExecutorSupport.FROM_DESC),
+            "to", Map.of("type", "string", "description", ExecutorSupport.TO_DESC));
     }
 
     @Override public List<String> requiredParams() { return List.of("targets"); }
