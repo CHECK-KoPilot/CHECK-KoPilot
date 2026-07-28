@@ -24,11 +24,10 @@ public class NavDisparityExecutor implements MetricExecutor {
 
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
-            "target", Map.of("type", "string", "description", "ETF의 한글 상품명 (예: TIGER 미국S&P500)"),
-            "from", Map.of("type", "string",
-                "description", "조회 시작일 YYYY-MM-DD (생략 시 최근 "
-                    + ExecutorSupport.DEFAULT_PERIOD_DAYS + "일)"),
-            "to", Map.of("type", "string", "description", "조회 종료일 YYYY-MM-DD (생략 시 오늘)"));
+            "target", Map.of("type", "string", "description",
+                "ETF의 한글 상품명 (예: TIGER 미국S&P500)." + ExecutorSupport.VERBATIM_TARGET),
+            "from", Map.of("type", "string", "description", ExecutorSupport.FROM_DESC),
+            "to", Map.of("type", "string", "description", ExecutorSupport.TO_DESC));
     }
 
     /**

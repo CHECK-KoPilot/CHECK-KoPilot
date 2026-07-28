@@ -26,7 +26,8 @@ public class MaDisparityExecutor implements MetricExecutor {
 
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
-            "target", Map.of("type", "string", "description", "대상의 한글 종목명"),
+            "target", Map.of("type", "string", "description",
+                "조회할 대상 — 한글 종목명·약칭." + ExecutorSupport.VERBATIM_TARGET),
             "window", Map.of("type", "integer", "description", "이동평균 일수 (기본 20)"),
             "as_of", Map.of("type", "string", "description", "기준일 YYYY-MM-DD (생략 시 오늘)"));
     }
