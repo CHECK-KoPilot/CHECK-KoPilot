@@ -71,8 +71,8 @@ export default function SidebarNav({
             data-tour="new-chat"
             className={cn(
               "flex flex-1 items-center gap-2 rounded-lg bg-linear-to-br from-accent-500 to-accent-300 px-3 py-2.5",
-              "text-sm font-medium text-white shadow-sm shadow-accent-700/20 hover:from-accent-600 hover:to-accent-400",
-              "lg:py-3 lg:text-[15px]"
+              "text-lg font-medium text-white shadow-sm shadow-accent-700/20 hover:from-accent-600 hover:to-accent-400",
+              "lg:py-3 lg:text-[19px]"
             )}
           >
             <KopilotMark className="h-4 w-4 shrink-0" />
@@ -88,13 +88,13 @@ export default function SidebarNav({
 
         <div className="flex-1 overflow-y-auto px-3 py-2">
           {conversations.length === 0 ? (
-            <p className="px-2 py-4 text-center text-xs text-slate-400">
+            <p className="px-2 py-4 text-center text-base text-slate-400">
               아직 대화 내역이 없습니다
             </p>
           ) : (
             grouped.map(([date, items]) => (
               <div key={date} className="mb-4">
-                <p className="mb-1.5 px-2 text-xs font-medium text-slate-400 lg:text-[13px]">
+                <p className="mb-1.5 px-2 text-base font-medium text-slate-400 lg:text-[17px]">
                   {date}
                 </p>
                 <div className="space-y-0.5">
@@ -111,7 +111,7 @@ export default function SidebarNav({
                           onSelectConversation?.(conv.id);
                           onClose();
                         }}
-                        className="min-w-0 flex-1 truncate px-2 py-1.5 text-left text-sm text-slate-600 lg:py-2 lg:text-[15px]"
+                        className="min-w-0 flex-1 truncate px-2 py-1.5 text-left text-lg text-slate-600 lg:py-2 lg:text-[19px]"
                         title={conv.title}
                       >
                         {conv.title}
@@ -135,7 +135,7 @@ export default function SidebarNav({
           {navLinks.map(({ icon: Icon, label }) => (
             <button
               key={label}
-              className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm text-slate-600 hover:bg-slate-200/60 lg:text-[15px]"
+              className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-lg text-slate-600 hover:bg-slate-200/60 lg:text-[19px]"
             >
               <Icon size={16} />
               {label}

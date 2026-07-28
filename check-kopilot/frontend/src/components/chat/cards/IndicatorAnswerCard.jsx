@@ -11,17 +11,17 @@ export default function IndicatorAnswerCard({ message, tourTarget = false, onAsk
   return (
     <div className="w-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:p-5">
       <div className="mb-3">
-        <h3 className="text-sm font-semibold text-slate-900 lg:text-base">{title}</h3>
+        <h3 className="text-lg font-semibold text-slate-900 lg:text-xl">{title}</h3>
         <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
           {targets?.map((t) => (
             <span
               key={t.code}
-              className="rounded-full bg-accent-50 px-2 py-0.5 text-xs font-medium text-accent-700"
+              className="rounded-full bg-accent-50 px-2 py-0.5 text-base font-medium text-accent-700"
             >
               {t.name} {t.code}
             </span>
           ))}
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
+          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-base text-slate-500">
             {from} ~ {to}
           </span>
         </div>
@@ -38,8 +38,8 @@ export default function IndicatorAnswerCard({ message, tourTarget = false, onAsk
       {commentary && (
         <div className="mb-3 flex gap-2 rounded-xl bg-slate-50 px-3 py-2.5 lg:px-4 lg:py-3">
           <Sparkles size={14} className="mt-0.5 shrink-0 text-accent-500" />
-          <p className="text-sm leading-relaxed text-slate-600 lg:text-[15px]">
-            <span className="mr-1 text-xs font-medium text-slate-400 lg:text-sm">
+          <p className="text-lg leading-relaxed text-slate-600 lg:text-[19px]">
+            <span className="mr-1 text-base font-medium text-slate-400 lg:text-lg">
               AI 해설
             </span>
             {commentary}
