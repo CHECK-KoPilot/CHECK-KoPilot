@@ -186,7 +186,7 @@ sequenceDiagram
 | Database | ![](https://img.shields.io/badge/MySQL%208.4-4479A1?logo=mysql&logoColor=white) ![](https://img.shields.io/badge/Redis%207-%23DD0031.svg?logo=redis&logoColor=white) |
 | External API | ![](https://img.shields.io/badge/KOSCOM%20CHECK%20API-0B4DA2?logoColor=white)  |
 | Test | ![](https://img.shields.io/badge/-JUnit%205-%2325A162?logo=junit5&logoColor=white) |
-| Infrastructure | ![](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) ![](https://img.shields.io/badge/Kubernetes%20(NKS)-326CE5?logo=kubernetes&logoColor=white) ![](https://img.shields.io/badge/Terraform-7B42BC?logo=terraform&logoColor=white) ![](https://img.shields.io/badge/GitHub%20Actions-%232671E5.svg?logo=githubactions&logoColor=white) ![](https://img.shields.io/badge/Naver%20Cloud%20Platform-03C75A?logo=naver&logoColor=ffffff) |
+| Infrastructure | ![](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white) ![](https://img.shields.io/badge/Kubernetes%20(NKS)-326CE5?logo=kubernetes&logoColor=white) ![](https://img.shields.io/badge/Terraform-7B42BC?logo=terraform&logoColor=white) ![](https://img.shields.io/badge/GitHub%20Actions-%232671E5.svg?logo=githubactions&logoColor=white) ![](https://img.shields.io/badge/Argo%20CD-EF7B4D?logo=argo&logoColor=white) ![](https://img.shields.io/badge/Naver%20Cloud%20Platform-03C75A?logo=naver&logoColor=ffffff) |
 | Collaboration Tools | ![](https://img.shields.io/badge/-GitHub-181717?logo=github&logoColor=white) ![](https://img.shields.io/badge/-Notion-000000?logo=notion&logoColor=white)|
 </br>
 
