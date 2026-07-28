@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import StockPicker from "../StockPicker";
@@ -48,13 +48,14 @@ describe("StockPicker", () => {
 
   it("검색 결과가 없으면 후보를 띄우지 않는다", async () => {
     vi.unstubAllGlobals();
-    vi.stubGlobal("fetch", vi.fn(() =>
+    const fetchMock = vi.fn(() =>
       Promise.resolve({
         ok: true,
         status: 200,
         json: () => Promise.resolve([]),
       })
-    ));
+    );
+    vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
     const onChange = vi.fn();
@@ -62,18 +63,19 @@ describe("StockPicker", () => {
 
     await user.type(screen.getByRole("combobox", { name: "종목 검색" }), "존재없음");
 
-    // 빈 결과는 자동완성 리스트를 띄우지 않는다 — debounce 후 리스트가 없을 때까지 대기
-    await waitFor(() => {
-      expect(screen.queryByRole("list")).not.toBeInTheDocument();
-    });
+    // 검색이 실제로 나갈 때까지 기다린다. 리스트 부재를 곧바로 waitFor하면
+    // debounce 발사 전 초기 상태에서 첫 폴에 통과해버려 아무것도 검증하지 못한다.
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    await act(async () => {}); // setResults가 반영되도록 마이크로태스크를 비운다
+
+    expect(screen.queryByRole("list")).not.toBeInTheDocument();
     expect(onChange).not.toHaveBeenCalled();
   });
 
   it("검색 실패 시 입력은 계속되고 자동완성만 비워진다", async () => {
     vi.unstubAllGlobals();
-    vi.stubGlobal("fetch", vi.fn(() =>
-      Promise.reject(new Error("Network error"))
-    ));
+    const fetchMock = vi.fn(() => Promise.reject(new Error("Network error")));
+    vi.stubGlobal("fetch", fetchMock);
 
     const user = userEvent.setup();
     const onChange = vi.fn();
@@ -81,13 +83,13 @@ describe("StockPicker", () => {
 
     await user.type(screen.getByRole("combobox", { name: "종목 검색" }), "테스트");
 
-    // 입력은 그대로 남아있다
-    expect(screen.getByRole("combobox", { name: "종목 검색" })).toHaveValue("테스트");
+    // 검색이 실제로 나가 실패할 때까지 기다린다 — 그래야 .catch 분기를 지난 상태를 본다
+    await waitFor(() => expect(fetchMock).toHaveBeenCalled());
+    await act(async () => {});
 
-    // 자동완성은 띄워지지 않는다 — 검색 실패 후 리스트가 없을 때까지 대기
-    await waitFor(() => {
-      expect(screen.queryByRole("list")).not.toBeInTheDocument();
-    });
+    // 입력은 그대로 남고 자동완성만 비워진다
+    expect(screen.getByRole("combobox", { name: "종목 검색" })).toHaveValue("테스트");
+    expect(screen.queryByRole("list")).not.toBeInTheDocument();
     expect(onChange).not.toHaveBeenCalled();
   });
 
