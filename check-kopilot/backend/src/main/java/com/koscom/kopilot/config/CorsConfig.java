@@ -15,7 +15,10 @@ public class CorsConfig implements WebMvcConfigurer {
     private final String[] allowedOrigins;
 
     public CorsConfig(@Value("${kopilot.cors.allowed-origins:}") String allowedOrigins) {
-        this.allowedOrigins = allowedOrigins.isBlank() ? new String[0] : allowedOrigins.split(",");
+        this.allowedOrigins = java.util.Arrays.stream(allowedOrigins.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isBlank())
+                .toArray(String[]::new);
     }
 
     @Override
