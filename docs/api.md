@@ -94,6 +94,7 @@ LLM은 도구 선택·해설 텍스트만 담당하고, **모든 수치 계산�
 | **필드** | **타입** | **의미** |
 | --- | --- | --- |
 | topic | string | 사용자가 물은 주제 |
+| status | string | `ok` \| `no_match`. `no_match`는 `matched`·`catalog`가 모두 빈 경우 — CHECK API 명세에서 근거를 찾지 못했다는 뜻이고, LLM은 레시피를 지어내는 대신 안내할 수 없다고 답한다. `explain_metric_recipe`에는 실리지 않는다 |
 | knownMetric | boolean | `true`면 **카탈로그에 있는 지표의 구현 방법**을 물은 경우(`explain_metric_recipe`). 카드가 "카탈로그에 없는 지표입니다"라고 말하지 않고 "카탈로그 추가 요청" 버튼도 감춘다. 생략되면 `false` |
 | matched[] | object[] | 필요 CHECK API 상세 `{ apiId, name, path, summary, params[], docUrl, fields[] }`. `knownMetric`이면 키워드 검색 결과가 아니라 **그 지표가 실제로 호출한 API**다 |
 | matched[].params[] | object[] | 파라미터 `{ name, required }` |
@@ -207,6 +208,7 @@ data: {}
 ```json
 {
   "topic": "외국인 순매수 동향",
+  "status": "ok",
   "matched": [
     {
       "apiId": "stock-investor",
