@@ -25,7 +25,11 @@ public class PeriodSummaryExecutor implements MetricExecutor {
              + "예: '현대차 올해 최고가·최저가·수익률'. 특정 종목의 기간 시세 집계 질문에 사용.";
     }
 
-    @Override 
+    @Override public PresetSpec presetSpec() {
+        return new PresetSpec("기간 시세 요약", "{targets}의 {period} 최고가·최저가·수익률을 알려줘", 1, 1);
+    }
+
+    @Override
     public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "target", Map.of("type", "string", "description",

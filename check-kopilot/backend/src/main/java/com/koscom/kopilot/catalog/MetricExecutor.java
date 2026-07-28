@@ -18,4 +18,7 @@ public interface MetricExecutor {
     List<String> requiredParams();
 
     MetricResult execute(JsonNode args);
+
+    /** 단축키 폼에 노출할 메타. null이면 폼에 나오지 않는다(새 실행기가 잊어도 컴파일은 깨지지 않는다). */
+    default PresetSpec presetSpec() { return null; }
 }

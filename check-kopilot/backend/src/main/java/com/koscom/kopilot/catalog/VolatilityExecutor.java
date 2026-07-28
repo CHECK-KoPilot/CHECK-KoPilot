@@ -24,6 +24,10 @@ public class VolatilityExecutor implements MetricExecutor {
              + "예: '에코프로랑 에코프로비엠 변동성 비교', '삼성전자 최근 3개월 변동성'. 변동성·위험도 질문에 사용.";
     }
 
+    @Override public PresetSpec presetSpec() {
+        return new PresetSpec("변동성", "{targets}의 {period} 변동성을 계산해줘", 1, 5);
+    }
+
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "targets", Map.of("type", "array", "items", Map.of("type", "string"),
