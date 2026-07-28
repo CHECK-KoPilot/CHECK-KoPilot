@@ -14,7 +14,15 @@ function deviceHeaders() {
 }
 
 async function parse(res) {
-  if (res.ok) return res.status === 204 ? null : res.json();
+  if (res.ok) {
+    if (res.status === 204) return null;
+    try {
+      return await res.json();
+    } catch {
+      // 200 OK인데 본문이 JSON이 아닐 수도 있다 — 에러로 취급해 알린다
+      throw new ShortcutApiError(res.status, "INVALID_RESPONSE", "응답 형식이 잘못되었습니다");
+    }
+  }
   let body = {};
   try {
     body = await res.json();
