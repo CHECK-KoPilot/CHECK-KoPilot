@@ -34,6 +34,10 @@ public class CumulativeReturnExecutor implements MetricExecutor {
              + "둘을 비교하면 return_gap, 셋 이상을 줄 세우면 return_ranking을 쓸 것.";
     }
 
+    @Override public PresetSpec presetSpec() {
+        return new PresetSpec("누적수익률 추이", "{targets}의 {period} 누적수익률을 차트로 보여줘", 1, 1);
+    }
+
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "target", Map.of("type", "string", "description",

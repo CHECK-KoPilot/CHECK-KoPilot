@@ -22,6 +22,11 @@ public class NavDisparityExecutor implements MetricExecutor {
              + "ETF 전용 지표 — 일반 주식/지수에는 사용 불가.";
     }
 
+    // "지금 얼마나 벌어져 있나"를 묻는 지표라 기간이 없다
+    @Override public PresetSpec presetSpec() {
+        return new PresetSpec("ETF 괴리율", "{targets}의 괴리율을 알려줘", 1, 1);
+    }
+
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "target", Map.of("type", "string", "description",

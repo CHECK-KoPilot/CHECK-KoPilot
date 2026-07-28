@@ -26,6 +26,10 @@ public class ReturnRankingExecutor implements MetricExecutor {
              + "주의: 테마명·업종명만 있고 종목이 나열되지 않았으면 이 tool을 쓰지 말고 종목을 되물을 것.";
     }
 
+    @Override public PresetSpec presetSpec() {
+        return new PresetSpec("수익률 순위", "{targets}의 {period} 수익률 순위를 매겨줘", 2, 10);
+    }
+
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "targets", Map.of("type", "array", "items", Map.of("type", "string"),

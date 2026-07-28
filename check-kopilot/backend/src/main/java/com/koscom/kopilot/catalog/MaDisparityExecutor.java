@@ -24,6 +24,11 @@ public class MaDisparityExecutor implements MetricExecutor {
              + "이동평균선·이격도 질문에 사용. window 기본값 20.";
     }
 
+    // 기간이 아니라 기준일을 받는 지표라 {period}를 넣지 않는다
+    @Override public PresetSpec presetSpec() {
+        return new PresetSpec("이동평균 이격도", "{targets}의 20일 이동평균 이격도를 알려줘", 1, 1);
+    }
+
     @Override public Map<String, Object> inputSchemaProperties() {
         return Map.of(
             "target", Map.of("type", "string", "description",
