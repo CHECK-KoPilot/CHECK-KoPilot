@@ -26,7 +26,8 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
   const [period, setPeriod] = useState(editing?.period ?? DEFAULT_PERIOD);
   const [keyCombo, setKeyCombo] = useState(editing?.keyCombo ?? null);
   const [prompt, setPrompt] = useState(editing?.prompt ?? "");
-  // 편집 중인 프리셋의 문구는 이미 사람이 확정한 것이다 — 열자마자 덮어쓰지 않는다
+  // 편집 모드는 일단 잠가둔다. 카탈로그가 와야 저장된 문구가 자동생성물인지 가릴 수 있고,
+  // 가리기 전에 덮어쓰면 사람이 쓴 문구가 날아간다.
   const [promptEdited, setPromptEdited] = useState(Boolean(editing));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
@@ -36,6 +37,22 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
       .then((items) => {
         setCatalog(items ?? []);
         setToolName((current) => current || items?.[0]?.toolName || "");
+        // 저장된 문구가 그 프리셋의 템플릿 결과 그대로면 사람이 손댄 적 없는 자동생성물이다.
+        // 그런 문구는 편집 중 선택을 따라 다시 만들어져야 한다 — 안 그러면 종목만 바꿔도
+        // 옛 종목을 묻는 문구가 그대로 저장돼 키를 눌렀을 때 엉뚱한 질문이 나간다.
+        // prompt가 실제 전송의 단일 진실이라 이 어긋남은 화면에 드러나지도 않는다.
+        if (editing) {
+          const spec = (items ?? []).find((i) => i.toolName === editing.toolName);
+          if (spec) {
+            const generated = buildPromptFrom(
+              spec,
+              editing.targets ?? [],
+              needsPeriod(spec.promptTemplate),
+              editing.period ?? DEFAULT_PERIOD
+            );
+            if (generated === (editing.prompt ?? "")) setPromptEdited(false);
+          }
+        }
       })
       .catch(() => setError("지표 목록을 불러오지 못했습니다"));
 
@@ -43,6 +60,8 @@ export default function ShortcutFormModal({ editing, existing, onSaved, onClose 
     if (toolSelectRef.current) {
       toolSelectRef.current.focus();
     }
+    // 마운트 1회만 — editing은 모달이 열려 있는 동안 바뀌지 않는다(수정 대상이 바뀌면 모달이 다시 마운트된다)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Escape 키로 모달 닫기

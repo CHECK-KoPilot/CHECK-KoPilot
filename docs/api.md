@@ -434,7 +434,7 @@ header X-Admin-Token: kopilot-demo
 
 | **필드** | **타입** | **의미** |
 | --- | --- | --- |
-| toolName | string | 지표 코드 (예: `return_gap`, `price_gap` 등) |
+| toolName | string | 지표 코드 (`GET /api/catalog`가 주는 값). 예: `return_gap`, `return_ranking` |
 | label | string | 지표 한글명 |
 | description | string | 지표 설명 |
 | promptTemplate | string | 프롬프트 템플릿 (치환 토큰: `{targets}`·`{period}`) |
@@ -474,7 +474,7 @@ GET /api/catalog
 | Parameter | Type | Description |
 | --- | --- | --- |
 | q | string (query) | 검색어 (2자 이상, 이하면 빈 배열) |
-| limit | number (query, default 8) | 반환할 항목 수 (기본값 8, 최대 20) |
+| limit | number (query, default 8) | 요청 상한 (기본 8, 최대 20). 다만 검색기가 5건에서 끊으므로 실제 반환은 최대 5건 |
 
 ### Status Code
 - `200 OK` StockInfo 배열
@@ -495,8 +495,8 @@ GET /api/catalog
 | --- | --- | --- |
 | code | string | 종목 코드 (6자리) 또는 지수 식별자(`KOSPI`, `KOSDAQ`) |
 | name | string | 종목명 또는 지수명 |
-| market | string | 소속 시장: `KOSPI` / `KOSDAQ` / `INDEX` |
-| type | string | 종류: `STOCK` / `ETF` / `INDEX` |
+| market | string | 소속 시장: `KOSPI` / `KOSDAQ` (지수 행도 소속 시장을 적는다) |
+| type | string | 종류: `STOCK` / `ETF` / `ETN` / `INDEX` |
 
 ### Example
 ```json
@@ -585,7 +585,9 @@ GET /api/stocks?q=삼성&limit=8
 | `TOOL_UNKNOWN` | 지표가 없거나 단축키 대상이 아님 |
 | `TARGET_COUNT_INVALID` | 종목 개수가 해당 지표 범위 밖 |
 | `PROMPT_INVALID` | 프롬프트 길이 위반 (1~300자 아님) |
-| `DEVICE_ID_INVALID` | X-Device-Id 헤더 누락 또는 형식 위반 |
+| `TARGETS_TOO_LONG` | 종목명을 이은 길이가 255자 초과 (긴 ETN을 여러 개 담은 경우) |
+| `PERIOD_INVALID` | 기간이 `1M`·`3M`·`6M`·`1Y` 밖의 값 |
+| `DEVICE_ID_INVALID` | X-Device-Id 헤더가 빈 값이거나 64자 초과 (헤더 자체가 없으면 Spring 기본 400이라 `code`가 없다) |
 
 에러 응답 형식:
 ```json
@@ -648,7 +650,7 @@ Content-Type: application/json
 
 {
   "keyCombo": "ctrl+shift+2",
-  "toolName": "price_gap",
+  "toolName": "return_ranking",
   "targets": ["삼성전자(005930)"],
   "period": "1M",
   "prompt": "삼성전자 1개월 주가 변동"
@@ -658,7 +660,7 @@ Content-Type: application/json
 {
   "id": "550e8400-e29b-41d4-a716-446655440000",
   "keyCombo": "ctrl+shift+2",
-  "toolName": "price_gap",
+  "toolName": "return_ranking",
   "targets": ["삼성전자(005930)"],
   "period": "1M",
   "prompt": "삼성전자 1개월 주가 변동"

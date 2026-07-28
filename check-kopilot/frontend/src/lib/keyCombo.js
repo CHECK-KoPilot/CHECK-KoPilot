@@ -3,7 +3,12 @@
  *
  * Ctrl(mac은 ⌘)+Shift로 범위를 좁힌 이유는 브라우저 예약 조합을 피하기 위해서다.
  * Ctrl+T/W/N은 탭·창을 열고, Alt+숫자는 탭을 전환한다.
+ *
+ * 다만 Ctrl+Shift 안에도 브라우저가 preventDefault를 무시하는 조합이 남아 있다.
+ * 아래 글자들은 등록 자체를 막는다 — W를 잡으면 창이 닫혀 작성 중인 폼이 날아가고,
+ * T는 저장해두면 눌러도 지표가 아니라 닫은 탭이 되살아난다.
  */
+const RESERVED_LETTERS = new Set(["t", "w", "n", "q", "i", "j", "p"]);
 const DIGIT = /^Digit([0-9])$/;
 const LETTER = /^Key([A-Z])$/;
 
@@ -13,9 +18,15 @@ function baseKey(event) {
   const digit = DIGIT.exec(code);
   if (digit) return digit[1];
   const letter = LETTER.exec(code);
-  if (letter) return letter[1].toLowerCase();
+  if (letter) {
+    const lower = letter[1].toLowerCase();
+    return RESERVED_LETTERS.has(lower) ? null : lower;
+  }
   return null;
 }
+
+/** 폼 안내 문구용 — 왜 어떤 글자는 안 잡히는지 알려준다. */
+export const RESERVED_HINT = "T·W·N·Q·I·J·P는 브라우저가 먼저 가져가 쓸 수 없어요";
 
 /** keydown 이벤트 → "ctrl+shift+1". 허용 범위 밖이면 null. */
 export function comboFromEvent(event) {

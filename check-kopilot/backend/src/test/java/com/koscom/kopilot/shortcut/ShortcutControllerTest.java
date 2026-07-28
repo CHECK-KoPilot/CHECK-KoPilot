@@ -180,4 +180,37 @@ class ShortcutControllerTest {
     void missingDeviceHeader_isBadRequest() throws Exception {
         mvc.perform(get("/api/shortcuts")).andExpect(status().isBadRequest());
     }
+
+    /**
+     * 종목명이 긴 ETN을 최대 개수(수익률 순위 = 10개)만큼 담으면 targets가 VARCHAR(255)를 넘긴다.
+     * 막지 않으면 INSERT가 터져 500이 나가고, 폼을 다 채운 사용자는 이유를 알 수 없다.
+     */
+    @Test
+    void targetsLongerThanColumn_isRejectedNotCrashed() throws Exception {
+        String longName = "하나 Solactive 2X US Tech Top 10 ETN(H)(700023)";
+        String tenLongNames = java.util.stream.IntStream.range(0, 10)
+                .mapToObj(i -> "\"" + longName + "\"")
+                .collect(java.util.stream.Collectors.joining(",", "[", "]"));
+        String body = VALID_BODY
+                .replace("return_gap", "return_ranking")
+                .replace("[\"삼성전자(005930)\",\"SK하이닉스(000660)\"]", tenLongNames);
+
+        mvc.perform(post("/api/shortcuts")
+                        .header("X-Device-Id", DEVICE)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(body))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("TARGETS_TOO_LONG"));
+    }
+
+    /** 기간은 화면이 주는 4종뿐이다. 임의 문자열이 저장되면 실행기가 파싱에서 터진다. */
+    @Test
+    void unknownPeriod_isRejected() throws Exception {
+        mvc.perform(post("/api/shortcuts")
+                        .header("X-Device-Id", DEVICE)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(VALID_BODY.replace("\"3M\"", "\"2Y\"")))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("PERIOD_INVALID"));
+    }
 }

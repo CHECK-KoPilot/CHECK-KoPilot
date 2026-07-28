@@ -295,4 +295,49 @@ describe("ShortcutFormModal", () => {
       expect(onSaved).toHaveBeenCalledWith(saved);
     });
   });
+
+  /**
+   * 자동생성 문구를 그대로 둔 프리셋은 종목을 바꾸면 문구도 따라와야 한다.
+   * prompt가 실제 전송의 단일 진실이라, 안 따라오면 키를 눌렀을 때 옛 종목을 묻는다.
+   */
+  it("손대지 않은 문구는 편집 중 선택을 따라 다시 만들어진다", async () => {
+    const user = userEvent.setup();
+    const editing = {
+      id: "s1",
+      toolName: "return_gap",
+      targets: ["삼성전자(005930)", "SK하이닉스(000660)"],
+      period: "3M",
+      keyCombo: "ctrl+shift+1",
+      // CATALOG[0]의 템플릿을 그대로 렌더한 결과 = 자동생성물
+      prompt: "삼성전자와 SK하이닉스의 최근 3개월 수익률 갭을 비교해줘",
+    };
+    render(<ShortcutFormModal editing={editing} existing={[]} onSaved={vi.fn()} onClose={vi.fn()} />);
+    await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
+
+    await user.selectOptions(screen.getByLabelText("기간"), "6M");
+
+    await waitFor(() =>
+      expect(screen.getByLabelText("프롬프트 예시")).toHaveValue(
+        "삼성전자와 SK하이닉스의 최근 6개월 수익률 갭을 비교해줘"
+      )
+    );
+  });
+
+  it("사람이 쓴 문구는 편집 중 선택이 바뀌어도 지켜진다", async () => {
+    const user = userEvent.setup();
+    const editing = {
+      id: "s1",
+      toolName: "return_gap",
+      targets: ["삼성전자(005930)", "SK하이닉스(000660)"],
+      period: "3M",
+      keyCombo: "ctrl+shift+1",
+      prompt: "내가 직접 쓴 질문",   // 템플릿 결과와 다르다 = 손댄 문구
+    };
+    render(<ShortcutFormModal editing={editing} existing={[]} onSaved={vi.fn()} onClose={vi.fn()} />);
+    await waitFor(() => expect(screen.getByLabelText("분석할 카탈로그")).toBeInTheDocument());
+
+    await user.selectOptions(screen.getByLabelText("기간"), "6M");
+
+    expect(screen.getByLabelText("프롬프트 예시")).toHaveValue("내가 직접 쓴 질문");
+  });
 });

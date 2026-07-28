@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
@@ -27,6 +28,9 @@ public class ShortcutController {
     private static final Pattern KEY_COMBO = Pattern.compile("^ctrl\\+shift\\+[a-z0-9]$");
     private static final int MAX_PROMPT_LENGTH = 300;
     private static final int MAX_DEVICE_ID_LENGTH = 64;
+    /** shortcut.targets 컬럼 폭. 넘치면 INSERT가 터지므로 저장 전에 400으로 막는다. */
+    private static final int MAX_TARGETS_LENGTH = 255;
+    private static final Set<String> PERIODS = Set.of("1M", "3M", "6M", "1Y");
 
     public record ShortcutRequest(String keyCombo, String toolName, List<String> targets,
                                   String period, String prompt) {}
@@ -148,9 +152,19 @@ public class ShortcutController {
                     "프롬프트는 1~%d자여야 합니다".formatted(MAX_PROMPT_LENGTH));
         }
 
+        // 종목명이 긴 ETN·ETF를 최대 개수만큼 담으면 255자를 넘긴다 — 컬럼이 터지기 전에 되돌려준다
+        String joined = String.join(",", targets);
+        if (joined.length() > MAX_TARGETS_LENGTH) {
+            throw new ShortcutException(HttpStatus.BAD_REQUEST, "TARGETS_TOO_LONG",
+                    "종목 이름이 너무 깁니다. 종목 수를 줄여주세요");
+        }
+
         String period = body.period() == null || body.period().isBlank() ? null : body.period().trim();
-        return new Shortcut(id, deviceId, body.keyCombo(), body.toolName(),
-                String.join(",", targets), period, prompt);
+        if (period != null && !PERIODS.contains(period)) {
+            throw new ShortcutException(HttpStatus.BAD_REQUEST, "PERIOD_INVALID",
+                    "기간은 1M · 3M · 6M · 1Y 중 하나여야 합니다");
+        }
+        return new Shortcut(id, deviceId, body.keyCombo(), body.toolName(), joined, period, prompt);
     }
 
     private static ShortcutView toView(Shortcut s) {
