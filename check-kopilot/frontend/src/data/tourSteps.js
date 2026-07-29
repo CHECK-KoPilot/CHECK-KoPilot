@@ -1,4 +1,4 @@
-export function buildTourSteps({ setSidebarOpen }) {
+export function buildTourSteps({ setSidebarOpen, setSuggestionsOpen }) {
   const isMobile = () => window.innerWidth < 1024;
 
   return [
@@ -19,6 +19,8 @@ export function buildTourSteps({ setSidebarOpen }) {
       title: "예시 질문으로 빠르게 시작",
       description:
         "자주 찾는 질문 템플릿을 누르면 바로 질문이 전송돼요.",
+      // 사용자가 접어 둔 상태일 수 있으니, 이 단계를 보여주기 전에 펼쳐서 가리킨다.
+      beforeShow: () => setSuggestionsOpen?.(true),
     },
     {
       selector: '[data-tour="chat-input"]',
