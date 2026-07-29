@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, ChevronDown, ChevronUp } from "lucide-react";
 import { suggestedPrompts } from "../../data/mockConversation";
 
 const FULL_PLACEHOLDER =
@@ -20,7 +20,13 @@ function useIsMobile() {
   return isMobile;
 }
 
-export default function ChatInputBar({ onSend, onSelectSuggestion, disabled = false }) {
+export default function ChatInputBar({
+  onSend,
+  onSelectSuggestion,
+  disabled = false,
+  suggestionsOpen = true,
+  onToggleSuggestions,
+}) {
   const [value, setValue] = useState("");
   const isMobile = useIsMobile();
 
@@ -33,17 +39,30 @@ export default function ChatInputBar({ onSend, onSelectSuggestion, disabled = fa
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 pb-3 pt-4 shadow-[0_-12px_20px_-14px_rgba(15,23,42,0.12)] sm:px-6 sm:pb-4 lg:max-w-4xl xl:max-w-5xl">
-      <div className="mb-4 flex flex-wrap gap-2" data-tour="suggested-prompts">
-        {suggestedPrompts.map((p) => (
-          <button
-            key={p}
-            disabled={disabled}
-            onClick={() => onSelectSuggestion?.(p)}
-            className="rounded-full border border-slate-300 px-3 py-1 text-base text-slate-600 hover:border-accent-300 hover:text-accent-600 disabled:opacity-40 lg:text-lg"
-          >
-            {p}
-          </button>
-        ))}
+      <div className="mb-4" data-tour="suggested-prompts">
+        <button
+          type="button"
+          onClick={() => onToggleSuggestions?.()}
+          aria-expanded={suggestionsOpen}
+          className="mb-2 flex items-center gap-1 text-base text-slate-400 hover:text-slate-600 lg:text-lg"
+        >
+          예상 질문
+          {suggestionsOpen ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
+        </button>
+        {suggestionsOpen && (
+          <div className="flex flex-wrap gap-2">
+            {suggestedPrompts.map((p) => (
+              <button
+                key={p}
+                disabled={disabled}
+                onClick={() => onSelectSuggestion?.(p)}
+                className="rounded-full border border-slate-300 px-3 py-1 text-base text-slate-600 hover:border-accent-300 hover:text-accent-600 disabled:opacity-40 lg:text-lg"
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <form

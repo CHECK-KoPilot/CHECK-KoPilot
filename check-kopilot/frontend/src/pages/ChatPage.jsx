@@ -39,6 +39,7 @@ export default function ChatPage() {
   const [sidebarOpen, setSidebarOpen] = useState(
     () => typeof window !== "undefined" && window.innerWidth >= 1024
   );
+  const [suggestionsOpen, setSuggestionsOpen] = useState(true);
   const [sending, setSending] = useState(false);
   const [conversations, setConversations] = useState(listConversations);
   const [loading, setLoading] = useState(true);
@@ -60,7 +61,10 @@ export default function ChatPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const tourSteps = useMemo(() => buildTourSteps({ setSidebarOpen }), []);
+  const tourSteps = useMemo(
+    () => buildTourSteps({ setSidebarOpen, setSuggestionsOpen }),
+    []
+  );
 
   useEffect(() => {
     saveTranscript(sessionId, messages);
@@ -249,7 +253,13 @@ export default function ChatPage() {
             tourOpen={tourOpen}
           />
         </div>
-        <ChatInputBar onSend={ask} onSelectSuggestion={ask} disabled={sending} />
+        <ChatInputBar
+          onSend={ask}
+          onSelectSuggestion={ask}
+          disabled={sending}
+          suggestionsOpen={suggestionsOpen}
+          onToggleSuggestions={() => setSuggestionsOpen((prev) => !prev)}
+        />
       </div>
       {showWelcome && (
         <WelcomeOverlay
