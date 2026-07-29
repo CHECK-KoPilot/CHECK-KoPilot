@@ -25,22 +25,52 @@ describe("SidebarNav", () => {
     expect(screen.getByText("KODEX 200 괴리율")).toBeInTheDocument();
   });
 
-  it("대화를 누르면 onSelectConversation에 id를 넘기고 사이드바를 닫는다", () => {
-    const onSelectConversation = vi.fn();
-    const onClose = vi.fn();
-    render(
-      <SidebarNav
-        open
-        onClose={onClose}
-        conversations={conversations}
-        onSelectConversation={onSelectConversation}
-      />
-    );
+  it("모바일 폭에서 대화를 누르면 onSelectConversation에 id를 넘기고 사이드바를 닫는다", () => {
+    const originalWidth = window.innerWidth;
+    window.innerWidth = 500;
+    try {
+      const onSelectConversation = vi.fn();
+      const onClose = vi.fn();
+      render(
+        <SidebarNav
+          open
+          onClose={onClose}
+          conversations={conversations}
+          onSelectConversation={onSelectConversation}
+        />
+      );
 
-    fireEvent.click(screen.getByText("KODEX 200 괴리율"));
+      fireEvent.click(screen.getByText("KODEX 200 괴리율"));
 
-    expect(onSelectConversation).toHaveBeenCalledWith("sess-2");
-    expect(onClose).toHaveBeenCalled();
+      expect(onSelectConversation).toHaveBeenCalledWith("sess-2");
+      expect(onClose).toHaveBeenCalled();
+    } finally {
+      window.innerWidth = originalWidth;
+    }
+  });
+
+  it("데스크톱 폭에서 대화를 누르면 사이드바를 닫지 않는다", () => {
+    const originalWidth = window.innerWidth;
+    window.innerWidth = 1280;
+    try {
+      const onSelectConversation = vi.fn();
+      const onClose = vi.fn();
+      render(
+        <SidebarNav
+          open
+          onClose={onClose}
+          conversations={conversations}
+          onSelectConversation={onSelectConversation}
+        />
+      );
+
+      fireEvent.click(screen.getByText("KODEX 200 괴리율"));
+
+      expect(onSelectConversation).toHaveBeenCalledWith("sess-2");
+      expect(onClose).not.toHaveBeenCalled();
+    } finally {
+      window.innerWidth = originalWidth;
+    }
   });
 
   it("삭제 버튼은 onDeleteConversation만 부르고 대화를 열지 않는다", () => {
