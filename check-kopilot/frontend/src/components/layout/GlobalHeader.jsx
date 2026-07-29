@@ -11,7 +11,7 @@ export default function GlobalHeader({ title = "새 대화", onMenuClick, action
         <button
           onClick={onMenuClick}
           aria-label="메뉴 열기"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 lg:hidden"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
         >
           <Menu size={20} />
         </button>

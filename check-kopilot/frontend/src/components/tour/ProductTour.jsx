@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { X, ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "../../lib/utils";
 
-const TOOLTIP_WIDTH = 320;
+const TOOLTIP_WIDTH = 380;
 const GAP = 14;
 
 function getRect(selector) {
@@ -141,13 +141,13 @@ export default function ProductTour({ steps, onClose }) {
           className="fixed rounded-2xl bg-white p-4 shadow-2xl transition-all duration-300 ease-out"
           style={tooltipStyle}
         >
-          <p className="mb-1 text-xs font-medium text-accent-600">
+          <p className="mb-1 text-lg font-medium text-accent-600 lg:text-xl">
             {stepIndex + 1} / {steps.length}
           </p>
-          <h3 className="text-sm font-semibold text-slate-900 lg:text-base">
+          <h3 className="text-lg font-semibold text-slate-900 lg:text-xl">
             {step.title}
           </h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-slate-500">
+          <p className="mt-1.5 text-lg leading-relaxed text-slate-500 lg:text-xl">
             {step.description}
           </p>
 
@@ -168,18 +168,18 @@ export default function ProductTour({ steps, onClose }) {
               {!isFirst && (
                 <button
                   onClick={handlePrev}
-                  className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
                   aria-label="이전"
                 >
-                  <ArrowLeft size={16} />
+                  <ArrowLeft size={18} />
                 </button>
               )}
               <button
                 onClick={handleNext}
-                className="flex h-8 items-center gap-1 rounded-lg bg-accent-600 px-3 text-sm font-medium text-white hover:bg-accent-700"
+                className="flex h-10 items-center gap-1 rounded-lg bg-accent-600 px-4 text-lg font-medium text-white hover:bg-accent-700 lg:text-xl"
               >
                 {isLast ? "완료" : "다음"}
-                {!isLast && <ArrowRight size={14} />}
+                {!isLast && <ArrowRight size={16} />}
               </button>
             </div>
           </div>

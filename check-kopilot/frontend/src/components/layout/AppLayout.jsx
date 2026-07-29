@@ -35,7 +35,7 @@ export default function AppLayout({
         <GlobalHeader
           title={headerTitle}
           actions={headerActions}
-          onMenuClick={() => setSidebarOpen(true)}
+          onMenuClick={() => setSidebarOpen((prev) => !prev)}
         />
         <div className="min-h-0 flex-1">{children}</div>
         <ComplianceFooterBar />

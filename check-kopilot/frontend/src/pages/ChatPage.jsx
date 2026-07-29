@@ -34,7 +34,11 @@ export default function ChatPage() {
   // 서버는 새로고침 후에도 세션 컨텍스트를 기억한다 — 화면도 같이 복원해야 맥락이 어긋나지 않는다
   const [sessionId, setSessionId] = useState(getSessionId);
   const [messages, setMessages] = useState(() => loadTranscript(getSessionId()));
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // 데스크톱(lg 이상, tourSteps.js의 isMobile 기준과 동일한 1024px)은 사이드바가
+  // 기본으로 열려 있던 기존 모습을 유지하고, 모바일 드로어만 닫힌 채로 시작한다.
+  const [sidebarOpen, setSidebarOpen] = useState(
+    () => typeof window !== "undefined" && window.innerWidth >= 1024
+  );
   const [sending, setSending] = useState(false);
   const [conversations, setConversations] = useState(listConversations);
   const [loading, setLoading] = useState(true);
