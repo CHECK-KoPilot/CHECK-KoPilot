@@ -1,12 +1,6 @@
-import { LayoutGrid, User, Settings, X, Trash2 } from "lucide-react";
+import { X, Trash2 } from "lucide-react";
 import { cn } from "../../lib/utils";
 import KopilotMark from "../common/KopilotMark";
-
-const navLinks = [
-  { icon: LayoutGrid, label: "지표 카탈로그" },
-  { icon: User, label: "마이페이지" },
-  { icon: Settings, label: "설정" },
-];
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -40,6 +34,11 @@ export default function SidebarNav({
   onDeleteConversation,
 }) {
   const grouped = groupByDate(conversations);
+  // lg 이상에서는 사이드바가 화면을 덮지 않고 폭이 밀리므로, 항목을 고르거나 새 대화를
+  // 시작해도 접을 필요가 없다 — 모바일 드로어에서만 자동으로 닫는다.
+  const closeIfMobile = () => {
+    if (window.innerWidth < 1024) onClose?.();
+  };
 
   return (
     <>
@@ -53,9 +52,11 @@ export default function SidebarNav({
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 flex-col border-r border-slate-200 bg-slate-50 shadow-xl transition-transform duration-200 ease-out",
-          "lg:static lg:z-auto lg:w-72 lg:translate-x-0 lg:shadow-none xl:w-80",
-          open ? "translate-x-0" : "-translate-x-full"
+          "fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 flex-col overflow-hidden border-r border-slate-200 bg-slate-50 shadow-xl transition-all duration-200 ease-out",
+          "lg:static lg:z-auto lg:shadow-none",
+          open
+            ? "translate-x-0 lg:w-72 xl:w-80"
+            : "-translate-x-full lg:w-0 lg:border-r-0"
         )}
         style={{
           paddingTop: "env(safe-area-inset-top)",
@@ -66,7 +67,7 @@ export default function SidebarNav({
           <button
             onClick={() => {
               onNewChat?.();
-              onClose();
+              closeIfMobile();
             }}
             data-tour="new-chat"
             className={cn(
@@ -109,7 +110,7 @@ export default function SidebarNav({
                       <button
                         onClick={() => {
                           onSelectConversation?.(conv.id);
-                          onClose();
+                          closeIfMobile();
                         }}
                         className="min-w-0 flex-1 truncate px-2 py-1.5 text-left text-lg text-slate-600 lg:py-2 lg:text-[19px]"
                         title={conv.title}
@@ -129,18 +130,6 @@ export default function SidebarNav({
               </div>
             ))
           )}
-        </div>
-
-        <div className="border-t border-slate-200 p-3 space-y-0.5">
-          {navLinks.map(({ icon: Icon, label }) => (
-            <button
-              key={label}
-              className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-lg text-slate-600 hover:bg-slate-200/60 lg:text-[19px]"
-            >
-              <Icon size={16} />
-              {label}
-            </button>
-          ))}
         </div>
       </aside>
     </>
